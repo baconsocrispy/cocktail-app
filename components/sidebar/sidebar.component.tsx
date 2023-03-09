@@ -1,6 +1,16 @@
-const Sidebar = () => {
+// external imports
+import { FC } from "react"
+
+// types
+type SidebarProps = {
+  open: boolean;
+}
+
+const Sidebar: FC<SidebarProps> = ({ open }) => {
   return (
-    <div className="sidebar">Sidebar</div>
+    <div className={ open ? 'sidebar sidebar__open' : 'sidebar' }>
+      Sidebar
+    </div>
   )
 }
 

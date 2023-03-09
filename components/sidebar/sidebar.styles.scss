@@ -1,4 +1,13 @@
 .sidebar {
-  background-color: bisque;
   display: none;
+  position: absolute;
+  width: 100vw;
+  top: calc($nav-height + $filter-bar-height);
+  bottom: $footer-height;
+
+  background-color: bisque;
+
+  &__open {
+    display: block;
+  }
 }
