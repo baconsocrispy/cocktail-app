@@ -2,7 +2,7 @@
 import FilterBar from "@/components/filterbar/filterbar.component";
 import Recipes from "@/components/recipes/recipes.component";
 import Sidebar from "@/components/sidebar/sidebar.component";
-import Tools from "@/components/tools/tools.component";
+import Toolbar from "@/components/toolbar/toolbar.component";
 
 export const Home = () => {
   return (
@@ -10,7 +10,7 @@ export const Home = () => {
       <FilterBar />
       <Sidebar />
       <Recipes />
-      <Tools />
+      <Toolbar />
     </>
   )
 }
