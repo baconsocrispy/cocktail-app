@@ -2,7 +2,7 @@
 import type { AppProps } from 'next/app'
 
 // components
-import Grid from '@/components/grid/grid.component';
+import Grid from '@/layout/grid/grid.component';
 import Nav from '@/components/nav/nav.component';
 
 // styles
