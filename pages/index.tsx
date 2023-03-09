@@ -1,8 +1,11 @@
+// components
+import FilterBar from "@/components/filter-bar/filter-bar.component";
+
 export const Home = () => {
   return (
-    <div>
-      Cocktailings
-    </div>
+    <>
+      <FilterBar />
+    </>
   )
 }
 
