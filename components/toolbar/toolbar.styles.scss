@@ -1,0 +1,31 @@
+.toolbar {
+  grid-column: 1 / -1;
+
+  background-color: seagreen;
+
+  &__options {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+
+    list-style: none;
+  }
+
+  &__option {
+    background-color: red;
+  }
+
+  &__button {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+  }
+
+  &__icon {
+    width: 100%;
+    text-align: center;
+  }
+}
