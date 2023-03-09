@@ -18,16 +18,33 @@ const FilterBar: FC<FilterbarProps> = ({ options }) => {
 
   return (
     <div className='filterbar'>
-      <ul className="filterbar__options">
-        { options.map((option) => (
-          <li key={ option } className="filterbar__option">
-            <button className="filterbar__button" onClick={ handleClick }>
-              <span className="filterbar__text">{ option }</span>
-            </button>
-          </li>
-        )) }
-      </ul>
-      <Sidebar open={ sidebarOpen }/>
+      <div className="filterbar__option">
+        <button className="filterbar__button" onClick={ handleClick }>
+          Ingredients
+        </button>
+      </div>
+      <div className="filterbar__option">
+        <button className="filterbar__button">
+          Categories
+        </button>
+      </div>
+      <div className="filterbar__option">
+        <button className="filterbar__button">
+          Sort By
+        </button>
+      </div>
+      <div className="filterbar__option--search">
+        <label htmlFor="search">Keyword</label>
+        <input className='filterbar__search' type='search' name='search'/>
+      </div>
+      <div className="filterbar__option--reset">
+        <button className="reset">
+          Reset
+        </button>
+      </div>
+      <Sidebar open={ sidebarOpen }>
+        Sidebar
+      </Sidebar>
     </div>
   )
 }

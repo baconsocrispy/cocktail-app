@@ -1,15 +1,16 @@
 // external imports
-import { FC } from "react"
+import { FC, ReactNode } from "react"
 
 // types
 type SidebarProps = {
   open: boolean;
+  children: ReactNode;
 }
 
-const Sidebar: FC<SidebarProps> = ({ open }) => {
+const Sidebar: FC<SidebarProps> = ({ open, children }) => {
   return (
     <div className={ open ? 'sidebar sidebar__open' : 'sidebar' }>
-      Sidebar
+      { children }
     </div>
   )
 }
