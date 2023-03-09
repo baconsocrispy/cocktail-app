@@ -2,5 +2,5 @@
 $nav-height: 5rem;
 $category-bar-height: 5rem;
 $filter-bar-height: 5rem;
-$main-content-height: 1fr;
 $footer-height: 5rem;
+$main-content-height: calc(100vh - $nav-height - $filter-bar-height - $footer-height);
