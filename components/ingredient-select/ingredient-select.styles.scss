@@ -1,0 +1,9 @@
+.ingredient-select {
+  overflow: hidden;
+
+  &__ingredients {
+    height: 100%;
+    list-style: none;
+    overflow: scroll;
+  }
+}

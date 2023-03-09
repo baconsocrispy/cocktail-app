@@ -10,7 +10,9 @@ type SidebarProps = {
 const Sidebar: FC<SidebarProps> = ({ open, children }) => {
   return (
     <div className={ open ? 'sidebar sidebar__open' : 'sidebar' }>
-      { children }
+      <div className="sidebar__content">
+        { children }
+      </div>
     </div>
   )
 }

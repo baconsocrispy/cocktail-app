@@ -2,6 +2,7 @@
 import { FC, useState } from "react"
 
 // components
+import Ingredients from "../ingredients/ingredients.component";
 import Sidebar from "../sidebar/sidebar.component";
 
 // types
@@ -43,7 +44,7 @@ const FilterBar: FC<FilterbarProps> = ({ options }) => {
         </button>
       </div>
       <Sidebar open={ sidebarOpen }>
-        Sidebar
+        <Ingredients />
       </Sidebar>
     </div>
   )
