@@ -40,6 +40,8 @@ export type RecipesAPI = {
 
 type RecipesProviderProps = {
   children: ReactNode;
+  recipes: Recipe[],
+  recipeCount: number;
 }
 
 // context
@@ -49,22 +51,15 @@ export const RecipesContext = createContext<RecipesAPI>({
 })
 
 // provider
-export const RecipesProvider = ({ children }: RecipesProviderProps) => {
-  // initial state
-  const [ recipes, setRecipes ] = useState<Recipe[]>([])
-  const [ recipeCount, setRecipeCount ] = useState<number>(0)
+export const RecipesProvider = ({ children, recipes, recipeCount }: RecipesProviderProps) => {
+  // initial state (set via Next.js getInitialState method)
+  const [ state, setState ] = useState({ recipes, recipeCount })
 
-  // api request
-  useEffect(() => {
-    const getRecipes = async () => {
-      const response = await fetchAllRecipes();
-      setRecipes(response.recipes)
-      setRecipeCount(response.recipeCount)
-    }
-    getRecipes();
-  })
+  const updateRecipes = (recipes: Recipe[], recipeCount: number) => {
+    setState({ recipes: recipes, recipeCount: recipeCount })
+  };
 
-  const value = { recipes, recipeCount }
+  const value = { recipes, recipeCount, updateRecipes };
 
   return (
     <RecipesContext.Provider value={ value }>
