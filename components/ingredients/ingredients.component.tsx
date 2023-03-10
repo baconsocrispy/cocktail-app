@@ -1,6 +1,7 @@
 // this will take a json object of all the current cabinet ingredients
 // and display them in the correct select 
 
+// components
 import IngredientSelect from "../ingredient-select/ingredient-select.component"
 
 const ingredients = [
@@ -17,6 +18,7 @@ const ingredients = [
 
 
 const Ingredients = () => {
+
   return (
     <div className='ingredients'>
       <h3 className="ingredients__header">Current Cabinet</h3>
