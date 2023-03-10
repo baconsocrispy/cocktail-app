@@ -1,14 +1,6 @@
-// types
-import type { NextApiRequest, NextApiResponse } from 'next';
-
-export const getRecipes = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-
-  const response = await fetch('https://localhost:3001/recipes');
+export const fetchAllRecipes = async () => {
+  const response = await fetch('http://localhost:3001/recipes');
   const recipes = await response.json();
-
-  res.status(200).json(recipes)
+  console.log(recipes)
 }
 
