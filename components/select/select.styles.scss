@@ -1,7 +1,11 @@
-.ingredient-select {
+.select {
   overflow: hidden;
 
-  &__ingredients {
+  &__header {
+    
+  }
+
+  &__options {
     height: 100%;
     list-style: none;
     overflow: scroll;

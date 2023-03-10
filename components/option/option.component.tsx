@@ -2,11 +2,11 @@
 import { FC, useState } from "react"
 
 // types
-type IngredientProps = {
-  ingredient: string;
+type OptionProps = {
+  option: string;
 }
 
-const Ingredient: FC<IngredientProps> = ({ ingredient }) => {
+const Option: FC<OptionProps> = ({ option }) => {
   // state
   const [ selected, setSelected ] = useState(false);
 
@@ -16,11 +16,11 @@ const Ingredient: FC<IngredientProps> = ({ ingredient }) => {
   return (
     <li 
       onClick={ handleClick } 
-      className={ selected ? 'ingredient ingredient--selected' : 'ingredient'}
+      className={ selected ? 'option option--selected' : 'option'}
     >
-      { ingredient }
+      { option }
     </li>
   )
 }
 
-export default Ingredient
+export default Option

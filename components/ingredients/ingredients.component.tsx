@@ -5,7 +5,7 @@
 import { FC } from "react"
 
 // components
-import IngredientSelect from "../ingredient-select/ingredient-select.component"
+import Select from "../select/select.component";
 
 // types
 type IngredientsProps = {
@@ -30,10 +30,10 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
   return (
     <div className={ open ? 'ingredients ingredients--open' : 'ingredients'}>
       <h3 className="ingredients__header">Current Cabinet</h3>
-      <IngredientSelect ingredients={ ingredients } header={ 'Spirits' }/>
-      <IngredientSelect ingredients={ ingredients } header={ 'Modifiers' } />
-      <IngredientSelect ingredients={ ingredients } header={ 'Sugars' } />
-      <IngredientSelect ingredients={ ingredients } header={ 'Garnishes' } />
+      <Select options={ ingredients } header={ 'Spirits' }/>
+      <Select options={ ingredients } header={ 'Modifiers' } />
+      <Select options={ ingredients } header={ 'Sugars' } />
+      <Select options={ ingredients } header={ 'Garnishes' } />
     </div>
   )
 }
