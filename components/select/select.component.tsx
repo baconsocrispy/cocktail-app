@@ -15,12 +15,10 @@ const Select: FC<SelectProps> = (
 ) => {
   return (
     <div className="select">
-
       <h4 className="select__header">{ header }</h4>
-
       <ul className="select__options">
-        { options.map((option) => (
-          <Option option={ option } key={ option } />
+        { options.map((option, index) => (
+          <Option option={ option } key={ index } />
         ))}
       </ul>
     </div>
