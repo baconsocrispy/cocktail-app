@@ -5,6 +5,7 @@ import Categories from "../categories/categories.component";
 // components
 import Ingredients from "../ingredients/ingredients.component";
 import Sidebar from "../sidebar/sidebar.component";
+import SortBy from "../sort-by/sort-by.component";
 
 const FilterBar: FC = () => {
   // state
@@ -17,6 +18,7 @@ const FilterBar: FC = () => {
     !sidebarOpen && setSidebarOpen(true)
     option === 'ingredients' && setSidebarContent('ingredients')
     option === 'categories' && setSidebarContent('categories')
+    option === 'sort-by' && setSidebarContent('sort-by')
   };
 
   return (
@@ -38,7 +40,10 @@ const FilterBar: FC = () => {
         </button>
       </div>
       <div className="filterbar__option">
-        <button className="filterbar__button">
+        <button 
+          className="filterbar__button"
+          onClick={ () => handleOptionClick('sort-by') }
+        >
           Sort By
         </button>
       </div>
@@ -62,6 +67,7 @@ const FilterBar: FC = () => {
        
         { <Ingredients open={ sidebarContent ==='ingredients' } /> }
         { <Categories open={ sidebarContent ==='categories' } /> }
+        { <SortBy open={ sidebarContent ==='sort-by' } /> }
       </Sidebar>
     </div>
   )
