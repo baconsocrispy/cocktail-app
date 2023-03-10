@@ -15,4 +15,13 @@
   &__open {
     display: block;
   }
+
+  &__close-button {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: transparent;
+    border: none;
+  }
 }

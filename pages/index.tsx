@@ -12,18 +12,10 @@ const toolbarOptions = [
   'Discover'
 ]
 
-const filterbarOptions = [
-  'Ingredients',
-  'Category',
-  'Sort By',
-  'Search',
-  'Reset'
-]
-
 export const Home = () => {
   return (
     <>
-      <FilterBar options={ filterbarOptions } />
+      <FilterBar />
       <Recipes />
       <Toolbar options={ toolbarOptions }/>
     </>

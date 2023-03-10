@@ -1,31 +1,39 @@
 // external imports
 import { FC, useState } from "react"
+import Categories from "../categories/categories.component";
 
 // components
 import Ingredients from "../ingredients/ingredients.component";
 import Sidebar from "../sidebar/sidebar.component";
 
-// types
-type FilterbarProps = {
-  options: string[];
-}
-
-const FilterBar: FC<FilterbarProps> = ({ options }) => {
+const FilterBar: FC = () => {
   // state
   const [ sidebarOpen, setSidebarOpen ] = useState(false);
+  const [ sidebarContent, setSidebarContent ] = useState('')
 
   // handlers
-  const handleClick = () => setSidebarOpen(!sidebarOpen);
+  const handleCloseSidebar = () => setSidebarOpen(false);
+  const handleOptionClick = (option: string) => {
+    !sidebarOpen && setSidebarOpen(true)
+    option === 'ingredients' && setSidebarContent('ingredients')
+    option === 'categories' && setSidebarContent('categories')
+  };
 
   return (
     <div className='filterbar'>
       <div className="filterbar__option">
-        <button className="filterbar__button" onClick={ handleClick }>
+        <button 
+          className="filterbar__button" 
+          onClick={ () => handleOptionClick('ingredients') }
+        >
           Ingredients
         </button>
       </div>
       <div className="filterbar__option">
-        <button className="filterbar__button">
+        <button 
+          className="filterbar__button"
+          onClick={ () => handleOptionClick('categories') }
+        >
           Categories
         </button>
       </div>
@@ -43,8 +51,17 @@ const FilterBar: FC<FilterbarProps> = ({ options }) => {
           Reset
         </button>
       </div>
+
       <Sidebar open={ sidebarOpen }>
-        <Ingredients />
+        <button 
+          className="sidebar__close-button" 
+          onClick={ handleCloseSidebar }
+        >
+          Close X
+        </button>
+       
+        { <Ingredients open={ sidebarContent ==='ingredients' } /> }
+        { <Categories open={ sidebarContent ==='categories' } /> }
       </Sidebar>
     </div>
   )
