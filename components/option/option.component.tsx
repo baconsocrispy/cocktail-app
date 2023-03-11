@@ -18,7 +18,9 @@ const Option: FC<OptionProps> = ({ option }) => {
   const handleClick = () => setSelected(!selected);
 
   return (
-    <li 
+    <li
+      role='option'
+      aria-selected={ selected }
       onClick={ handleClick } 
       className={ selected ? 'option option--selected' : 'option'}
     >
