@@ -37,7 +37,7 @@ export const IngredientsProvider = ({ children }: IngredientsProviderProps) => {
   const [ ingredients, setIngredients ] = useState<Ingredient[]>([]);
   const [ ingredientTypes, setIngredientTypes ] = useState<string[]>([])
 
-  // set ingredients
+  // set ingredients && ingredientTypes
   useEffect(() => {
     const getIngredients = async () => {
       const response = await fetchAllIngredients();

@@ -55,10 +55,12 @@ export const RecipesProvider = ({ children, recipes, recipeCount }: RecipesProvi
   // initial state (set via Next.js getInitialState method)
   const [ state, setState ] = useState({ recipes, recipeCount })
 
+  // actions
   const updateRecipes = (recipes: Recipe[], recipeCount: number) => {
     setState({ recipes: recipes, recipeCount: recipeCount })
   };
 
+  // export data
   const value = { recipes: state.recipes, recipeCount: state.recipeCount, updateRecipes };
 
   return (

@@ -39,7 +39,7 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     setFilterOptions({})
   }
 
-  // export
+  // export data
   const value = { 
     filterOptions,
     updateFilterOptions,

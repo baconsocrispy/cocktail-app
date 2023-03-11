@@ -59,10 +59,10 @@ const FilterOptions = () => {
         { <Categories 
             open={ sidebarContent === FILTER_OPTIONS.by_category } 
           /> }
-        {/* { <SortBy 
+        { <SortBy 
             open={ sidebarContent === FILTER_OPTIONS.by_sort_type } 
           /> 
-        } */}
+        }
       </Sidebar>
     </>
   )

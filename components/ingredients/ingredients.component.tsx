@@ -20,7 +20,13 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
     <div className={ open ? 'ingredients ingredients--open' : 'ingredients'}>
       <h3 className="ingredients__header">Current Cabinet</h3>
       { ingredientTypes.map((type) => (
-        <Select key={ type } options={ ingredients } header={ type } />
+        <Select 
+          key={ type } 
+          header={ type }
+          options={ 
+            ingredients.filter((ingredient) => ingredient.type === type) 
+          }  
+        />
       ))}
     </div>
   )

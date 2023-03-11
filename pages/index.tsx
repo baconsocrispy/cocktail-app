@@ -9,6 +9,7 @@ import { CategoriesProvider } from "@/contexts/categories.context";
 import { FilteringProvider } from "@/contexts/filtering.context";
 import { IngredientsProvider } from "@/contexts/ingredients.context";
 import { RecipesProvider } from "@/contexts/recipes.context";
+import { SortByProvider } from "@/contexts/sort-by.context";
 
 // api
 import { fetchAllRecipes } from "./api/cocktail-api";
@@ -36,7 +37,9 @@ export const Home = ({ data }: HomeProps) => {
         <FilteringProvider>
           <CategoriesProvider>
             <IngredientsProvider>
-              <FilterBar />
+              <SortByProvider>
+                <FilterBar />
+              </SortByProvider>
             </IngredientsProvider>
           </CategoriesProvider>
         </FilteringProvider>

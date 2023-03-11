@@ -1,22 +1,22 @@
 // external imports
-import { FC } from "react"
+import { FC, useContext } from "react"
 
 // components
 import Select from "../select/select.component";
 
+// context
+import { SortByContext } from "@/contexts/sort-by.context";
+
 // types
+
 type SortByProps = {
   open: boolean;
 }
 
-const sortOptions = [
-  'All Recipes',
-  'Favorites',
-  'I Have Any Of The Ingredients',
-  'I Have All Of The Ingredients',
-]
-
 const SortBy: FC<SortByProps> = ({ open }) => {
+  // state
+  const { sortOptions } = useContext(SortByContext)
+  
   return (
     <div 
       className={ open ? "sort-by sort-by--open" : "sort-by" }

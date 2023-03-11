@@ -12,11 +12,10 @@ const Recipes = () => {
   const { 
     recipes, 
     recipeCount
-  } = useContext(RecipesContext)
+  } = useContext(RecipesContext);
   
   return (
     <div className="recipes">
-      <div>{ recipeCount }</div>
       { recipes.map((recipe) => (
         <Card key={ recipe.id } title={ recipe.name } />
       ))}

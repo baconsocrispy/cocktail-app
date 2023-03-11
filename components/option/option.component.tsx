@@ -4,8 +4,10 @@ import { FC, useState } from "react"
 // types
 import { Category } from "@/contexts/categories.context";
 import { Ingredient } from "@/contexts/ingredients.context";
+import { SortOption } from "@/contexts/sort-by.context";
+
 type OptionProps = {
-  option: Category | Ingredient;
+  option: Category | Ingredient | SortOption;
 }
 
 const Option: FC<OptionProps> = ({ option }) => {
