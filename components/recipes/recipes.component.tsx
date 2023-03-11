@@ -11,8 +11,7 @@ const Recipes = () => {
   // state
   const { 
     recipes, 
-    recipeCount, 
-    updateRecipes 
+    recipeCount
   } = useContext(RecipesContext)
   
   return (
