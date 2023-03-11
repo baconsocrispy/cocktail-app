@@ -12,11 +12,13 @@ export type Ingredient = {
   id: number;
   product?: string;
   sub_type: string;
+  type: string;
   updated_at: string;
 }
 
 type IngredientsContextProps = {
-  ingredients: Ingredient[]
+  ingredients: Ingredient[],
+  ingredientTypes: string[]
 }
 
 type IngredientsProviderProps = {
@@ -25,26 +27,29 @@ type IngredientsProviderProps = {
 
 // context
 export const IngredientsContext = createContext<IngredientsContextProps>({
-  ingredients: []
+  ingredients: [],
+  ingredientTypes: []
 })
 
 // provider
 export const IngredientsProvider = ({ children }: IngredientsProviderProps) => {
   // state
   const [ ingredients, setIngredients ] = useState<Ingredient[]>([]);
+  const [ ingredientTypes, setIngredientTypes ] = useState<string[]>([])
 
   // set ingredients
   useEffect(() => {
     const getIngredients = async () => {
       const response = await fetchAllIngredients();
-      const { ingredients } = response;
+      const { ingredients, ingredientTypes } = response;
       setIngredients(ingredients)
+      setIngredientTypes(ingredientTypes)
     }
     getIngredients();
   }, [])
 
   // export data
-  const value = { ingredients }
+  const value = { ingredients, ingredientTypes }
 
   return (
     <IngredientsContext.Provider value={ value }>

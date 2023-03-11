@@ -14,15 +14,14 @@ type IngredientsProps = {
 
 const Ingredients: FC<IngredientsProps> = ({ open }) => {
   // state
-  const { ingredients } = useContext(IngredientsContext);
+  const { ingredients, ingredientTypes } = useContext(IngredientsContext);
 
   return (
     <div className={ open ? 'ingredients ingredients--open' : 'ingredients'}>
       <h3 className="ingredients__header">Current Cabinet</h3>
-      <Select options={ ingredients } header={ 'Spirits' }/>
-      <Select options={ ingredients } header={ 'Modifiers' } />
-      <Select options={ ingredients } header={ 'Sugars' } />
-      <Select options={ ingredients } header={ 'Garnishes' } />
+      { ingredientTypes.map((type) => (
+        <Select key={ type } options={ ingredients } header={ type } />
+      ))}
     </div>
   )
 }

@@ -13,7 +13,8 @@ export type CategoriesAPI = {
 }
 
 export type IngredientsAPI = {
-  ingredients: Ingredient[]
+  ingredients: Ingredient[],
+  ingredientTypes: string[]
 }
 
 // api calls
