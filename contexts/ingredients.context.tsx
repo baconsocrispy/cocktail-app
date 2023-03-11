@@ -8,7 +8,7 @@ export type Ingredient = {
   age?: number;
   brand?: string;
   created_at: string;
-  display_name: string;
+  name: string;
   id: number;
   product?: string;
   sub_type: string;
@@ -41,7 +41,7 @@ export const IngredientsProvider = ({ children }: IngredientsProviderProps) => {
       setIngredients(ingredients)
     }
     getIngredients();
-  })
+  }, [])
 
   // export data
   const value = { ingredients }

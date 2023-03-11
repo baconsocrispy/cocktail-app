@@ -1,67 +1,20 @@
-// this will take a json object of all the current cabinet ingredients
-// and display them in the correct select 
-
 // external imports
-import { FC } from "react"
+import { FC, useContext } from "react"
 
 // components
 import Select from "../select/select.component";
+
+// context
+import { IngredientsContext } from "@/contexts/ingredients.context";
 
 // types
 type IngredientsProps = {
   open: boolean;
 }
 
-const ingredients = [
-  'fish',
-  'booze',
-  'crayon,',
-  'mouse',
-  'finger',
-  'pen',
-  'pad',
-  'paper',
-  'speaker',
-  'fish',
-  'booze',
-  'crayon,',
-  'mouse',
-  'finger',
-  'pen',
-  'pad',
-  'paper',
-  'speaker',
-  'fish',
-  'booze',
-  'crayon,',
-  'mouse',
-  'finger',
-  'pen',
-  'pad',
-  'paper',
-  'speaker',
-  'fish',
-  'booze',
-  'crayon,',
-  'mouse',
-  'finger',
-  'pen',
-  'pad',
-  'paper',
-  'speaker',
-  'fish',
-  'booze',
-  'crayon,',
-  'mouse',
-  'finger',
-  'pen',
-  'pad',
-  'paper',
-  'speaker'
-]
-
-
 const Ingredients: FC<IngredientsProps> = ({ open }) => {
+  // state
+  const { ingredients } = useContext(IngredientsContext);
 
   return (
     <div className={ open ? 'ingredients ingredients--open' : 'ingredients'}>

@@ -6,9 +6,10 @@ import Option from "../option/option.component"
 
 // types
 import { Category } from "@/contexts/categories.context"
+import { Ingredient } from "@/contexts/ingredients.context"
 type SelectProps = {
   header: string;
-  options: Category[];
+  options: Category[] | Ingredient[];
 }
 
 const Select: FC<SelectProps> = (

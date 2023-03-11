@@ -53,9 +53,9 @@ const FilterOptions = () => {
         </button>
         
         {/* sidebar content */}
-        {/* { <Ingredients 
+        { <Ingredients 
             open={ sidebarContent === FILTER_OPTIONS.by_ingredient } 
-          /> } */}
+          /> }
         { <Categories 
             open={ sidebarContent === FILTER_OPTIONS.by_category } 
           /> }
