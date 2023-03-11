@@ -1,5 +1,9 @@
 // types
-import { RecipesAPI } from "@/contexts/recipes.context";
+import { Recipe } from "@/contexts/recipes.context";
+export type RecipesAPI = {
+  recipes: Recipe[];
+  recipeCount: number;
+}
 
 export const fetchAllRecipes = async () => {
   const response = await fetch('http://localhost:3001/recipes');

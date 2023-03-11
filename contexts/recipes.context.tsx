@@ -1,8 +1,5 @@
 // external imports 
-import { ReactNode, createContext, useState, useEffect } from 'react';
-
-// api
-import { fetchAllRecipes } from '@/pages/api/cocktail-api';
+import { ReactNode, createContext, useState } from 'react';
 
 //types
 import { Category } from './categories.context';
@@ -23,9 +20,10 @@ type User = {
   email: string;
 }
 
-type Recipe = {
+export type Recipe = {
   categories: Category[];
   description?: string;
+  id: number;
   ingredients: Ingredient[];
   name: string;
   steps: Step[];
@@ -33,9 +31,10 @@ type Recipe = {
   users: User[];
 }
 
-export type RecipesAPI = {
+export type RecipesContextProps = {
   recipes: Recipe[]
   recipeCount: number;
+  updateRecipes: Function;
 }
 
 type RecipesProviderProps = {
@@ -45,9 +44,10 @@ type RecipesProviderProps = {
 }
 
 // context
-export const RecipesContext = createContext<RecipesAPI>({
+export const RecipesContext = createContext<RecipesContextProps>({
   recipes: [],
-  recipeCount: 0
+  recipeCount: 0,
+  updateRecipes: () => {}
 })
 
 // provider
@@ -59,7 +59,7 @@ export const RecipesProvider = ({ children, recipes, recipeCount }: RecipesProvi
     setState({ recipes: recipes, recipeCount: recipeCount })
   };
 
-  const value = { recipes, recipeCount, updateRecipes };
+  const value = { recipes: state.recipes, recipeCount: state.recipeCount, updateRecipes };
 
   return (
     <RecipesContext.Provider value={ value }>

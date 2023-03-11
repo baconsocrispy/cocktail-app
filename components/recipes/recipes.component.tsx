@@ -1,25 +1,26 @@
+// external imports
+import { useContext } from "react";
+
 // components
-import { useEffect } from "react";
 import Card from "../card/card.component"
 
-import { fetchAllRecipes } from "@/pages/api/cocktail-api";
+// context
+import { RecipesContext } from "@/contexts/recipes.context";
 
 const Recipes = () => {
-  useEffect(() => {
-    const getRecipes = async () => {
-      await fetchAllRecipes()
-    }
-    getRecipes()
-  }, [])
-
-  var cards = [];
-  for (let i = 0; i < 60; i++) {
-    cards.push(<Card key={ i } />) 
-  }
+  // state
+  const { 
+    recipes, 
+    recipeCount, 
+    updateRecipes 
+  } = useContext(RecipesContext)
   
   return (
     <div className="recipes">
-      { cards }
+      <div>{ recipeCount }</div>
+      { recipes.map((recipe) => (
+        <Card key={ recipe.id } title={ recipe.name } />
+      ))}
     </div>
   )
 }

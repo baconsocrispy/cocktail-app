@@ -4,8 +4,16 @@ import Recipes from "@/components/recipes/recipes.component";
 import Toolbar from "@/components/toolbar/toolbar.component";
 
 // context
-import { RecipesAPI, RecipesProvider } from "@/contexts/recipes.context";
+import { RecipesProvider } from "@/contexts/recipes.context";
+
+// api
 import { fetchAllRecipes } from "./api/cocktail-api";
+
+// types
+import { RecipesAPI } from "./api/cocktail-api";
+type HomeProps = {
+  data: RecipesAPI;
+}
 
 // data
 const toolbarOptions = [
@@ -16,19 +24,14 @@ const toolbarOptions = [
   'Discover'
 ]
 
-// types
-type HomeProps = {
-  data: RecipesAPI;
-}
-
 export const Home = ({ data }: HomeProps) => {
   const { recipes, recipeCount } = data;
   return (
     <>
-      <FilterBar />
-        <RecipesProvider recipes={ recipes } recipeCount={ recipeCount }>
-          <Recipes />
-        </RecipesProvider>
+      <RecipesProvider recipes={ recipes } recipeCount={ recipeCount }>
+        <FilterBar />
+        <Recipes />
+      </RecipesProvider>
       <Toolbar options={ toolbarOptions }/>
     </>
   )

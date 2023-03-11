@@ -1,8 +1,14 @@
+// external imports
+import { FC } from "react"
 
+// types
+type CardProps = {
+  title: string;
+}
 
-const Card = () => {
+const Card: FC<CardProps> = ({ title }) => {
   return (
-    <div className="card">Card</div>
+    <div className="card">{ title }</div>
   )
 }
 
