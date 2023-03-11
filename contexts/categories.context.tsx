@@ -1,6 +1,8 @@
 // external imports
-import { CategoriesAPI, fetchAllCategories } from "@/pages/api/cocktail-api";
 import { createContext, ReactNode, useEffect, useState } from "react";
+
+// api
+import { fetchAllCategories } from "@/pages/api/cocktail-api";
 
 // types
 export type Category = {
