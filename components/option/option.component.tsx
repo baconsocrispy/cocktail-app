@@ -1,9 +1,10 @@
 // external imports
+import { Category } from "@/contexts/categories.context";
 import { FC, useState } from "react"
 
 // types
 type OptionProps = {
-  option: string;
+  option: Category;
 }
 
 const Option: FC<OptionProps> = ({ option }) => {
@@ -18,7 +19,7 @@ const Option: FC<OptionProps> = ({ option }) => {
       onClick={ handleClick } 
       className={ selected ? 'option option--selected' : 'option'}
     >
-      { option }
+      { option.name }
     </li>
   )
 }

@@ -1,49 +1,28 @@
 // external imports
-import { FC } from "react"
+import { FC, useContext } from "react"
 
 // components
 import Select from "../select/select.component";
+
+// context
+import { CategoriesContext } from "@/contexts/categories.context";
 
 // types
 type CategoriesProps = {
   open: boolean;
 }
 
-const categoryOptions = [
-  'wine',
-  'rum',
-  'whiseky',
-  'gin',
-  'vodka',
-  'sours',
-  'punches',
-  'soft drinks',
-  'wine',
-  'rum',
-  'whiseky',
-  'gin',
-  'vodka',
-  'sours',
-  'punches',
-  'soft drinks',
-  'wine',
-  'rum',
-  'whiseky',
-  'gin',
-  'vodka',
-  'sours',
-  'punches',
-  'soft drinks',
-]
-
 const Categories: FC<CategoriesProps> = ({ open }) => {
+  // state
+  const { categories } = useContext(CategoriesContext);
+
   return (
     <div 
       className={ open ? "categories categories--open" : "categories" }
     >
       <Select 
         header={ 'Select one or more categories'} 
-        options={ categoryOptions } 
+        options={ categories } 
       />
     </div>
   )

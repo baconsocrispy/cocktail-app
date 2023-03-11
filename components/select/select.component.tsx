@@ -5,9 +5,10 @@ import { FC } from "react"
 import Option from "../option/option.component"
 
 // types
+import { Category } from "@/contexts/categories.context"
 type SelectProps = {
   header: string;
-  options: string[];
+  options: Category[];
 }
 
 const Select: FC<SelectProps> = (
@@ -17,8 +18,8 @@ const Select: FC<SelectProps> = (
     <div className="select">
       <h4 className="select__header">{ header }</h4>
       <ul className="select__options">
-        { options.map((option, index) => (
-          <Option option={ option } key={ index } />
+        { options.map((option) => (
+          <Option option={ option } key={ option.id } />
         ))}
       </ul>
     </div>

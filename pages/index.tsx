@@ -2,6 +2,7 @@
 import FilterBar from "@/components/filterbar/filterbar.component";
 import Recipes from "@/components/recipes/recipes.component";
 import Toolbar from "@/components/toolbar/toolbar.component";
+import { CategoriesProvider } from "@/contexts/categories.context";
 
 // context
 import { FilteringProvider } from "@/contexts/filtering.context";
@@ -31,7 +32,9 @@ export const Home = ({ data }: HomeProps) => {
     <>
       <RecipesProvider recipes={ recipes } recipeCount={ recipeCount }>
         <FilteringProvider>
-          <FilterBar />
+          <CategoriesProvider>
+            <FilterBar />
+          </CategoriesProvider>
         </FilteringProvider>
         <Recipes />
       </RecipesProvider>
