@@ -7,19 +7,22 @@ import { Ingredient } from "./ingredients.context";
 import { SortOption } from "./sort-by.context";
 
 type FilterOptions = {
-  ingredientIds?: number[] | null;
-  categoryIds?: number[] | null;
-  sortOptionId?: number;
-  keyword?: string | null;
+  ingredientIds: number[];
+  categoryIds: number[];
+  sortOptionId: number | null;
+  keyword: string | null;
 }
 
 type FilterOption = {
-  option: Category | Ingredient | SortOption;
+  class: string;
+  id: number;
+  option: Category | Ingredient | SortOption | string;
 }
 
 type FilteringContextProps = {
   filterOptions: FilterOptions;
-  updateFilterOptions: Function;
+  addFilterOption: Function;
+  removeFilterOption: Function;
   resetFilterOptions: Function;
 }
 
@@ -29,32 +32,80 @@ type FilteringProviderProps = {
 
 // context
 export const FilteringContext = createContext<FilteringContextProps>({
-  filterOptions: {},
-  updateFilterOptions: () => {},
+  filterOptions: {
+    ingredientIds: [],
+    categoryIds: [],
+    sortOptionId: null,
+    keyword: null
+  },
+  addFilterOption: () => {},
+  removeFilterOption: () => {},
   resetFilterOptions: () => {}
 })
 
 // provider
 export const FilteringProvider = ({ children }: FilteringProviderProps) => {
   // initial state
-  const [ filterOptions, setFilterOptions ] = useState<FilterOptions>({})
-
-  // actions
-  const updateFilterOptions = (option: FilterOption) => {
-    const updatedFilterOptions = {
-      ...filterOptions
-    };
-
+  const emptyFilterOptions: FilterOptions = {
+    ingredientIds: [],
+    categoryIds: [],
+    sortOptionId: null,
+    keyword: null
   }
 
+  const [ 
+    filterOptions, 
+    setFilterOptions 
+  ] = useState<FilterOptions>(emptyFilterOptions)
+
+  // actions
+  const addFilterOption = (option: FilterOption) => {
+    const updatedFilterOptions = { ...filterOptions }
+
+    switch (option.class.toLowerCase()) {
+      case 'category':
+        updatedFilterOptions.categoryIds.push(option.id)
+        break;
+      case 'ingredient':
+        updatedFilterOptions.ingredientIds.push(option.id)
+        break;
+      case 'sortoption':
+        updatedFilterOptions.sortOptionId = option.id
+        break;
+    }
+
+    setFilterOptions(updatedFilterOptions);
+  }
+
+  const removeFilterOption = (option: FilterOption) => {
+    const updatedFilterOptions = { ...filterOptions }
+
+    switch (option.class.toLowerCase()) {
+      case 'category':
+        const categoryIds = updatedFilterOptions.categoryIds.filter(
+          (id) => id !== option.id
+        )
+        updatedFilterOptions.categoryIds = categoryIds;
+      case 'ingredient':
+        const ingredientIds = updatedFilterOptions.ingredientIds.filter(
+          (id) => id !== option.id
+        )
+        updatedFilterOptions.ingredientIds = ingredientIds;
+    }
+
+    setFilterOptions(updatedFilterOptions);
+  }
+
+  console.log(filterOptions)
   const resetFilterOptions = () => {
-    setFilterOptions({})
+    setFilterOptions(emptyFilterOptions)
   }
 
   // export data
   const value = { 
     filterOptions,
-    updateFilterOptions,
+    addFilterOption,
+    removeFilterOption,
     resetFilterOptions
   };
 
@@ -64,8 +115,3 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     </FilteringContext.Provider>
   )
 }
-
-// know what type of object it is
-// based on type test whether id already in relevant id array
-// if not, add to array
-// if so, remove from array

@@ -6,6 +6,7 @@ import { fetchAllCategories } from "@/pages/api/cocktail-api";
 
 // types
 export type Category = {
+  class: string;
   created_at: string;
   id: number;
   name: string;

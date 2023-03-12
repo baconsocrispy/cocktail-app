@@ -6,6 +6,7 @@ import { fetchSortOptions } from "@/pages/api/cocktail-api";
 
 // types
 export type SortOption = {
+  class: string;
   id: number;
   name: string;
 }

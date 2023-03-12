@@ -16,11 +16,11 @@ type OptionProps = {
 const Option: FC<OptionProps> = ({ option }) => {
   // state
   const [ selected, setSelected ] = useState(false);
-  const { updateFilterOptions } = useContext(FilteringContext)
+  const { addFilterOption, removeFilterOption } = useContext(FilteringContext);
 
   // handlers
   const handleClick = () => {
-    updateFilterOptions(option);
+    selected ? removeFilterOption(option) : addFilterOption(option);
     setSelected(!selected);
   }
 
@@ -37,7 +37,3 @@ const Option: FC<OptionProps> = ({ option }) => {
 }
 
 export default Option
-
-// if item is not selected, add item id to correct filterOption array
-
-// determine which type it is ()

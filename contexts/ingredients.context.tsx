@@ -7,6 +7,7 @@ export type Ingredient = {
   abv?: string;
   age?: number;
   brand?: string;
+  class: string;
   created_at: string;
   name: string;
   id: number;

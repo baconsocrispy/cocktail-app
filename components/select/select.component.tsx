@@ -25,7 +25,6 @@ const Select: FC<SelectProps> = (
         ))}
       </ul>
     </div>
-    
   )
 }
 

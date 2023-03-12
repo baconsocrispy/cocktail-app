@@ -44,7 +44,6 @@ export const fetchAllIngredients = async () => {
 export const fetchSortOptions = async () => {
   const response = await fetch('http://localhost:3001/sort_options');
   const sortOptions: SortOptionAPI = await response.json();
-  console.log(sortOptions)
   return sortOptions;
 }
 
