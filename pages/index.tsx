@@ -39,11 +39,12 @@ export const Home = ({ data }: HomeProps) => {
             <IngredientsProvider>
               <SortByProvider>
                 <FilterBar />
+                
               </SortByProvider>
             </IngredientsProvider>
           </CategoriesProvider>
+          <Recipes />
         </FilteringProvider>
-        <Recipes />
       </RecipesProvider>
       <Toolbar options={ toolbarOptions }/>
     </>

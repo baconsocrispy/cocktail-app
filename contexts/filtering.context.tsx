@@ -6,7 +6,7 @@ import { Category } from "./categories.context";
 import { Ingredient } from "./ingredients.context";
 import { SortOption } from "./sort-by.context";
 
-type FilterOptions = {
+export type FilterOptions = {
   ingredientIds: number[];
   categoryIds: number[];
   sortOptionId: number | null;
@@ -16,11 +16,12 @@ type FilterOptions = {
 type FilterOption = {
   class: string;
   id: number;
-  option: Category | Ingredient | SortOption | string;
+  option: Category | Ingredient | SortOption;
 }
 
 type FilteringContextProps = {
   filterOptions: FilterOptions;
+  page: number;
   addFilterOption: Function;
   removeFilterOption: Function;
   resetFilterOptions: Function;
@@ -38,6 +39,7 @@ export const FilteringContext = createContext<FilteringContextProps>({
     sortOptionId: null,
     keyword: null
   },
+  page: 1,
   addFilterOption: () => {},
   removeFilterOption: () => {},
   resetFilterOptions: () => {}
@@ -58,6 +60,8 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     setFilterOptions 
   ] = useState<FilterOptions>(emptyFilterOptions)
 
+  const [ page, setPage ] = useState(1);
+
   // actions
   const addFilterOption = (option: FilterOption) => {
     const updatedFilterOptions = { ...filterOptions }
@@ -73,12 +77,13 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
         updatedFilterOptions.sortOptionId = option.id
         break;
     }
-
+    
+    setPage(1);
     setFilterOptions(updatedFilterOptions);
   }
 
   const removeFilterOption = (option: FilterOption) => {
-    const updatedFilterOptions = { ...filterOptions }
+    const updatedFilterOptions: FilterOptions = { ...filterOptions }
 
     switch (option.class.toLowerCase()) {
       case 'category':
@@ -92,18 +97,20 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
         )
         updatedFilterOptions.ingredientIds = ingredientIds;
     }
-
+    
+    setPage(1);
     setFilterOptions(updatedFilterOptions);
   }
 
-  console.log(filterOptions)
   const resetFilterOptions = () => {
+    setPage(1);
     setFilterOptions(emptyFilterOptions)
   }
 
   // export data
   const value = { 
     filterOptions,
+    page,
     addFilterOption,
     removeFilterOption,
     resetFilterOptions
