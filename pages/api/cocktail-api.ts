@@ -30,16 +30,19 @@ export const fetchAllRecipes = async () => {
   return recipes;
 }
 
-export const filterRecipes = async (filterOptions: FilterOptions) => {
-  const url = new URL('http://localhost:3001/recipes');
-  const params = configureURLSearchParams(filterOptions);
+export const filterRecipes = async (
+  filterOptions: FilterOptions, 
+  page: number
+) => {
+  // returns URLSearchParams object
+  const params = configureURLSearchParams(filterOptions, page); 
+
+  const url = new URL('http://localhost:3001/recipes/search');
   url.search = params.toString();
 
   const response = await fetch(url);
-  const recipes = await response.json();
-
-  console.log(url);
-
+  const recipes: RecipesAPI = await response.json();
+  console.log(recipes)
   return recipes
 }
 
@@ -61,7 +64,11 @@ export const fetchSortOptions = async () => {
   return sortOptions;
 }
 
-const configureURLSearchParams = (filterOptions: FilterOptions) => {
+// helpers
+const configureURLSearchParams = (
+  filterOptions: FilterOptions, 
+  page: number
+) => {
   const params = new URLSearchParams();
 
   if (filterOptions.ingredientIds.length > 0) {
@@ -83,6 +90,8 @@ const configureURLSearchParams = (filterOptions: FilterOptions) => {
   if (filterOptions.keyword !== null) {
     params.append('keyword', filterOptions.keyword);
   }
+
+  params.append('page', page.toString())
 
   return params 
 }

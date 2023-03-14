@@ -25,6 +25,7 @@ type FilteringContextProps = {
   addFilterOption: Function;
   removeFilterOption: Function;
   resetFilterOptions: Function;
+  updatePage: Function;
 }
 
 type FilteringProviderProps = {
@@ -40,6 +41,7 @@ export const FilteringContext = createContext<FilteringContextProps>({
     keyword: null
   },
   page: 1,
+  updatePage: () => {},
   addFilterOption: () => {},
   removeFilterOption: () => {},
   resetFilterOptions: () => {}
@@ -102,6 +104,12 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     setFilterOptions(updatedFilterOptions);
   }
 
+  // break out into next page/previous page, 
+  // accounting for page 1 as lowest limit
+  const updatePage = (page: number) => {
+    setPage(page)
+  }
+
   const resetFilterOptions = () => {
     setPage(1);
     setFilterOptions(emptyFilterOptions)
@@ -111,6 +119,7 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
   const value = { 
     filterOptions,
     page,
+    updatePage,
     addFilterOption,
     removeFilterOption,
     resetFilterOptions

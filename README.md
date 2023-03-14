@@ -15,3 +15,20 @@ page's component.
 
 ### INDEX.TSX
 This is the root/home page component. 
+
+## API
+
+### Configuring Params
+As I needed to send arrays of ingredient/category ids as params, there was not
+a simple solution for parameterizing the arrays. URLSearchParams cannot 
+serialize a javascript object with array values as it needs key/value string
+pairs. I got what I needed by iterating over the id arrays and appending them
+to the URLSearchParams object with the format below:
+
+`params.append('ingredientIds[]', id.toString())`
+
+This allowed the parameters to come through in the format I needed for Rails 
+to digest them properly. 
+
+`{"ingredientIds"=>["104", "42", "106", "105", "103", "45"], "categoryIds"=>["4", "3"], "sortOptionsId"=>"3"}`
+
