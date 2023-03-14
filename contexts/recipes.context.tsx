@@ -51,7 +51,9 @@ export const RecipesContext = createContext<RecipesContextProps>({
 })
 
 // provider
-export const RecipesProvider = ({ children, recipes, recipeCount }: RecipesProviderProps) => {
+export const RecipesProvider = (
+  { children, recipes, recipeCount }: RecipesProviderProps
+) => {
   // initial state (set via Next.js getInitialState method)
   const [ state, setState ] = useState({ recipes, recipeCount })
 

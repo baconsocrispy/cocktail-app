@@ -93,11 +93,13 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
           (id) => id !== option.id
         )
         updatedFilterOptions.categoryIds = categoryIds;
+        break;
       case 'ingredient':
         const ingredientIds = updatedFilterOptions.ingredientIds.filter(
           (id) => id !== option.id
         )
         updatedFilterOptions.ingredientIds = ingredientIds;
+        break;
     }
     
     setPage(1);

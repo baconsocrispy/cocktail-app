@@ -8,6 +8,7 @@ import Option from "../option/option.component"
 import { Category } from "@/contexts/categories.context"
 import { Ingredient } from "@/contexts/ingredients.context"
 import { SortOption } from "@/contexts/sort-by.context"
+
 type SelectProps = {
   header: string;
   options: Category[] | Ingredient[] | SortOption[];
