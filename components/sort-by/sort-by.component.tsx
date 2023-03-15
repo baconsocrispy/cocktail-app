@@ -8,7 +8,6 @@ import Select from "../select/select.component";
 import { SortByContext } from "@/contexts/sort-by.context";
 
 // types
-
 type SortByProps = {
   open: boolean;
 }

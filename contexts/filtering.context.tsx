@@ -9,13 +9,14 @@ import { SortOption } from "./sort-by.context";
 export type FilterOptions = {
   ingredientIds: number[];
   categoryIds: number[];
-  sortOptionId: number | null;
+  sortOption: string | null;
   keyword: string | null;
 }
 
 type FilterOption = {
   class: string;
   id: number;
+  name: string;
   option: Category | Ingredient | SortOption;
 }
 
@@ -37,7 +38,7 @@ export const FilteringContext = createContext<FilteringContextProps>({
   filterOptions: {
     ingredientIds: [],
     categoryIds: [],
-    sortOptionId: null,
+    sortOption: null,
     keyword: null
   },
   page: 1,
@@ -53,7 +54,7 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
   const emptyFilterOptions: FilterOptions = {
     ingredientIds: [],
     categoryIds: [],
-    sortOptionId: null,
+    sortOption: null,
     keyword: null
   }
 
@@ -76,7 +77,7 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
         updatedFilterOptions.ingredientIds.push(option.id)
         break;
       case 'sortoption':
-        updatedFilterOptions.sortOptionId = option.id
+        updatedFilterOptions.sortOption = option.name
         break;
     }
     

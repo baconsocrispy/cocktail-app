@@ -83,8 +83,8 @@ const configureURLSearchParams = (
     });
   }
 
-  if (filterOptions.sortOptionId !== null) {
-    params.append('sortOptionsId', filterOptions.sortOptionId.toString());
+  if (filterOptions.sortOption !== null) {
+    params.append('sortOption', filterOptions.sortOption);
   }
 
   if (filterOptions.keyword !== null) {
