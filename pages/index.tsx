@@ -20,15 +20,6 @@ type HomeProps = {
   data: RecipesAPI;
 }
 
-// data
-const toolbarOptions = [
-  'Cabinets', 
-  'Favorites', 
-  'Recipes', 
-  'New Recipe', 
-  'Discover'
-]
-
 export const Home = ({ data }: HomeProps) => {
   const { recipes, recipeCount } = data;
   return (
@@ -46,7 +37,7 @@ export const Home = ({ data }: HomeProps) => {
           <Recipes />
         </FilteringProvider>
       </RecipesProvider>
-      <Toolbar options={ toolbarOptions }/>
+      <Toolbar />
     </>
   )
 }

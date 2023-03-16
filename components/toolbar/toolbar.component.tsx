@@ -1,12 +1,15 @@
-// external imports
-import { FC } from "react"
-
-// types
-type ToobarProps = {
-  options: string[];
+// data
+enum ToolbarOptions {
+  cabinets = 'Cabinets', 
+  favorites = 'Favorites', 
+  recipes = 'Recipes', 
+  newRecipe = 'New Recipe', 
+  discover = 'Discover'
 }
 
-const Toolbar: FC<ToobarProps> = ({ options }) => {
+const Toolbar = () => {
+  const options = Object.values(ToolbarOptions);
+
   return (
     <div className="toolbar">
       <ul className="toolbar__options">
