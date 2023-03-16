@@ -1,5 +1,6 @@
 // external imports
 import { useContext } from "react"
+import Link from "next/link";
 
 // context
 import { UserContext } from "@/contexts/user.context"
@@ -14,7 +15,8 @@ const Nav = () => {
   return (
     <nav className="nav">
       <div className="nav__logo">
-        NavLogo
+        <Link href='/'>Home</Link>
+        <Link href='/auth'>Auth</Link>
       </div>
       <div className="nav__menu">
         <button onClick={ handleLogOut }>Log Out</button>
