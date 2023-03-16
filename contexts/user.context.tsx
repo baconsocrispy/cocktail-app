@@ -13,6 +13,9 @@ export type User = {
 
 type UserContextProps = {
   user: User | null;
+  signUp: Function;
+  signIn: Function;
+  signOut: Function;
 }
 
 type UserProviderProps = {
@@ -21,7 +24,10 @@ type UserProviderProps = {
 
 // context
 export const UserContext = createContext<UserContextProps>({
-  user: null
+  user: null,
+  signUp: () => {},
+  signIn: () => {},
+  signOut: () => {}
 })
 
 // provider
@@ -31,18 +37,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   // actions
   const signUp = async (formData: UserFormData) => {
-    const response = await signUpUser(formData);
-    const currentUser = await response.json();
+    const currentUser = await signUpUser(formData);
     setUser(currentUser)
   }
 
   const signIn = async (formData: UserFormData) => {
-    const response = await logInUser(formData);
-    const currentUser = await response.json();
+    const currentUser = await logInUser(formData);
     setUser(currentUser);
   }
   
-  const signOut = () => async () => {
+  const signOut = async () => {
     await logOutUser();
     setUser(null)
   }

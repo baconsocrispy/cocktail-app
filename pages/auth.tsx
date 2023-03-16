@@ -11,9 +11,16 @@ const Auth = () => {
   // state
   const [ activeForm, setActiveForm ] = useState(FORM_TYPES.signUp)
 
+  const changeForm = () => {
+    activeForm === FORM_TYPES.signUp ? 
+      setActiveForm(FORM_TYPES.signIn) :
+      setActiveForm(FORM_TYPES.signUp)
+  }
+
   return (
     <div>
       <AuthForm formType={ activeForm } />
+      <button onClick={ changeForm }>{ activeForm }</button>
       <Toolbar />
     </div>
   )

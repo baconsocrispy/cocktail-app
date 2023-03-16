@@ -1,16 +1,19 @@
 // external imports
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-// api
-import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth-api";
+// context
+import { UserContext } from "@/contexts/user.context";
 
 // types
 export type UserFormData = {
-  email: string;
-  password: string;
-  confirmPassword?: string; 
+  user: {
+    email: string;
+    password: string;
+    password_confirmation?: string; 
+  }
 }
+
 type AuthFormProps = {
   formType: string;
 }
@@ -22,8 +25,63 @@ export enum FORM_TYPES {
 }
 
 const AuthForm: FC<AuthFormProps> = ({ formType }) => {
+  // state
+  const { signUp, signIn } = useContext(UserContext);
+
+  // useForm elements
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<UserFormData>()
+
+  // handlers
+  const onSignUp: SubmitHandler<UserFormData> = async (formData: UserFormData) => {
+    await signUp(formData);
+  }
+
+  const onSignIn: SubmitHandler<UserFormData> = async (formData: UserFormData) => {
+    await signIn(formData);
+  }
+
   return (
-    <div>AuthForm</div>
+    <div>
+      <form id='user' onSubmit={ formType === FORM_TYPES.signUp ? 
+        handleSubmit(onSignUp) : 
+        handleSubmit(onSignIn)
+      }>
+        
+        <label htmlFor="email">Email</label>
+        <input 
+          type="email"
+          { ...register('user.email', { required: 'Email is required' })}
+          autoComplete="email"
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          { ...register('user.password', { required: 'Password is required' })}
+          autoComplete="current-password"
+        />
+
+        { formType === FORM_TYPES.signUp && 
+          <>
+            <label htmlFor="password_confirmation">Confirm Password</label>
+            <input
+              type="password"
+              { ...register('user.password_confirmation', 
+                { required: 'Password confirmation required' })
+              }
+              autoComplete="new-password"
+            />
+          </>
+        }
+
+        <button>Submit</button>
+      </form>
+    </div>
   )
 }
 
