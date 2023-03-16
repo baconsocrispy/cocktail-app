@@ -1,9 +1,9 @@
 // external imports
-import { useContext } from "react"
+import { useContext } from "react";
 import Link from "next/link";
 
 // context
-import { UserContext } from "@/contexts/user.context"
+import { UserContext } from "@/contexts/user.context";
 
 const Nav = () => {
   // state
