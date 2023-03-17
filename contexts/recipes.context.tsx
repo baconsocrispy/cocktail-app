@@ -4,6 +4,7 @@ import { ReactNode, createContext, useState } from 'react';
 //types
 import { Category } from './categories.context';
 import { Ingredient } from './ingredients.context';
+import { User } from './user.context';
 
 type Step = {
   description?: string;
@@ -12,12 +13,8 @@ type Step = {
   name: string;
 }
 
-type Tool = {
+export type Tool = {
   name: string;
-}
-
-type User = {
-  email: string;
 }
 
 export type Recipe = {

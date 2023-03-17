@@ -30,7 +30,6 @@ export const Home = ({ data }: HomeProps) => {
             <IngredientsProvider>
               <SortByProvider>
                 <FilterBar />
-                
               </SortByProvider>
             </IngredientsProvider>
           </CategoriesProvider>

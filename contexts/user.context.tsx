@@ -1,17 +1,31 @@
 // external imports
-import { UserFormData } from "@/components/auth-form/auth-form.component";
 import { createContext, ReactNode, useState } from "react";
 
 // api
 import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth-api";
 
 // types
+import { Ingredient } from "./ingredients.context";
+import { Tool } from "./recipes.context";
+import { UserFormData } from "@/components/auth-form/auth-form.component";
+
+export type Cabinet = {
+  id: number;
+  name: string;
+  private: boolean;
+  ingredients: Ingredient[];
+  tools: Tool[];
+}
+
 export type User = {
   id: number | null;
+  cabinets: Cabinet[];
+  default_cabinet_id: number;
   email: string | null;
 }
 
 type UserContextProps = {
+  jwt: string | null;
   user: User | null;
   signUp: Function;
   signIn: Function;
@@ -24,6 +38,7 @@ type UserProviderProps = {
 
 // context
 export const UserContext = createContext<UserContextProps>({
+  jwt: null,
   user: null,
   signUp: () => {},
   signIn: () => {},
@@ -33,26 +48,37 @@ export const UserContext = createContext<UserContextProps>({
 // provider
 export const UserProvider = ({ children }: UserProviderProps) => {
   // initial state
-  const [ user, setUser ] = useState(null);
+  const [ user, setUser ] = useState<User | null>(null);
+  const [ jwt, setJWT ] = useState<string | null>(null);
 
   // actions
   const signUp = async (formData: UserFormData) => {
-    const currentUser = await signUpUser(formData);
-    setUser(currentUser)
+    const { user, jwt } = await signUpUser(formData);
+    setJWT(jwt);
+    setUser(user);
   }
 
   const signIn = async (formData: UserFormData) => {
-    const currentUser = await logInUser(formData);
-    setUser(currentUser);
+    const { user, jwt } = await logInUser(formData);
+
+    setJWT(jwt);
+    setUser(user);
   }
   
   const signOut = async () => {
     await logOutUser();
-    setUser(null)
+    setJWT(null);
+    setUser(null);
   }
 
   // export data
-  const value = { user, signUp, signIn, signOut };
+  const value = { 
+    jwt,
+    user,
+    signUp, 
+    signIn, 
+    signOut
+  };
 
   return (
     <UserContext.Provider value={ value }>

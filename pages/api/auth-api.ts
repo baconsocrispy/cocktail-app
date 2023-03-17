@@ -1,59 +1,52 @@
 // types
+import { User } from "@/contexts/user.context";
 import { UserFormData } from "@/components/auth-form/auth-form.component"
-type CSRFToken = {
-  token: string;
+
+type UserAPI = {
+  jwt: string;
+  user: User;
+  status: {
+    code: number;
+    message: string;
+  };
 }
 
 // api POST/DELETE calls
 export const signUpUser = async (formData: UserFormData) => {
-  const response = await backendRequest(
-    'POST', 'http://localhost:3001/users/', formData
+  const response: UserAPI = await backendRequest(
+    'POST', 'http://localhost:3001/signup', formData
   );
-  console.log(response)
   return response
 }
 
 export const logInUser = async (formData: UserFormData) => {
-  const response = await backendRequest(
-    'POST', 'http://localhost:3001/users/sign_in', formData
+  const response: UserAPI = await backendRequest(
+    'POST', 'http://localhost:3001/signin', formData
   );
-  console.log(response)
   return response
 }
 
 export const logOutUser = async () => {
   const response = await backendRequest(
-    'DELETE', 'http://localhost:3001/users/sign_out'
+    'DELETE', 'http://localhost:3001/signout'
   );
-  console.log(response)
   return response
 }
 
 // helpers
-const CSRFToken = async () => {
-  const response = await fetch('http://localhost:3001/csrf_token')
-  const { token }: CSRFToken = await response.json();
-  return token;
-}
-
 const backendRequest = async (
   method: string,
   url: string,
-  data: UserFormData | null = null
+  data: UserFormData | null = null,
 ) => {
 
-  const csrfToken = await CSRFToken();
+  const response = await fetch(url, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
 
-  if (csrfToken) {
-    const response = await fetch(url, {
-      method: method,
-      headers: {
-        'X-CSRF-Token': csrfToken,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-
-    return response.json();
-  }
+  return response.json();
 }
