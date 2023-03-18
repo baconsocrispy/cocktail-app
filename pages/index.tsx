@@ -21,7 +21,7 @@ type HomeProps = {
 }
 
 export const Home = ({ data }: HomeProps) => {
-  const { recipes, recipeCount } = data;
+  const { recipes, recipeCount } = data || {};
   return (
     <>
       <RecipesProvider recipes={ recipes } recipeCount={ recipeCount }>

@@ -7,10 +7,10 @@ import { UserContext } from "@/contexts/user.context";
 
 const Nav = () => {
   // state
-  const { signOut } = useContext(UserContext);
+  const { user, signOut } = useContext(UserContext);
 
   // handlers
-  const handleLogOut = () => signOut()
+  const handleLogOut = () => signOut();
 
   return (
     <nav className="nav">
@@ -18,8 +18,13 @@ const Nav = () => {
         <Link href='/'>Home</Link>
         <Link href='/auth'>Auth</Link>
       </div>
+
       <div className="nav__menu">
-        <button onClick={ handleLogOut }>Log Out</button>
+        { user && 
+            <button onClick={ handleLogOut }>
+              Log Out
+            </button> 
+        }
       </div>
     </nav>
   )

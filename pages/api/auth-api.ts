@@ -11,35 +11,34 @@ type UserAPI = {
   };
 }
 
-// api POST/DELETE calls
+// api
 export const signUpUser = async (formData: UserFormData) => {
-  const response: UserAPI = await backendRequest(
+  const response: UserAPI = await backendAuthRequest(
     'POST', 'http://localhost:3001/signup', formData
   );
   return response
 }
 
 export const logInUser = async (formData: UserFormData) => {
-  const response: UserAPI = await backendRequest(
+  const response: UserAPI = await backendAuthRequest(
     'POST', 'http://localhost:3001/signin', formData
   );
   return response
 }
 
 export const logOutUser = async () => {
-  const response = await backendRequest(
+  const response = await backendAuthRequest(
     'DELETE', 'http://localhost:3001/signout'
   );
   return response
 }
 
 // helpers
-const backendRequest = async (
+const backendAuthRequest = async (
   method: string,
   url: string,
   data: UserFormData | null = null,
 ) => {
-
   const response = await fetch(url, {
     method: method,
     headers: {
@@ -47,6 +46,5 @@ const backendRequest = async (
     },
     body: JSON.stringify(data)
   })
-
   return response.json();
 }
