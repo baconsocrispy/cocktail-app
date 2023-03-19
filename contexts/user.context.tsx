@@ -2,7 +2,7 @@
 import { createContext, ReactNode, useState } from "react";
 
 // api
-import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth-api";
+import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth/auth-api";
 
 // types
 import { Ingredient } from "./ingredients.context";
@@ -54,6 +54,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   // actions
   const signUp = async (formData: UserFormData) => {
     const { user, jwt } = await signUpUser(formData);
+
     setJWT(jwt);
     setUser(user);
   }
