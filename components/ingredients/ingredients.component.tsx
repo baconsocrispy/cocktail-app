@@ -1,34 +1,47 @@
 // external imports
-import { FC, useContext } from "react"
+import { FC, useContext, useState, useEffect } from "react"
 
 // components
 import Select from "../select/select.component";
 
 // context
-import { IngredientsContext } from "@/contexts/ingredients.context";
+import { Ingredient, IngredientsContext } from "@/contexts/ingredients.context";
 import { UserContext } from "@/contexts/user.context";
+import { fetchCabinetIngredients } from "@/pages/api/cocktail-api";
 
 // types
 type IngredientsProps = {
   open: boolean;
+  cabinetId?: number | null;
 }
 
-const Ingredients: FC<IngredientsProps> = ({ open }) => {
+const Ingredients: FC<IngredientsProps> = ({ open, cabinetId }) => {
   // state
   const { user } = useContext(UserContext);
   const { ingredients, ingredientTypes } = useContext(IngredientsContext);
+  const [ cabinetIngredients, setCabinetIngredients ] = useState<Ingredient[]>(ingredients)
 
-  const handleUpdateCabinet = async (cabinetId: number) => {
+  const handleResetIngredients = () => setCabinetIngredients(ingredients); 
+
+  const handleUpdateIngredients = async (cabinetId: number) => {
+    const { ingredients } = await fetchCabinetIngredients(cabinetId);
+    setCabinetIngredients(ingredients)
   }
+
+  useEffect(() => {
+    cabinetId ? 
+      handleUpdateIngredients(cabinetId) :
+      setCabinetIngredients(ingredients)
+  }, [ cabinetId, ingredients ])
 
   return (
     <div className={ open ? 'ingredients ingredients--open' : 'ingredients'}>
       <ul>
-        <li>All Ingredients</li>
+        <li onClick={ handleResetIngredients }>All Ingredients</li>
         { user?.cabinets.map((cabinet) => (
           <li 
             key={ cabinet.id }
-            onClick={ () => handleUpdateCabinet(cabinet.id) }
+            onClick={ () => handleUpdateIngredients(cabinet.id) }
           >
             { cabinet.name }
           </li>
@@ -40,7 +53,7 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
           key={ type } 
           header={ type }
           options={
-            ingredients.filter((ingredient) => ingredient.type === type)
+            cabinetIngredients.filter((ingredient) => ingredient.type === type) 
           }  
         />
       ))}

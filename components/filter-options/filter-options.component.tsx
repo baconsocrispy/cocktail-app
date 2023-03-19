@@ -1,11 +1,14 @@
 // external imports
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useContext } from "react";
 
 // components
 import Sidebar from "../sidebar/sidebar.component";
 import Ingredients from "../ingredients/ingredients.component";
 import Categories from "../categories/categories.component";
 import SortBy from "../sort-by/sort-by.component";
+
+// context
+import { UserContext } from "@/contexts/user.context";
 
 // data
 enum FILTER_OPTIONS {
@@ -17,6 +20,7 @@ enum FILTER_OPTIONS {
 const FilterOptions = () => { 
   // state
   const options = Object.values(FILTER_OPTIONS);
+  const { user } = useContext(UserContext);
   const [ sidebarOpen, setSidebarOpen ] = useState(false);
   const [ sidebarContent, setSidebarContent ] = useState('');
 
@@ -54,7 +58,8 @@ const FilterOptions = () => {
         
         {/* sidebar content */}
         { <Ingredients 
-            open={ sidebarContent === FILTER_OPTIONS.by_ingredient } 
+            open={ sidebarContent === FILTER_OPTIONS.by_ingredient }
+            cabinetId={ user?.current_cabinet_id } 
           /> }
         { <Categories 
             open={ sidebarContent === FILTER_OPTIONS.by_category } 

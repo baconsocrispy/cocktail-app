@@ -23,7 +23,7 @@ export type SortOptionAPI = {
   sortOptions: SortOption[];
 }
 
-// api GET calls
+// recipes api
 export const fetchAllRecipes = async () => {
   const response = await fetch('http://localhost:3001/recipes');
   const recipes: RecipesAPI = await response.json();
@@ -46,25 +46,57 @@ export const filterRecipes = async (
   return recipes
 }
 
+// categories api
 export const fetchAllCategories = async () => {
   const response = await fetch('http://localhost:3001/categories');
   const categories: CategoriesAPI = await response.json();
   return categories;
 }
 
+// ingredients api
 export const fetchAllIngredients = async () => {
   const response = await fetch('http://localhost:3001/ingredients');
   const ingredients: IngredientsAPI = await response.json();
   return ingredients;
 }
 
+export const fetchCabinetIngredients = async (cabinetId: number) => {
+  const response = await fetch(
+    `http://localhost:3001/cabinet_ingredients/${ cabinetId }`
+  );
+  const ingredients: IngredientsAPI = await response.json()
+  return ingredients
+}
+
+// sort options api
 export const fetchSortOptions = async () => {
   const response = await fetch('http://localhost:3001/sort_options');
   const sortOptions: SortOptionAPI = await response.json();
   return sortOptions;
 }
 
+// user api
+export const updateCurrentCabinet = async (cabinetId: number) => {
+  const response = await backendRequest(
+    'POST', `http://localhost:3001/update_current_cabinet/${ cabinetId }`
+  );
+  console.log(response);
+}
+
 // helpers
+const backendRequest = async (
+  method: string,
+  url: string
+) => {
+  const response = await fetch(url, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  return response.json();
+}
+
 const configureURLSearchParams = (
   filterOptions: FilterOptions, 
   page: number
