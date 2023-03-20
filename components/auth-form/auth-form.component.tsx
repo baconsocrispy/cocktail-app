@@ -26,7 +26,7 @@ export enum FORM_TYPES {
 
 const AuthForm: FC<AuthFormProps> = ({ formType }) => {
   // state
-  const { signUp, signIn, getUser } = useContext(UserContext);
+  const { signUp, signIn } = useContext(UserContext);
 
   // useForm elements
   const {
@@ -39,12 +39,10 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
   // handlers
   const onSignUp: SubmitHandler<UserFormData> = (formData: UserFormData) => {
     signUp(formData);
-    getUser();
   }
 
   const onSignIn: SubmitHandler<UserFormData> = (formData: UserFormData) => {
     signIn(formData);
-    getUser();
   }
 
   return (

@@ -21,7 +21,6 @@ const Auth = () => {
     <div>
       <AuthForm formType={ activeForm } />
       <button onClick={ changeForm }>{ activeForm }</button>
-      <Toolbar />
     </div>
   )
 }

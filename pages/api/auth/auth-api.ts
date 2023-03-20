@@ -21,6 +21,7 @@ export const logInUser = async (formData: UserFormData) => {
   const response: AuthAPI = await backendAuthRequest(
     'POST', 'http://localhost:3001/signin', formData
   );
+  console.log(formData)
   return response
 }
 

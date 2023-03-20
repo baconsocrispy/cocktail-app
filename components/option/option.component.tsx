@@ -19,11 +19,27 @@ const Option: FC<OptionProps> = ({ option }) => {
   const { filterOptions, addFilterOption, removeFilterOption } = useContext(FilteringContext);
 
   // reset selected state when filterOptions resets
-  useEffect(() => {
-    if (selected && filterOptions.ingredientIds?.length === 0) {
-      setSelected(false)
+  useEffect(() => { 
+    switch (option.class.toLowerCase()) {
+      case 'category':
+        if (selected && filterOptions.categoryIds?.length === 0) {
+          setSelected(false)
+        }
+        break;
+      case 'ingredient':
+        if (selected && filterOptions.ingredientIds?.length === 0) {
+          setSelected(false)
+        }
+        break;
+      case 'sortoption':
+        if (selected && filterOptions.sortOption !== option.name.toString()) {
+          console.log(filterOptions.sortOption)
+          console.log(option.id.toString())
+          setSelected(false)
+        }
+        break;
     }
-  }, [ filterOptions, selected ])
+  }, [ filterOptions, selected, option ])
 
   // handlers
   const handleClick = () => {

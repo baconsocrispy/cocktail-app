@@ -13,7 +13,6 @@ import { FilteringContext } from "@/contexts/filtering.context";
 // types
 type IngredientsProps = {
   open: boolean;
-  cabinetId?: number | null;
 }
 
 const Ingredients: FC<IngredientsProps> = ({ open }) => {
@@ -37,7 +36,7 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
   }
 
   // handlers
-  const handleAllIngredients = async () => {
+  const handleResetIngredients = async () => {
     jwt && await updateCurrentCabinet(null, jwt)
     setCabinetIngredients(ingredients); 
     resetFilterOptions();
@@ -52,7 +51,7 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
   return (
     <div className={ open ? 'ingredients ingredients--open' : 'ingredients'}>
       <ul>
-        <li onClick={ handleAllIngredients }>All Ingredients</li>
+        <li onClick={ handleResetIngredients }>All Ingredients</li>
         
         { user?.cabinets.map((cabinet) => (
           <li 

@@ -9,6 +9,8 @@ const Nav = () => {
   // state
   const { user, signOut } = useContext(UserContext);
 
+  console.log(user)
+
   // handlers
   const handleLogOut = () => signOut();
 

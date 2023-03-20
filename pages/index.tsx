@@ -36,7 +36,6 @@ export const Home = ({ data }: HomeProps) => {
           <Recipes />
         </FilteringProvider>
       </RecipesProvider>
-      <Toolbar />
     </>
   )
 }

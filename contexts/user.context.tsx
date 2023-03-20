@@ -1,5 +1,5 @@
 // external imports
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState, useEffect } from "react";
 
 // api
 import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth/auth-api";
@@ -54,6 +54,11 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [ user, setUser ] = useState<User | null>(null);
   const [ jwt, setJWT ] = useState<string | null>(null);
 
+  // set user when jwt updates
+  useEffect(() => {
+    jwt && getUser();
+  }, [ jwt ])
+
   // actions
   const signUp = async (formData: UserFormData) => {
     const { jwt } = await signUpUser(formData);
@@ -77,8 +82,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       setUser(currentUser)
     }
   }
-
-  console.log(user)
     
 
   // export data

@@ -1,5 +1,6 @@
 // external imports
-import { FC } from "react"
+import { FC } from "react";
+import { useRouter } from "next/router";
 
 // types
 import { ReactNode } from "react"
@@ -8,8 +9,10 @@ type GridProps = {
 }
 
 const Grid: FC<GridProps> = ({ children }) => {
+  const { asPath } = useRouter();
+
   return (
-    <div className="grid">
+    <div className={ asPath === '/' ? 'grid grid__home' : 'grid grid__page' }>
       { children }
     </div>
   )

@@ -2,9 +2,18 @@
   display: grid;
   grid-template-columns: 1fr;
 
-  grid-template-rows: 
-    $nav-height 
-    $filter-bar-height 
-    $main-content-height 
-    $footer-height;
+  &__home {
+    grid-template-rows: 
+      $nav-height 
+      $filter-bar-height 
+      $main-content-home-height 
+      $footer-height;
+  }
+
+  &__page {
+    grid-template-rows: 
+      $nav-height 
+      $main-content-page-height 
+      $footer-height;
+  }
 }

@@ -10,6 +10,7 @@ import { UserProvider } from '@/contexts/user.context';
 
 // styles
 import '@/styles/globals.scss'
+import Toolbar from '@/components/toolbar/toolbar.component';
 
 
 export const App = ({ Component, pageProps }: AppProps) => {
@@ -19,6 +20,7 @@ export const App = ({ Component, pageProps }: AppProps) => {
         <Nav />
         <Component { ...pageProps } />
       </UserProvider>
+      <Toolbar />
     </Grid>
   )
 }
