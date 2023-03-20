@@ -19,7 +19,7 @@ export type Cabinet = {
 }
 
 export type User = {
-  id: number | null;
+  id: number;
   cabinets: Cabinet[];
   current_cabinet_id: number | null;
   email: string | null;

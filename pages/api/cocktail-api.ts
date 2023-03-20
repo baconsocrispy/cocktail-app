@@ -4,6 +4,7 @@ import { FilterOptions } from "@/contexts/filtering.context";
 import { Ingredient } from "@/contexts/ingredients.context";
 import { Recipe } from "@/contexts/recipes.context";
 import { SortOption } from "@/contexts/sort-by.context";
+import { Tool } from "@/contexts/tools.context";
 import { User } from "@/contexts/user.context";
 
 export type RecipesAPI = {
@@ -65,8 +66,16 @@ export const fetchCabinetIngredients = async (cabinetId: number) => {
   const response = await fetch(
     `http://localhost:3001/cabinet_ingredients/${ cabinetId }`
   );
-  const ingredients: IngredientsAPI = await response.json()
-  return ingredients
+  const ingredients: IngredientsAPI = await response.json();
+  return ingredients;
+}
+
+// tools api
+export const fetchTools = async () => {
+  const response = await fetch('http://localhost:3001/tools');
+  const tools: Tool[] = await response.json();
+  console.log(tools);
+  return tools;
 }
 
 // sort options api

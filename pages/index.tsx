@@ -27,11 +27,9 @@ export const Home = ({ data }: HomeProps) => {
       <RecipesProvider recipes={ recipes } recipeCount={ recipeCount }>
         <FilteringProvider>
           <CategoriesProvider>
-            <IngredientsProvider>
-              <SortByProvider>
-                <FilterBar />
-              </SortByProvider>
-            </IngredientsProvider>
+            <SortByProvider>
+              <FilterBar />
+            </SortByProvider>
           </CategoriesProvider>
           <Recipes />
         </FilteringProvider>
