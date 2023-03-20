@@ -1,5 +1,5 @@
 // external imports
-import { FC, useContext, useState } from "react";
+import { FC, useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 // context
@@ -26,7 +26,7 @@ export enum FORM_TYPES {
 
 const AuthForm: FC<AuthFormProps> = ({ formType }) => {
   // state
-  const { signUp, signIn } = useContext(UserContext);
+  const { signUp, signIn, getUser } = useContext(UserContext);
 
   // useForm elements
   const {
@@ -37,12 +37,14 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
   } = useForm<UserFormData>()
 
   // handlers
-  const onSignUp: SubmitHandler<UserFormData> = async (formData: UserFormData) => {
-    await signUp(formData);
+  const onSignUp: SubmitHandler<UserFormData> = (formData: UserFormData) => {
+    signUp(formData);
+    getUser();
   }
 
-  const onSignIn: SubmitHandler<UserFormData> = async (formData: UserFormData) => {
-    await signIn(formData);
+  const onSignIn: SubmitHandler<UserFormData> = (formData: UserFormData) => {
+    signIn(formData);
+    getUser();
   }
 
   return (

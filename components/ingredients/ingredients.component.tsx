@@ -7,7 +7,8 @@ import Select from "../select/select.component";
 // context
 import { Ingredient, IngredientsContext } from "@/contexts/ingredients.context";
 import { UserContext } from "@/contexts/user.context";
-import { fetchCabinetIngredients } from "@/pages/api/cocktail-api";
+import { fetchCabinetIngredients, updateCurrentCabinet } from "@/pages/api/cocktail-api";
+import { FilteringContext } from "@/contexts/filtering.context";
 
 // types
 type IngredientsProps = {
@@ -15,33 +16,48 @@ type IngredientsProps = {
   cabinetId?: number | null;
 }
 
-const Ingredients: FC<IngredientsProps> = ({ open, cabinetId }) => {
+const Ingredients: FC<IngredientsProps> = ({ open }) => {
   // state
-  const { user } = useContext(UserContext);
+  const { user, jwt, getUser } = useContext(UserContext);
   const { ingredients, ingredientTypes } = useContext(IngredientsContext);
-  const [ cabinetIngredients, setCabinetIngredients ] = useState<Ingredient[]>(ingredients)
+  const { resetFilterOptions } = useContext(FilteringContext)
+  const [ cabinetIngredients, setCabinetIngredients ] = useState<Ingredient[]>(ingredients);
 
-  const handleResetIngredients = () => setCabinetIngredients(ingredients); 
+  // set initial ingredients && rerender when current_cabinet_id changes
+  useEffect(() => {
+    user?.current_cabinet_id ? 
+      updateIngredients(user.current_cabinet_id) :
+      setCabinetIngredients(ingredients)
+  }, [ user, ingredients ])
 
-  const handleUpdateIngredients = async (cabinetId: number) => {
+  // actions
+  const updateIngredients = async (cabinetId: number) => {
     const { ingredients } = await fetchCabinetIngredients(cabinetId);
     setCabinetIngredients(ingredients)
   }
 
-  useEffect(() => {
-    cabinetId ? 
-      handleUpdateIngredients(cabinetId) :
-      setCabinetIngredients(ingredients)
-  }, [ cabinetId, ingredients ])
+  // handlers
+  const handleAllIngredients = async () => {
+    jwt && await updateCurrentCabinet(null, jwt)
+    setCabinetIngredients(ingredients); 
+    resetFilterOptions();
+  }
+
+  const handleUpdateCabinet = (cabinetId: number) => {
+    jwt && updateCurrentCabinet(cabinetId, jwt);
+    getUser();
+    resetFilterOptions();
+  }
 
   return (
     <div className={ open ? 'ingredients ingredients--open' : 'ingredients'}>
       <ul>
-        <li onClick={ handleResetIngredients }>All Ingredients</li>
+        <li onClick={ handleAllIngredients }>All Ingredients</li>
+        
         { user?.cabinets.map((cabinet) => (
           <li 
             key={ cabinet.id }
-            onClick={ () => handleUpdateIngredients(cabinet.id) }
+            onClick={ () => handleUpdateCabinet(cabinet.id) }
           >
             { cabinet.name }
           </li>

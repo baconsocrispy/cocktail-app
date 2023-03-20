@@ -1,10 +1,8 @@
 // types
-import { User } from "@/contexts/user.context";
 import { UserFormData } from "@/components/auth-form/auth-form.component"
 
-type UserAPI = {
+type AuthAPI = {
   jwt: string;
-  user: User;
   status: {
     code: number;
     message: string;
@@ -13,14 +11,14 @@ type UserAPI = {
 
 // api
 export const signUpUser = async (formData: UserFormData) => {
-  const response: UserAPI = await backendAuthRequest(
+  const response: AuthAPI = await backendAuthRequest(
     'POST', 'http://localhost:3001/signup', formData
   );
   return response
 }
 
 export const logInUser = async (formData: UserFormData) => {
-  const response: UserAPI = await backendAuthRequest(
+  const response: AuthAPI = await backendAuthRequest(
     'POST', 'http://localhost:3001/signin', formData
   );
   return response

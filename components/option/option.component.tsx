@@ -1,5 +1,5 @@
 // external imports
-import { FC, useContext, useState } from "react"
+import { FC, useContext, useEffect, useState } from "react"
 
 // context
 import { FilteringContext } from "@/contexts/filtering.context";
@@ -16,7 +16,14 @@ type OptionProps = {
 const Option: FC<OptionProps> = ({ option }) => {
   // state
   const [ selected, setSelected ] = useState(false);
-  const { addFilterOption, removeFilterOption } = useContext(FilteringContext);
+  const { filterOptions, addFilterOption, removeFilterOption } = useContext(FilteringContext);
+
+  // reset selected state when filterOptions resets
+  useEffect(() => {
+    if (selected && filterOptions.ingredientIds?.length === 0) {
+      setSelected(false)
+    }
+  }, [ filterOptions, selected ])
 
   // handlers
   const handleClick = () => {

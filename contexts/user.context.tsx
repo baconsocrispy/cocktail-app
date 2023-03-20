@@ -8,6 +8,7 @@ import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth/auth-api";
 import { Ingredient } from "./ingredients.context";
 import { Tool } from "./recipes.context";
 import { UserFormData } from "@/components/auth-form/auth-form.component";
+import { getCurrentUser } from "@/pages/api/cocktail-api";
 
 export type Cabinet = {
   id: number;
@@ -27,6 +28,7 @@ export type User = {
 type UserContextProps = {
   jwt: string | null;
   user: User | null;
+  getUser: Function;
   signUp: Function;
   signIn: Function;
   signOut: Function;
@@ -40,6 +42,7 @@ type UserProviderProps = {
 export const UserContext = createContext<UserContextProps>({
   jwt: null,
   user: null,
+  getUser: () => {},
   signUp: () => {},
   signIn: () => {},
   signOut: () => {}
@@ -53,17 +56,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   // actions
   const signUp = async (formData: UserFormData) => {
-    const { user, jwt } = await signUpUser(formData);
-
+    const { jwt } = await signUpUser(formData);
     setJWT(jwt);
-    setUser(user);
   }
 
   const signIn = async (formData: UserFormData) => {
-    const { user, jwt } = await logInUser(formData);
-
+    const { jwt } = await logInUser(formData);
     setJWT(jwt);
-    setUser(user);
   }
   
   const signOut = async () => {
@@ -72,10 +71,21 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     setUser(null);
   }
 
+  const getUser = async () => {
+    if (jwt) {
+      const currentUser: User = await getCurrentUser(jwt)
+      setUser(currentUser)
+    }
+  }
+
+  console.log(user)
+    
+
   // export data
   const value = { 
     jwt,
     user,
+    getUser,
     signUp, 
     signIn, 
     signOut

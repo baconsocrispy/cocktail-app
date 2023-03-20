@@ -4,6 +4,7 @@ import { FilterOptions } from "@/contexts/filtering.context";
 import { Ingredient } from "@/contexts/ingredients.context";
 import { Recipe } from "@/contexts/recipes.context";
 import { SortOption } from "@/contexts/sort-by.context";
+import { User } from "@/contexts/user.context";
 
 export type RecipesAPI = {
   recipes: Recipe[];
@@ -76,21 +77,30 @@ export const fetchSortOptions = async () => {
 }
 
 // user api
-export const updateCurrentCabinet = async (cabinetId: number) => {
-  const response = await backendRequest(
-    'POST', `http://localhost:3001/update_current_cabinet/${ cabinetId }`
+export const updateCurrentCabinet = async (cabinetId: number | null, jwt: string) => {
+  const response = await backendJWTRequest(
+    'POST', `http://localhost:3001/update_current_cabinet/${ cabinetId }`, jwt
   );
-  console.log(response);
+  return response
+}
+
+export const getCurrentUser = async (jwt: string) => {
+  const user: User = await backendJWTRequest(
+    'GET', 'http://localhost:3001/current_user', jwt
+  )
+  return user
 }
 
 // helpers
-const backendRequest = async (
+const backendJWTRequest = async (
   method: string,
-  url: string
+  url: string,
+  jwt: string
 ) => {
   const response = await fetch(url, {
     method: method,
     headers: {
+      'Authorization': `Bearer ${ jwt }`,
       'Content-Type': 'application/json'
     },
   })

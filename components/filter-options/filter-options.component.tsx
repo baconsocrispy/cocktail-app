@@ -59,7 +59,6 @@ const FilterOptions = () => {
         {/* sidebar content */}
         { <Ingredients 
             open={ sidebarContent === FILTER_OPTIONS.by_ingredient }
-            cabinetId={ user?.current_cabinet_id } 
           /> }
         { <Categories 
             open={ sidebarContent === FILTER_OPTIONS.by_category } 
