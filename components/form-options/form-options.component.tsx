@@ -3,20 +3,20 @@ import { useState, MouseEvent } from "react";
 
 // components
 import Sidebar from "../sidebar/sidebar.component";
-import Ingredients from "../ingredients/ingredients.component";
-import Categories from "../categories/categories.component";
-import SortBy from "../sort-by/sort-by.component";
+import FormIngredients from "../form-ingredients/form-ingredients.component";
+import FormCategories from "../form-categories/form-categories.component";
+import FormTools from "../form-tools/form-tools.component";
 
 // data
-enum FILTER_OPTIONS {
-  by_ingredient = 'Ingredients',
-  by_category = 'Categories',
-  by_sort_type = 'Sort By'
+enum FORM_OPTIONS {
+  ingredients = 'Ingredients',
+  categories = 'Categories',
+  tools = 'Tools'
 }
 
-const FilterOptions = () => { 
+const FormOptions = () => { 
   // state
-  const options = Object.values(FILTER_OPTIONS);
+  const options = Object.values(FORM_OPTIONS);
   const [ sidebarOpen, setSidebarOpen ] = useState(false);
   const [ sidebarContent, setSidebarContent ] = useState('');
 
@@ -53,14 +53,14 @@ const FilterOptions = () => {
         </button>
         
         {/* sidebar content */}
-        { <Ingredients 
-            open={ sidebarContent === FILTER_OPTIONS.by_ingredient }
+        { <FormIngredients 
+            open={ sidebarContent === FORM_OPTIONS.ingredients }
           /> }
-        { <Categories 
-            open={ sidebarContent === FILTER_OPTIONS.by_category } 
+        { <FormCategories 
+            open={ sidebarContent === FORM_OPTIONS.categories } 
           /> }
-        { <SortBy 
-            open={ sidebarContent === FILTER_OPTIONS.by_sort_type } 
+        { <FormTools 
+            open={ sidebarContent === FORM_OPTIONS.tools } 
           /> 
         }
       </Sidebar>
@@ -68,4 +68,4 @@ const FilterOptions = () => {
   )
 }
 
-export default FilterOptions
+export default FormOptions

@@ -10,9 +10,9 @@ type GridProps = {
 
 const Grid: FC<GridProps> = ({ children }) => {
   const { asPath } = useRouter();
-
+  console.log(asPath)
   return (
-    <div className={ asPath === '/' ? 'grid grid__home' : 'grid grid__page' }>
+    <div className='grid grid__home'>
       { children }
     </div>
   )

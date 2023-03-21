@@ -13,6 +13,7 @@ import '@/styles/globals.scss'
 import Toolbar from '@/components/toolbar/toolbar.component';
 import { ToolsProvider } from '@/contexts/tools.context';
 import { IngredientsProvider } from '@/contexts/ingredients.context';
+import { CategoriesProvider } from '@/contexts/categories.context';
 
 
 export const App = ({ Component, pageProps }: AppProps) => {
@@ -21,9 +22,11 @@ export const App = ({ Component, pageProps }: AppProps) => {
       <UserProvider>
         <Nav />
         <IngredientsProvider>
-          <ToolsProvider>
-            <Component { ...pageProps } />
-          </ToolsProvider>
+          <CategoriesProvider>
+            <ToolsProvider>
+              <Component { ...pageProps } />
+            </ToolsProvider>
+          </CategoriesProvider>
         </IngredientsProvider>
       </UserProvider>
       <Toolbar />

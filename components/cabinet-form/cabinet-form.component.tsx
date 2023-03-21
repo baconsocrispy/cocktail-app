@@ -63,23 +63,6 @@ const CabinetForm: FC<CabinetFormProps> = ({ user }) => {
         />
       </div>
 
-      <div className="cabinet-form__form-element">
-        <ul className="cabinet-form__list--tools">
-          { tools?.map((tool) => (
-            <li key={ tool.id }>
-              <label htmlFor={ `cabinet.tool_ids.${ tool.id }` }>
-                { tool.name }
-              </label>
-              <input 
-                type='checkbox'
-                { ...register(`cabinet.tool_ids.${ tool.id }`, { required: false })}
-                value={ tool.id }
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <input 
         type="hidden"
         { ...register('cabinet.user_id', { required: true })}

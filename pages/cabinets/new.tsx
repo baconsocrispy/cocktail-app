@@ -2,20 +2,25 @@
 import { useContext } from "react"
 
 // components
-import CabinetForm from "@/components/cabinet-form/cabinet-form.component"
+import CabinetForm from "@/components/cabinet-form/cabinet-form.component";
 
 // context
 import { UserContext } from "@/contexts/user.context"
+import FormBar from "@/components/formbar/formbar.component";
 
 const NewCabinetPage = () => {
   // state 
   const { user } = useContext(UserContext)
   
   return (
-    <div className="new-cabinet">
-      <div>NewCabinetPage</div>
-      { user && <CabinetForm user={ user } /> }
-    </div>
+    <>
+      <FormBar />    
+      <div className="new-cabinet">
+        
+        { user && <CabinetForm user={ user } /> }
+      </div>
+    </>
+   
   )
 }
 

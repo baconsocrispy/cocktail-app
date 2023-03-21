@@ -7,12 +7,13 @@ import { fetchTools } from "@/pages/api/cocktail-api";
 // types
 export type Tool = {
   id: number;
+  class: string;
   name: string;
   tool_brand: string;
 }
 
 type ToolsContextProps = {
-  tools: Tool[] | null;
+  tools: Tool[];
 }
 
 type ToolsProviderProps = {
@@ -27,7 +28,7 @@ export const ToolsContext = createContext<ToolsContextProps>({
 // provider
 export const ToolsProvider = ({ children}: ToolsProviderProps) => {
   // initial state
-  const [ tools, setTools ] = useState<Tool[] | null>(null)
+  const [ tools, setTools ] = useState<Tool[]>([])
 
   // fetch / set tools on load
   useEffect(() => {

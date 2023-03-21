@@ -8,9 +8,10 @@ import { FilteringContext } from "@/contexts/filtering.context";
 import { Category } from "@/contexts/categories.context";
 import { Ingredient } from "@/contexts/ingredients.context";
 import { SortOption } from "@/contexts/sort-by.context";
+import { Tool } from "@/contexts/tools.context";
 
 type OptionProps = {
-  option: Category | Ingredient | SortOption;
+  option: Category | Ingredient | SortOption | Tool;
 }
 
 const Option: FC<OptionProps> = ({ option }) => {
