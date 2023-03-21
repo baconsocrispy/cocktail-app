@@ -1,29 +1,19 @@
 // external imports 
 import { createContext, ReactNode, useState } from "react";
-import { Category } from "./categories.context";
+
 
 // types
+import { Category } from "./categories.context";
 import { Tool } from "./tools.context";
 import { Ingredient } from "./ingredients.context";
 
-export type Portion = {
-  ingredientId: number;
-  amount: number;
-  unit: string;
-}
-
 type FormOptions = {
-  formCategories: number[];
-  formIngredients: number[];
-  formTools: number[];
+  formCategories: Category[];
+  formIngredients: Ingredient[];
+  formTools: Tool[];
 }
 
-type FormOption = {
-  class: string;
-  id: number;
-  name: string;
-  option: Category | Ingredient | Tool;
-}
+type FormOption = Category | Ingredient | Tool;
 
 type FormContextProps = {
   formOptions: FormOptions;
@@ -65,13 +55,13 @@ export const FormProvider = ({ children }: FormProviderProps) => {
 
     switch (option.class.toLowerCase()) {
       case 'category':
-        updatedFormOptions.formCategories.push(option.id)
+        updatedFormOptions.formCategories.push(option as Category)
         break;
       case 'ingredient':
-        updatedFormOptions.formIngredients.push(option.id)
+        updatedFormOptions.formIngredients.push(option as Ingredient)
         break;
       case 'tool':
-        updatedFormOptions.formTools.push(option.id)
+        updatedFormOptions.formTools.push(option as Tool)
         break;
     }
     
@@ -84,19 +74,19 @@ export const FormProvider = ({ children }: FormProviderProps) => {
     switch (option.class.toLowerCase()) {
       case 'category':
         const formCategories = updatedFormOptions.formCategories.filter(
-          (id) => id !== option.id
+          (category) => category.id !== option.id
         )
         updatedFormOptions.formCategories = formCategories;
         break;
       case 'ingredient':
         const formIngredients = updatedFormOptions.formIngredients.filter(
-          (id) => id !== option.id
+          (ingredient) => ingredient.id !== option.id
         )
         updatedFormOptions.formIngredients = formIngredients;
         break;
       case 'tool':
         const formTools = updatedFormOptions.formTools.filter(
-          (id) => id !== option.id
+          (tool) => tool.id !== option.id
         )
         updatedFormOptions.formTools = formTools;
         break;

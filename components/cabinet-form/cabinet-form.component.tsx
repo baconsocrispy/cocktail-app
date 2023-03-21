@@ -6,8 +6,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FormContext } from "@/contexts/form.context";
 
 // types
-import { Portion } from "@/contexts/form.context";
-type CabinetFormData = {
+import PortionForm, { Portion } from "../form-portion/form-portion.component";
+
+export type CabinetFormData = {
   cabinet: {
     name: string;
     private: boolean;
@@ -34,7 +35,9 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId }) => {
   } = useForm<CabinetFormData>();
 
   // handlers
-  const handleFormSubmit: SubmitHandler<CabinetFormData> = () => {};
+  const handleFormSubmit: SubmitHandler<CabinetFormData> = (formData: CabinetFormData) => {
+    console.log(formData);
+  };
   
   return (
     <form id='cabinet' onSubmit={ handleSubmit(handleFormSubmit) } className='cabinet-form'>
@@ -54,11 +57,24 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId }) => {
         />
       </div>
 
+      <div>
+        { formOptions.formIngredients.map((ingredient, index) => (
+          <PortionForm 
+            key={ ingredient.id } 
+            index={ index } 
+            ingredient={ ingredient } 
+            register={ register } 
+          />
+        ))}
+      </div>
+
       <input 
         type="hidden"
         { ...register('cabinet.user_id', { required: true })}
         value={ userId }
       />
+
+      <button type='submit'>Submit</button>
     </form>
   )
 }
