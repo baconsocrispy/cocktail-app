@@ -1,5 +1,6 @@
 // external imports
 import { createContext, ReactNode, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 // api
 import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth/auth-api";
@@ -53,10 +54,12 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   // initial state
   const [ user, setUser ] = useState<User | null>(null);
   const [ jwt, setJWT ] = useState<string | null>(null);
+  const router = useRouter();
 
   // set user when jwt updates
   useEffect(() => {
     jwt && getUser();
+    router.push('/')
   }, [ jwt ])
 
   // actions

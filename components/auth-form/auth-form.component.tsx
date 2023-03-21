@@ -39,10 +39,12 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
   // handlers
   const onSignUp: SubmitHandler<UserFormData> = (formData: UserFormData) => {
     signUp(formData);
+    reset();
   }
 
   const onSignIn: SubmitHandler<UserFormData> = (formData: UserFormData) => {
     signIn(formData);
+    reset();
   }
 
   return (
