@@ -2,7 +2,7 @@
 import { FC, useContext } from "react"
 
 // components
-import Select from "../select/select.component";
+import FormSelect from "../form-select/form-select.component";
 
 // context
 import { ToolsContext } from "@/contexts/tools.context";
@@ -20,7 +20,7 @@ const FormTools: FC<FormToolsProps> = ({ open }) => {
     <div 
       className={ open ? "categories categories--open" : "categories" }
     >
-      <Select 
+      <FormSelect 
         header={ 'Select one or more tools'} 
         options={ tools } 
       />

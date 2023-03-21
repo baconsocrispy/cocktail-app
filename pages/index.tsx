@@ -4,9 +4,7 @@ import Recipes from "@/components/recipes/recipes.component";
 
 
 // contexts
-import { CategoriesProvider } from "@/contexts/categories.context";
 import { FilteringProvider } from "@/contexts/filtering.context";
-import { IngredientsProvider } from "@/contexts/ingredients.context";
 import { RecipesProvider } from "@/contexts/recipes.context";
 import { SortByProvider } from "@/contexts/sort-by.context";
 

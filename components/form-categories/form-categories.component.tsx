@@ -2,7 +2,7 @@
 import { FC, useContext } from "react"
 
 // components
-import Select from "../select/select.component";
+import FormSelect from "../form-select/form-select.component";
 
 // context
 import { CategoriesContext } from "@/contexts/categories.context";
@@ -20,7 +20,7 @@ const FormCategories: FC<FormCategoriesProps> = ({ open }) => {
     <div 
       className={ open ? "categories categories--open" : "categories" }
     >
-      <Select 
+      <FormSelect 
         header={ 'Select one or more categories'} 
         options={ categories } 
       />
