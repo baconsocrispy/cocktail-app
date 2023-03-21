@@ -1,9 +1,13 @@
 // external imports
-import { User } from "@/contexts/user.context";
-import { useState, FC } from "react";
+import { useState, FC, useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+// context
+import { IngredientsContext } from "@/contexts/ingredients.context";
+import { ToolsContext } from "@/contexts/tools.context";
+
 // types
+import { User } from "@/contexts/user.context";
 type CabinetFormData = {
   cabinet: {
     name: string;
@@ -26,6 +30,8 @@ type CabinetFormProps = {
 
 const CabinetForm: FC<CabinetFormProps> = ({ user }) => {
   // state
+  const { tools } = useContext(ToolsContext);
+  const { ingredients } = useContext(IngredientsContext);
   const [ portions, setPortions ] = useState<Portion[] | null>(null);
 
   // destructure useForm elements
@@ -37,7 +43,7 @@ const CabinetForm: FC<CabinetFormProps> = ({ user }) => {
   } = useForm<CabinetFormData>();
 
   // handlers
-  const handleFormSubmit = () => {};
+  const handleFormSubmit: SubmitHandler<CabinetFormData> = () => {};
   
   return (
     <form id='cabinet' onSubmit={ handleSubmit(handleFormSubmit) } className='cabinet-form'>
@@ -59,7 +65,18 @@ const CabinetForm: FC<CabinetFormProps> = ({ user }) => {
 
       <div className="cabinet-form__form-element">
         <ul className="cabinet-form__list--tools">
-          
+          { tools?.map((tool) => (
+            <li key={ tool.id }>
+              <label htmlFor={ `cabinet.tool_ids.${ tool.id }` }>
+                { tool.name }
+              </label>
+              <input 
+                type='checkbox'
+                { ...register(`cabinet.tool_ids.${ tool.id }`, { required: false })}
+                value={ tool.id }
+              />
+            </li>
+          ))}
         </ul>
       </div>
 

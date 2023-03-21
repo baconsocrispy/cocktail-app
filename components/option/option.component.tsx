@@ -16,7 +16,11 @@ type OptionProps = {
 const Option: FC<OptionProps> = ({ option }) => {
   // state
   const [ selected, setSelected ] = useState(false);
-  const { filterOptions, addFilterOption, removeFilterOption } = useContext(FilteringContext);
+  const { 
+    filterOptions, 
+    addFilterOption, 
+    removeFilterOption 
+  } = useContext(FilteringContext);
 
   // reset selected state when filterOptions resets
   useEffect(() => { 
@@ -33,8 +37,6 @@ const Option: FC<OptionProps> = ({ option }) => {
         break;
       case 'sortoption':
         if (selected && filterOptions.sortOption !== option.name.toString()) {
-          console.log(filterOptions.sortOption)
-          console.log(option.id.toString())
           setSelected(false)
         }
         break;

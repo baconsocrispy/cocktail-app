@@ -6,7 +6,7 @@ import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth/auth-api";
 
 // types
 import { Ingredient } from "./ingredients.context";
-import { Tool } from "./recipes.context";
+import { Tool } from "./tools.context";
 import { UserFormData } from "@/components/auth-form/auth-form.component";
 import { getCurrentUser } from "@/pages/api/cocktail-api";
 

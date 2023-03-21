@@ -25,6 +25,10 @@ export type SortOptionAPI = {
   sortOptions: SortOption[];
 }
 
+export type ToolsAPI = {
+  tools: Tool[];
+}
+
 // recipes api
 export const fetchAllRecipes = async () => {
   const response = await fetch('http://localhost:3001/recipes');
@@ -44,7 +48,6 @@ export const filterRecipes = async (
 
   const response = await fetch(url);
   const recipes: RecipesAPI = await response.json();
-  console.log(recipes)
   return recipes
 }
 
@@ -73,8 +76,7 @@ export const fetchCabinetIngredients = async (cabinetId: number) => {
 // tools api
 export const fetchTools = async () => {
   const response = await fetch('http://localhost:3001/tools');
-  const tools: Tool[] = await response.json();
-  console.log(tools);
+  const tools: ToolsAPI = await response.json();
   return tools;
 }
 

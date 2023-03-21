@@ -8,6 +8,7 @@ import { fetchTools } from "@/pages/api/cocktail-api";
 export type Tool = {
   id: number;
   name: string;
+  tool_brand: string;
 }
 
 type ToolsContextProps = {
@@ -31,7 +32,7 @@ export const ToolsProvider = ({ children}: ToolsProviderProps) => {
   // fetch / set tools on load
   useEffect(() => {
     const getTools = async () => {
-      const tools = await fetchTools();
+      const { tools } = await fetchTools();
       setTools(tools);
     }
     getTools(); 

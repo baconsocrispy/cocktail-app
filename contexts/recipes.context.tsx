@@ -5,15 +5,12 @@ import { ReactNode, createContext, useState } from 'react';
 import { Category } from './categories.context';
 import { Ingredient } from './ingredients.context';
 import { User } from './user.context';
+import { Tool } from './tools.context';
 
 type Step = {
   description?: string;
   id: number;
   ingredient_id: number;
-  name: string;
-}
-
-export type Tool = {
   name: string;
 }
 
