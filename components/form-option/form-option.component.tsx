@@ -1,18 +1,65 @@
 // external imports
-import { FC, MouseEvent } from "react"
+import { FC, useState, useEffect, useContext } from "react";
+
+// context
+import { FormContext } from "@/contexts/form.context";
 
 // types
-import { Ingredient } from "@/contexts/ingredients.context"
-import { Tool } from "@/contexts/tools.context"
+import { Category } from "@/contexts/categories.context";
+import { Ingredient } from "@/contexts/ingredients.context";
+import { Tool } from "@/contexts/tools.context";
 
 type FormOptionProps = {
-  option: Ingredient | Tool;
-  onClick: (event: MouseEvent<HTMLElement>) => void;
+  option: Ingredient | Tool | Category;
 }
 
-const FormOption: FC<FormOptionProps> = ({ option, onClick }) => {
+const FormOption: FC<FormOptionProps> = ({ option }) => {
+  // state
+  const [ selected, setSelected ] = useState(false);
+  const { 
+    formOptions, 
+    addFormOption, 
+    removeFormOption, 
+  } = useContext(FormContext)
+  
+  // initialize options as selected for form edit
+  useEffect(() => {
+    switch (option.class.toLowerCase()) {
+      case 'category':
+        if (formOptions.formCategories.includes(option.id)) {
+          setSelected(true);
+        }
+        break;
+      case 'ingredient':
+        if (formOptions.formIngredients.includes(option.id)) {
+          setSelected(true);
+        }
+        break;
+      case 'tool':
+        if (formOptions.formTools.includes(option.id)) {
+          setSelected(true);
+        }
+        break;
+    }
+  }, [])
+
+  // handlers
+  const handleClick = () => {
+    selected ? removeFormOption(option) : addFormOption(option);
+    setSelected(!selected);
+  }
+
   return (
-    <li onClick={ onClick }>{ option.name }</li>
+    <li 
+      role='option'
+      aria-selected={ selected }
+      className={ 
+        selected ? 'form-option form-option--selected' : 'form-option' 
+      }
+      onClick={ handleClick }
+    >
+      { option.name }
+    </li>
   )
 }
 

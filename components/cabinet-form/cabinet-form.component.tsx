@@ -1,13 +1,12 @@
 // external imports
-import { useState, FC, useContext } from "react";
+import { FC, useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 // context
-import { IngredientsContext } from "@/contexts/ingredients.context";
-import { ToolsContext } from "@/contexts/tools.context";
+import { FormContext } from "@/contexts/form.context";
 
 // types
-import { User } from "@/contexts/user.context";
+import { Portion } from "@/contexts/form.context";
 type CabinetFormData = {
   cabinet: {
     name: string;
@@ -18,21 +17,13 @@ type CabinetFormData = {
   }
 }
 
-type Portion = {
-  ingredient_id: number;
-  amount: number;
-  unit: string;
-}
-
 type CabinetFormProps = {
-  user: User;
+  userId: number;
 }
 
-const CabinetForm: FC<CabinetFormProps> = ({ user }) => {
+const CabinetForm: FC<CabinetFormProps> = ({ userId }) => {
   // state
-  const { tools } = useContext(ToolsContext);
-  const { ingredients } = useContext(IngredientsContext);
-  const [ portions, setPortions ] = useState<Portion[] | null>(null);
+  const { formOptions } = useContext(FormContext);
 
   // destructure useForm elements
   const {
@@ -66,7 +57,7 @@ const CabinetForm: FC<CabinetFormProps> = ({ user }) => {
       <input 
         type="hidden"
         { ...register('cabinet.user_id', { required: true })}
-        value={ user.id }
+        value={ userId }
       />
     </form>
   )

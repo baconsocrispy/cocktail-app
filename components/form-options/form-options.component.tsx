@@ -33,10 +33,10 @@ const FormOptions = () => {
   return (
     <>
       { options.map((option) => (
-        <div key={ option } className="filter-options__option">
+        <div key={ option } className="formbar-options__option">
           <button
             id={ option } 
-            className="filter-options__button" 
+            className="formbar-options__button" 
             onClick={ (event: MouseEvent) => handleOptionClick(event) }
           >
             { option }

@@ -1,4 +1,4 @@
-.filterbar {
+.formbar {
   grid-column: 1 / -1;
 
   display: grid;
@@ -15,10 +15,6 @@
     &--search {
       grid-column: span 5;
     }
-
-    &--reset {
-
-    }
   }
 
   &__button {
@@ -32,9 +28,5 @@
 
   &__search {
     width: 80%;
-  }
-
-  &__reset {
-
   }
 }

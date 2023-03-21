@@ -1,29 +1,15 @@
 // external imports
 
 // components
-import FilterOptions from "../filter-options/filter-options.component";
 import FormOptions from "../form-options/form-options.component";
 
-
-
 const FormBar = () => {
-  // state
-  
-
-  // handlers
-  const handleResetClick = () => {};
-
   return (
-    <div className='filterbar'>
+    <div className='formbar'>
       <FormOptions />
-      <div className="filterbar__option--search">
-        <label htmlFor="search">Keyword</label>
-        <input className='filterbar__search' type='search' name='search'/>
-      </div>
-      <div className="filterbar__option--reset">
-        <button className="reset" onClick={ handleResetClick }>
-          Reset
-        </button>
+      <div className="formbar__option--search">
+        <label htmlFor="search">Quick Add</label>
+        <input className='formbar__search' type='search' name='search'/>
       </div>
     </div>
   )

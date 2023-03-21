@@ -2,11 +2,10 @@
 import { FC, useContext } from "react"
 
 // components
-import Select from "../select/select.component";
+import FormSelect from "../form-select/form-select.component";
 
 // context
 import { IngredientsContext } from "@/contexts/ingredients.context";
-import { UserContext } from "@/contexts/user.context";
 
 // types
 type FormIngredientsProps = {
@@ -23,7 +22,7 @@ const FormIngredients: FC<FormIngredientsProps> = ({ open }) => {
     }>
 
       { ingredientTypes.map((type) => (
-        <Select 
+        <FormSelect 
           key={ type } 
           header={ type }
           options={

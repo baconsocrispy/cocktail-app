@@ -57,7 +57,11 @@ export const RecipesProvider = (
   };
 
   // export data
-  const value = { recipes: state.recipes, recipeCount: state.recipeCount, updateRecipes };
+  const value = { 
+    recipes: state.recipes, 
+    recipeCount: state.recipeCount, 
+    updateRecipes 
+  };
 
   return (
     <RecipesContext.Provider value={ value }>
