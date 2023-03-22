@@ -1,19 +1,22 @@
 // external imports
 import { FC, useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/router";
 
 // context
 import { FormContext } from "@/contexts/form.context";
 
 // types
 import PortionForm, { Portion } from "../form-portion/form-portion.component";
+import { createNewCabinet } from "@/pages/api/cocktail-api";
+import { UserContext } from "@/contexts/user.context";
 
 export type CabinetFormData = {
   cabinet: {
     name: string;
     private: boolean;
     user_id: number;
-    portion_attributes: Portion[];
+    portions_attributes: Portion[];
     tool_ids: number[];
   }
 }
@@ -25,6 +28,10 @@ type CabinetFormProps = {
 const CabinetForm: FC<CabinetFormProps> = ({ userId }) => {
   // state
   const { formOptions } = useContext(FormContext);
+  const { jwt, getUser } = useContext(UserContext);
+
+  // navigation
+  const router = useRouter();
 
   // destructure useForm elements
   const {
@@ -35,8 +42,14 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId }) => {
   } = useForm<CabinetFormData>();
 
   // handlers
-  const handleFormSubmit: SubmitHandler<CabinetFormData> = (formData: CabinetFormData) => {
-    console.log(formData);
+  const handleFormSubmit: SubmitHandler<CabinetFormData> = async (formData: CabinetFormData) => {
+    if (jwt) {
+      const response = await createNewCabinet(formData, jwt)
+      if (response.status.code === 200) {
+        await getUser();
+        router.push('/cabinets');
+      }
+    }
   };
   
   return (

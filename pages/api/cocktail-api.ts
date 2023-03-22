@@ -1,4 +1,5 @@
 // types
+import { CabinetFormData } from "@/components/cabinet-form/cabinet-form.component";
 import { Category } from "@/contexts/categories.context";
 import { FilterOptions } from "@/contexts/filtering.context";
 import { Ingredient } from "@/contexts/ingredients.context";
@@ -73,6 +74,14 @@ export const fetchCabinetIngredients = async (cabinetId: number) => {
   return ingredients;
 }
 
+// cabinets api
+export const createNewCabinet = async (formData: CabinetFormData, jwt: string) => {
+  const response = await backendJWTRequest(
+    'POST', 'http://localhost:3001/cabinets', jwt, formData
+  );
+  return response;
+}
+
 // tools api
 export const fetchTools = async () => {
   const response = await fetch('http://localhost:3001/tools');
@@ -106,7 +115,8 @@ export const getCurrentUser = async (jwt: string) => {
 const backendJWTRequest = async (
   method: string,
   url: string,
-  jwt: string
+  jwt: string,
+  data?: CabinetFormData
 ) => {
   const response = await fetch(url, {
     method: method,
@@ -114,6 +124,7 @@ const backendJWTRequest = async (
       'Authorization': `Bearer ${ jwt }`,
       'Content-Type': 'application/json'
     },
+    body: JSON.stringify(data)
   })
   return response.json();
 }

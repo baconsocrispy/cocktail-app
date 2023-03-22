@@ -1,6 +1,7 @@
 // external imports
+import { FormContext } from "@/contexts/form.context";
 import { Ingredient } from "@/contexts/ingredients.context";
-import { FC } from "react";
+import { FC, useContext } from "react";
 
 import { UseFormRegister } from "react-hook-form";
 
@@ -20,20 +21,19 @@ type PortionFormProps = {
 }
 
 const PortionForm: FC<PortionFormProps> = ({ ingredient, index, register }) => {
+  const { removeFormOption } = useContext(FormContext)
+
+  const handleClick = () => removeFormOption(ingredient)
+
   return (
     <div>
       <p>{ ingredient.name }</p>
       <input 
         type='hidden'
-        { ...register(`cabinet.portion_attributes.${ index }.ingredient_id` )}
+        { ...register(`cabinet.portions_attributes.${ index }.ingredient_id` )}
         value={ ingredient.id }
       />
-      <input
-        type='number'
-        min='0'
-        step='.1'
-        { ...register(`cabinet.portion_attributes.${ index }.amount`)}
-      />
+      <button onClick={ handleClick }>X</button>
     </div>
   )
 }
