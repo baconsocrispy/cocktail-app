@@ -1,5 +1,5 @@
 // external imports
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 
 // context
 import { FormContext } from "@/contexts/form.context";
@@ -27,11 +27,19 @@ const PortionForm: FC<PortionFormProps> = ({
   register, 
   unregister 
 }) => {
+  // state
   const { removeFormOption } = useContext(FormContext)
 
+  // unregister portion when removed from cabinet
+  useEffect(() => {
+    return () => {
+      unregister(`cabinet.portions_attributes.${ index }.ingredient_id`)
+    }
+  }, [ index, unregister ])
+
+  // handlers
   const handleClick = () => {
     removeFormOption(ingredient)
-    unregister(`cabinet.portions_attributes.${ index }.ingredient_id`)
   }
 
   return (

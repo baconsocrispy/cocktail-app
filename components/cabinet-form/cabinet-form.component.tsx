@@ -1,5 +1,5 @@
 // external imports
-import { FC, useContext, useEffect, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 
@@ -29,6 +29,8 @@ type CabinetFormProps = {
 const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
   // state
   const [ loading, setLoading ] = useState(true);
+  const [ nameField, setNameField ] = useState('')
+
   const { 
     formOptions, 
     addFormOption, 
@@ -54,12 +56,12 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
     if (cabinet && emptyFormOptions()) {
       cabinet.ingredients.map((ingredient) => addFormOption(ingredient));
       cabinet.tools.map((tool) => addFormOption(tool));
+      setNameField(cabinet.name)
     }
-  }, [])
+  }, [ ])
 
   // handlers
   const handleFormSubmit: SubmitHandler<CabinetFormData> = async (formData: CabinetFormData) => {
-    console.log(formData)
     if (jwt) {
       const response = cabinet ? 
       await updateCabinet(cabinet.slug, formData, jwt) :
@@ -73,7 +75,11 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
       }
     }
   };
-  
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const name = event.target?.value
+    setNameField(name)
+  }
 
   return (
     <form 
@@ -87,7 +93,8 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
         <input 
           type="text"
           { ...register('cabinet.name', { required: 'Cabinet name is required' })}
-          value={ cabinet && cabinet.name }
+          onChange={ handleNameChange }
+          value={ nameField }
         />
       </div>
 
