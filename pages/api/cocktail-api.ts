@@ -49,6 +49,7 @@ export const filterRecipes = async (
 
   const response = await fetch(url);
   const recipes: RecipesAPI = await response.json();
+  console.log(recipes)
   return recipes
 }
 

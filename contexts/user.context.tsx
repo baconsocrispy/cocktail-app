@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 // api
 import { logInUser, logOutUser, signUpUser } from "@/pages/api/auth/auth-api";
+import { fetchCabinetIngredients } from "@/pages/api/cocktail-api";
 
 // types
 import { Ingredient } from "./ingredients.context";
@@ -30,6 +31,7 @@ export type User = {
 type UserContextProps = {
   jwt: string | null;
   user: User | null;
+  userIngredients: Ingredient[];
   getUser: Function;
   signUp: Function;
   signIn: Function;
@@ -44,6 +46,7 @@ type UserProviderProps = {
 export const UserContext = createContext<UserContextProps>({
   jwt: null,
   user: null,
+  userIngredients: [],
   getUser: () => {},
   signUp: () => {},
   signIn: () => {},
@@ -55,6 +58,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   // initial state
   const [ user, setUser ] = useState<User | null>(null);
   const [ jwt, setJWT ] = useState<string | null>(null);
+  const [ userIngredients, setUserIngredients ] = useState<Ingredient[]>([])
   const router = useRouter();
 
   // set user when jwt updates
@@ -62,6 +66,19 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     jwt && getUser();
     router.push('/')
   }, [ jwt ])
+
+  // update userIngredients when cabinet ID changes
+  useEffect(() => {
+    const getUserIngredients = async () => {
+      if (user?.current_cabinet_id) {
+        const { ingredients } = await fetchCabinetIngredients(user.current_cabinet_id);
+        setUserIngredients(ingredients)
+      } else {
+        setUserIngredients([])
+      }
+    }
+    getUserIngredients();
+  }, [ user?.current_cabinet_id ])
 
   // actions
   const signUp = async (formData: UserFormData) => {
@@ -86,12 +103,12 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       setUser(currentUser)
     }
   }
-    
 
   // export data
   const value = { 
     jwt,
     user,
+    userIngredients,
     getUser,
     signUp, 
     signIn, 

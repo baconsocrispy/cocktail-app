@@ -17,7 +17,7 @@ type IngredientsProps = {
 
 const Ingredients: FC<IngredientsProps> = ({ open }) => {
   // state
-  const { user, jwt, getUser } = useContext(UserContext);
+  const { user, jwt, userIngredients, getUser } = useContext(UserContext);
   const { ingredients, ingredientTypes } = useContext(IngredientsContext);
   const { resetFilterOptions } = useContext(FilteringContext)
   const [ cabinetIngredients, setCabinetIngredients ] = useState<Ingredient[]>(ingredients);
@@ -25,15 +25,9 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
   // set initial ingredients && rerender when current_cabinet_id changes
   useEffect(() => {
     user?.current_cabinet_id ? 
-      updateIngredients(user.current_cabinet_id) :
+      setCabinetIngredients(userIngredients) :
       setCabinetIngredients(ingredients)
-  }, [ user, ingredients ])
-
-  // actions
-  const updateIngredients = async (cabinetId: number) => {
-    const { ingredients } = await fetchCabinetIngredients(cabinetId);
-    setCabinetIngredients(ingredients)
-  }
+  }, [ user, userIngredients, ingredients ])
 
   // handlers
   const handleResetIngredients = async () => {

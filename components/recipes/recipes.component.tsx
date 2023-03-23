@@ -24,6 +24,7 @@ const Recipes = () => {
         const response = await filterRecipes(filterOptions, page);
         const { recipes } = response;
         updateRecipes(recipes);
+        console.log(filterOptions)
       }
       getFilteredRecipes();
     } else {

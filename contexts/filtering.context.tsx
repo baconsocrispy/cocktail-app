@@ -1,5 +1,5 @@
 // external imports
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
 // types
 import { Category } from "./categories.context";
@@ -9,6 +9,7 @@ import { SortOption } from "./sort-by.context";
 export type FilterOptions = {
   ingredientIds: number[];
   categoryIds: number[];
+  userIngredientIds?: number[];
   sortOption: string | null;
   keyword: string | null;
 }
@@ -38,6 +39,7 @@ export const FilteringContext = createContext<FilteringContextProps>({
   filterOptions: {
     ingredientIds: [],
     categoryIds: [],
+    userIngredientIds: [],
     sortOption: null,
     keyword: null
   },
@@ -64,6 +66,16 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
   ] = useState<FilterOptions>(emptyFilterOptions)
 
   const [ page, setPage ] = useState(1);
+
+  // add user ingredients to filterOptions based on sortOption
+  // useEffect(() => {
+  //   if ( 
+  //     filterOptions.sortOption === 'I Have All Ingredients' ||
+  //     filterOptions.sortOption === 'I Have Any Ingredient'
+  //   ) {
+
+  //   }
+  // }, [ filterOptions ])
 
   // actions
   const addFilterOption = (option: FilterOption) => {
@@ -102,9 +114,16 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
         updatedFilterOptions.ingredientIds = ingredientIds;
         break;
     }
-    
     setPage(1);
     setFilterOptions(updatedFilterOptions);
+  }
+
+      
+  const addUserIngredients = (ingredientIds: number[]) => {
+    const updatedFilterOptions = { ...filterOptions };
+    updatedFilterOptions.userIngredientIds = ingredientIds;
+    setPage(1);
+    setFilterOptions(updatedFilterOptions)
   }
 
   // break out into next page/previous page, 
