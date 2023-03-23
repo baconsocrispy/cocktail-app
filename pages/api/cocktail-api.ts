@@ -162,6 +162,12 @@ const configureURLSearchParams = (
     });
   }
 
+  if (filterOptions.userIngredientIds) {
+    filterOptions.userIngredientIds.forEach((id) => {
+      params.append('userIngredientIds[]', id.toString())
+    });
+  }
+
   if (filterOptions.categoryIds.length > 0) {
     filterOptions.categoryIds.forEach((id) => {
       params.append('categoryIds[]', id.toString())

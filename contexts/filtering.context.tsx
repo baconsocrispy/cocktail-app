@@ -1,10 +1,18 @@
-// external imports
-import { createContext, ReactNode, useEffect, useState } from "react";
+// library imports
+import Ingredients from "@/components/ingredients/ingredients.component";
+import { 
+  createContext, 
+  ReactNode, 
+  useContext, 
+  useEffect, 
+  useState 
+} from "react";
 
 // types
 import { Category } from "./categories.context";
 import { Ingredient } from "./ingredients.context";
 import { SortOption } from "./sort-by.context";
+import { UserContext } from "./user.context";
 
 export type FilterOptions = {
   ingredientIds: number[];
@@ -60,6 +68,8 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     keyword: null
   }
 
+  const { userIngredients } = useContext(UserContext)
+
   const [ 
     filterOptions, 
     setFilterOptions 
@@ -67,15 +77,15 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
 
   const [ page, setPage ] = useState(1);
 
-  // add user ingredients to filterOptions based on sortOption
-  // useEffect(() => {
-  //   if ( 
-  //     filterOptions.sortOption === 'I Have All Ingredients' ||
-  //     filterOptions.sortOption === 'I Have Any Ingredient'
-  //   ) {
-
-  //   }
-  // }, [ filterOptions ])
+  // add user ingredient ids to filterOptions
+  useEffect(() => {
+    if (userIngredients.length > 0) {
+      const userIngredientIds = userIngredients.map((ingredient) => ingredient.id)
+      addUserIngredients(userIngredientIds)
+    } else {
+      addUserIngredients([])
+    }
+  }, [ userIngredients ])
 
   // actions
   const addFilterOption = (option: FilterOption) => {
@@ -118,7 +128,6 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     setFilterOptions(updatedFilterOptions);
   }
 
-      
   const addUserIngredients = (ingredientIds: number[]) => {
     const updatedFilterOptions = { ...filterOptions };
     updatedFilterOptions.userIngredientIds = ingredientIds;
