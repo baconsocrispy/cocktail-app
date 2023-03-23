@@ -1,14 +1,21 @@
-// external imports
+// library imports
 import { FC } from "react"
 
+// components
+import Favorite from "../favorite/favorite.component";
+
 // types
+import { Recipe } from "@/contexts/recipes.context";
 type CardProps = {
-  title: string;
+  recipe: Recipe;
 }
 
-const Card: FC<CardProps> = ({ title }) => {
+const Card: FC<CardProps> = ({ recipe }) => {
   return (
-    <div className="card">{ title }</div>
+    <div className="card">
+      { recipe.name }
+      <Favorite recipeId={ recipe.id } />
+    </div>
   )
 }
 

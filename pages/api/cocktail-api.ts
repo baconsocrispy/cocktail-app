@@ -49,7 +49,6 @@ export const filterRecipes = async (
 
   const response = await fetch(url);
   const recipes: RecipesAPI = await response.json();
-  console.log(recipes)
   return recipes
 }
 
@@ -129,7 +128,16 @@ export const getCurrentUser = async (jwt: string) => {
   const user: User = await backendJWTRequest(
     'GET', 'http://localhost:3001/current_user', jwt
   )
+  console.log(user)
   return user
+}
+
+export const favoriteRecipe = async (recipeId: number, jwt: string) => {
+  const response = await backendJWTRequest(
+    'POST', `http://localhost:3001/favorite/${ recipeId }`, jwt
+  )
+  console.log(response)
+  return response
 }
 
 // helpers

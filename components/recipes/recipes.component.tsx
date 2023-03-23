@@ -24,7 +24,6 @@ const Recipes = () => {
         const response = await filterRecipes(filterOptions, page);
         const { recipes } = response;
         updateRecipes(recipes);
-        console.log(filterOptions)
       }
       getFilteredRecipes();
     } else {
@@ -36,7 +35,7 @@ const Recipes = () => {
   return (
     <div className="recipes">
       { recipes.map((recipe) => (
-        <Card key={ recipe.id } title={ recipe.name } />
+        <Card key={ recipe.id } recipe={ recipe } />
       ))}
     </div>
   )
