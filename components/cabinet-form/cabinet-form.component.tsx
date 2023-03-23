@@ -1,5 +1,5 @@
 // external imports
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 
@@ -8,8 +8,8 @@ import { FormContext } from "@/contexts/form.context";
 
 // types
 import PortionForm, { Portion } from "../form-portion/form-portion.component";
-import { createNewCabinet } from "@/pages/api/cocktail-api";
-import { UserContext } from "@/contexts/user.context";
+import { createNewCabinet, updateCabinet } from "@/pages/api/cocktail-api";
+import { Cabinet, UserContext } from "@/contexts/user.context";
 
 export type CabinetFormData = {
   cabinet: {
@@ -23,11 +23,18 @@ export type CabinetFormData = {
 
 type CabinetFormProps = {
   userId: number;
+  cabinet?: Cabinet;
 }
 
-const CabinetForm: FC<CabinetFormProps> = ({ userId }) => {
+const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
   // state
-  const { formOptions } = useContext(FormContext);
+  const [ loading, setLoading ] = useState(true);
+  const { 
+    formOptions, 
+    addFormOption, 
+    resetFormOptions,
+    emptyFormOptions
+  } = useContext(FormContext);
   const { jwt, getUser } = useContext(UserContext);
 
   // navigation
@@ -36,29 +43,51 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId }) => {
   // destructure useForm elements
   const {
     register,
+    unregister,
     handleSubmit,
     reset,
     formState: { errors }
   } = useForm<CabinetFormData>();
 
+  // load cabinet elements on Edit page
+  useEffect(() => {
+    if (cabinet && emptyFormOptions()) {
+      cabinet.ingredients.map((ingredient) => addFormOption(ingredient));
+      cabinet.tools.map((tool) => addFormOption(tool));
+    }
+  }, [])
+
   // handlers
   const handleFormSubmit: SubmitHandler<CabinetFormData> = async (formData: CabinetFormData) => {
+    console.log(formData)
     if (jwt) {
-      const response = await createNewCabinet(formData, jwt)
+      const response = cabinet ? 
+      await updateCabinet(cabinet.slug, formData, jwt) :
+      await createNewCabinet(formData, jwt)
+
       if (response.status.code === 200) {
+        resetFormOptions();
+        reset();
         await getUser();
         router.push('/cabinets');
       }
     }
   };
   
+
   return (
-    <form id='cabinet' onSubmit={ handleSubmit(handleFormSubmit) } className='cabinet-form'>
+    <form 
+      id='cabinet'
+      onLoad={ () => setLoading(false)} 
+      onSubmit={ handleSubmit(handleFormSubmit) } 
+      className='cabinet-form'
+    >
       <div className="cabinet-form__form-element">
         <label htmlFor="name">Cabinet Name</label>
         <input 
           type="text"
           { ...register('cabinet.name', { required: 'Cabinet name is required' })}
+          value={ cabinet && cabinet.name }
         />
       </div>
 
@@ -77,6 +106,7 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId }) => {
             index={ index } 
             ingredient={ ingredient } 
             register={ register } 
+            unregister={ unregister }
           />
         ))}
       </div>

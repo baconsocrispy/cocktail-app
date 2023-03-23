@@ -82,6 +82,26 @@ export const createNewCabinet = async (formData: CabinetFormData, jwt: string) =
   return response;
 }
 
+export const updateCabinet = async (cabinetSlug: string, formData: CabinetFormData, jwt: string) => {
+  const response = await backendJWTRequest(
+    'PUT', `http://localhost:3001/cabinets/${ cabinetSlug }`, jwt, formData
+  );
+  return response;
+}
+
+export const fetchCabinet = async (cabinetSlug: string, jwt: string) => {
+  const response = await backendJWTRequest(
+    'GET', `http://localhost:3001/cabinets/${ cabinetSlug }`, jwt )
+  return response
+}
+
+export const deleteCabinet = async (cabinetSlug: string, jwt: string) => {
+  const response = await backendJWTRequest(
+    'DELETE', `http://localhost:3001/cabinets/${ cabinetSlug }`, jwt, cabinetSlug
+  );
+  return response;
+}
+
 // tools api
 export const fetchTools = async () => {
   const response = await fetch('http://localhost:3001/tools');
@@ -116,7 +136,7 @@ const backendJWTRequest = async (
   method: string,
   url: string,
   jwt: string,
-  data?: CabinetFormData
+  data?: CabinetFormData | string
 ) => {
   const response = await fetch(url, {
     method: method,

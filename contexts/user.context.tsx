@@ -16,6 +16,7 @@ export type Cabinet = {
   name: string;
   private: boolean;
   ingredients: Ingredient[];
+  slug: string;
   tools: Tool[];
 }
 

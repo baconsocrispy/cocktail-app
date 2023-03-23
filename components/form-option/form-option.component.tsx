@@ -26,28 +26,34 @@ const FormOption: FC<FormOptionProps> = ({ option }) => {
   useEffect(() => {
     switch (option.class.toLowerCase()) {
       case 'category':
-        if (formOptions.formCategories.includes(option as Category)) {
+        if (formOptions.formCategories.some(
+          (category) => category.id === option.id
+        )) {
           setSelected(true);
         } else {
           setSelected(false);
         }
         break;
       case 'ingredient':
-        if (formOptions.formIngredients.includes(option as Ingredient)) {
+        if (formOptions.formIngredients.some(
+          (ingredient) => ingredient.id === option.id
+        )) {
           setSelected(true);
         } else {
           setSelected(false);
         }
         break;
       case 'tool':
-        if (formOptions.formTools.includes(option as Tool)) {
+        if (formOptions.formTools.some(
+          (tool) => tool.id === option.id
+        )) {
           setSelected(true);
         } else {
           setSelected(false)
         }
         break;
     }
-  }, [ formOptions ])
+  }, [ formOptions, option ])
 
   // handlers
   const handleClick = () => {

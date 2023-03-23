@@ -6,6 +6,7 @@ import { createContext, ReactNode, useState } from "react";
 import { Category } from "./categories.context";
 import { Tool } from "./tools.context";
 import { Ingredient } from "./ingredients.context";
+import FormOptions from "@/components/form-options/form-options.component";
 
 type FormOptions = {
   formCategories: Category[];
@@ -20,6 +21,7 @@ type FormContextProps = {
   addFormOption: Function;
   removeFormOption: Function;
   resetFormOptions: Function;
+  emptyFormOptions: Function;
 }
 
 type FormProviderProps = {
@@ -35,7 +37,8 @@ export const FormContext = createContext<FormContextProps>({
   },
   addFormOption: () => {},
   removeFormOption: () => {},
-  resetFormOptions: () => {}
+  resetFormOptions: () => {},
+  emptyFormOptions: () => {}
 })
 
 // provider
@@ -95,14 +98,25 @@ export const FormProvider = ({ children }: FormProviderProps) => {
     setFormOptions(updatedFormOptions);
   }
 
-  const resetFormOptions = () => setFormOptions(emptyForm)
+  const resetFormOptions = () => {
+    setFormOptions(emptyForm);
+  }
+
+  const emptyFormOptions = () => {
+    return (
+      formOptions.formCategories.length === 0 &&
+      formOptions.formIngredients.length === 0 &&
+      formOptions.formTools.length === 0
+    )
+  }
 
   // export data
   const value = { 
     formOptions, 
     addFormOption, 
-    removeFormOption, 
-    resetFormOptions 
+    removeFormOption,
+    resetFormOptions,
+    emptyFormOptions
   }
 
   return (
