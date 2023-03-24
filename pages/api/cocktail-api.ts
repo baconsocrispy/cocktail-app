@@ -191,7 +191,7 @@ const configureURLSearchParams = (
     params.append('sortOption', filterOptions.sortOption);
   }
 
-  if (filterOptions.keyword !== null) {
+  if (filterOptions.keyword !== '') {
     params.append('keyword', filterOptions.keyword);
   }
 

@@ -6,6 +6,7 @@ import Sidebar from "../sidebar/sidebar.component";
 import Ingredients from "../ingredients/ingredients.component";
 import Categories from "../categories/categories.component";
 import SortBy from "../sort-by/sort-by.component";
+import ResetButton from "../button-reset/button-reset.component";
 
 // data
 enum FILTER_OPTIONS {
@@ -43,6 +44,7 @@ const FilterOptions = () => {
           </button>
         </div>
       ))}
+      <ResetButton />
 
       <Sidebar open={ sidebarOpen }>
         <button 

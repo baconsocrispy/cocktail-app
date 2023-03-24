@@ -19,7 +19,7 @@ export type FilterOptions = {
   categoryIds: number[];
   userIngredientIds?: number[];
   sortOption: string | null;
-  keyword: string | null;
+  keyword: string;
 }
 
 type FilterOption = {
@@ -36,6 +36,7 @@ type FilteringContextProps = {
   removeFilterOption: Function;
   resetFilterOptions: Function;
   updatePage: Function;
+  updateKeyword: Function;
 }
 
 type FilteringProviderProps = {
@@ -49,13 +50,14 @@ export const FilteringContext = createContext<FilteringContextProps>({
     categoryIds: [],
     userIngredientIds: [],
     sortOption: null,
-    keyword: null
+    keyword: ''
   },
   page: 1,
   updatePage: () => {},
   addFilterOption: () => {},
   removeFilterOption: () => {},
-  resetFilterOptions: () => {}
+  resetFilterOptions: () => {},
+  updateKeyword: () => {}
 })
 
 // provider
@@ -65,7 +67,7 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     ingredientIds: [],
     categoryIds: [],
     sortOption: null,
-    keyword: null
+    keyword: ''
   }
 
   const { userIngredients } = useContext(UserContext)
@@ -132,7 +134,14 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     const updatedFilterOptions = { ...filterOptions };
     updatedFilterOptions.userIngredientIds = ingredientIds;
     setPage(1);
-    setFilterOptions(updatedFilterOptions)
+    setFilterOptions(updatedFilterOptions);
+  }
+
+  const updateKeyword = (keyword: string) => {
+    const updatedFilterOptions = { ...filterOptions };
+    updatedFilterOptions.keyword = keyword;
+    setPage(1);
+    setFilterOptions(updatedFilterOptions);
   }
 
   // break out into next page/previous page, 
@@ -153,7 +162,8 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
     updatePage,
     addFilterOption,
     removeFilterOption,
-    resetFilterOptions
+    resetFilterOptions,
+    updateKeyword
   };
 
   return (
