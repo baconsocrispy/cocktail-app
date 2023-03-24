@@ -1,5 +1,5 @@
 // library imports
-import { useState, FC, useContext } from "react";
+import { useState, FC, useContext, useEffect } from "react";
 
 // context
 import { UserContext } from "@/contexts/user.context";
@@ -16,23 +16,21 @@ type FavoriteProps = {
 const Favorite: FC<FavoriteProps> = ({ recipeId }) => {
   // state
   const [ favorited, setFavorited ] = useState(false);
-  const { jwt, getUser } = useContext(UserContext);
+  const { jwt, user, getUser } = useContext(UserContext);
+
+  useEffect(() => {
+    const favorited = user?.favorites.some(
+      (recipe) => Object.is(recipe.id, recipeId)
+    )
+    favorited ? setFavorited(true) : setFavorited(false)
+  }, [ user?.favorites, recipeId ])
   
   // handlers
-  const handleFavorite = () => {
-    const setFavorite = async () => {
-      if (jwt) {
-        const response = await favoriteRecipe(recipeId, jwt);
-        if (response.message === 'Favorited') {
-          setFavorited(true)
-          getUser();
-        } else if (response.message === 'Unfavorited') {
-          setFavorited(false)
-          getUser();
-        }
-      }
+  const handleFavorite = async () => {
+    if (jwt) {
+      const response = await favoriteRecipe(recipeId, jwt);
+      getUser();
     }
-    setFavorite();
   }
 
   return (

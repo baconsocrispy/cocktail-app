@@ -11,6 +11,7 @@ import { Ingredient } from "./ingredients.context";
 import { Tool } from "./tools.context";
 import { UserFormData } from "@/components/auth-form/auth-form.component";
 import { getCurrentUser } from "@/pages/api/cocktail-api";
+import { Recipe } from "./recipes.context";
 
 export type Cabinet = {
   id: number;
@@ -26,6 +27,7 @@ export type User = {
   cabinets: Cabinet[];
   current_cabinet_id: number | null;
   email: string | null;
+  favorites: Recipe[];
 }
 
 type UserContextProps = {
@@ -58,13 +60,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   // initial state
   const [ user, setUser ] = useState<User | null>(null);
   const [ jwt, setJWT ] = useState<string | null>(null);
-  const [ userIngredients, setUserIngredients ] = useState<Ingredient[]>([])
+  const [ userIngredients, setUserIngredients ] = useState<Ingredient[]>([]);
   const router = useRouter();
 
   // set user when jwt updates
   useEffect(() => {
     jwt && getUser();
-    router.push('/')
+    router.push('/');
   }, [ jwt ])
 
   // update userIngredients when cabinet ID changes

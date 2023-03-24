@@ -39,7 +39,8 @@ export const fetchAllRecipes = async () => {
 
 export const filterRecipes = async (
   filterOptions: FilterOptions, 
-  page: number
+  page: number,
+  jwt: string | null = null
 ) => {
   // returns URLSearchParams object
   const params = configureURLSearchParams(filterOptions, page); 
@@ -47,8 +48,9 @@ export const filterRecipes = async (
   const url = new URL('http://localhost:3001/recipes/search');
   url.search = params.toString();
 
-  const response = await fetch(url);
-  const recipes: RecipesAPI = await response.json();
+  const recipes: RecipesAPI = await backendJWTRequest(
+    'GET', url, jwt
+  );
   return recipes
 }
 
@@ -128,7 +130,6 @@ export const getCurrentUser = async (jwt: string) => {
   const user: User = await backendJWTRequest(
     'GET', 'http://localhost:3001/current_user', jwt
   )
-  console.log(user)
   return user
 }
 
@@ -136,15 +137,14 @@ export const favoriteRecipe = async (recipeId: number, jwt: string) => {
   const response = await backendJWTRequest(
     'POST', `http://localhost:3001/favorite/${ recipeId }`, jwt
   )
-  console.log(response)
   return response
 }
 
 // helpers
 const backendJWTRequest = async (
   method: string,
-  url: string,
-  jwt: string,
+  url: string | URL,
+  jwt: string | null,
   data?: CabinetFormData | string
 ) => {
   const response = await fetch(url, {
@@ -164,13 +164,18 @@ const configureURLSearchParams = (
 ) => {
   const params = new URLSearchParams();
 
+  console.log(filterOptions)
+
   if (filterOptions.ingredientIds.length > 0) {
     filterOptions.ingredientIds.forEach((id) => {
       params.append('ingredientIds[]', id.toString())
     });
   }
 
-  if (filterOptions.userIngredientIds) {
+  if (
+    filterOptions.userIngredientIds &&
+    filterOptions.userIngredientIds.length > 0
+  ) {
     filterOptions.userIngredientIds.forEach((id) => {
       params.append('userIngredientIds[]', id.toString())
     });
