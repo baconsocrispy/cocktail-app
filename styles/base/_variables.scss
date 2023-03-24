@@ -5,3 +5,6 @@ $filter-bar-height: 5rem;
 $footer-height: 5rem;
 $main-content-home-height: calc(100vh - $nav-height - $filter-bar-height - $footer-height);
 $main-content-page-height: calc(100vh - $nav-height - $footer-height);
+
+// typography
+$font-primary: 'Oswald', 'open-sans';

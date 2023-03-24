@@ -1,4 +1,5 @@
 // base
+@import '@/styles/base/fonts.scss';
 @import './base/variables';
 @import './base/mixins';
 @import './base/base';
@@ -19,6 +20,7 @@
 @import '@/components/form-select/form-select.styles';
 @import '@/components/form-tools/form-tools.styles';
 @import '@/components/ingredients/ingredients.styles';
+@import '@/components/logo/logo.styles';
 @import '@/components/nav/nav.styles';
 @import '@/components/option/option.styles';
 @import '@/components/recipes/recipes.styles';

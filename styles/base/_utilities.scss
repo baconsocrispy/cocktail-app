@@ -1,0 +1,8 @@
+.u-remove-link-styles {
+  &,
+  &:link,
+  &:visited {
+    text-decoration: none;
+    color: currentColor;
+  } 
+}

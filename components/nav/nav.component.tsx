@@ -1,6 +1,9 @@
-// external imports
+// library imports
 import { useContext } from "react";
 import Link from "next/link";
+
+// components
+import Logo from "../logo/logo.component"; 
 
 // context
 import { UserContext } from "@/contexts/user.context";
@@ -14,11 +17,10 @@ const Nav = () => {
 
   return (
     <nav className="nav">
-      <div className="nav__logo">
-        <Link href='/'>Home</Link>
-        <Link href='/auth'>Auth</Link>
-      </div>
-
+      <Link href='/' className="u-remove-link-styles">
+        <Logo />
+      </Link>
+     
       <div className="nav__menu">
         { user && 
             <button onClick={ handleLogOut }>
