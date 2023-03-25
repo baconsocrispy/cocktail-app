@@ -2,8 +2,8 @@
   display: none;
   position: absolute;
   width: 100vw;
-  top: calc($nav-height + $filter-bar-height);
-  bottom: $footer-height;
+  top: calc($height-nav + $height-controlbar);
+  bottom: $height-footer;
 
   background-color: bisque;
 

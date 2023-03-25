@@ -1,10 +1,9 @@
 // grid
-$nav-height: 5rem;
-$category-bar-height: 5rem;
-$filter-bar-height: 5rem;
-$footer-height: 5rem;
-$main-content-home-height: calc(100vh - $nav-height - $filter-bar-height - $footer-height);
-$main-content-page-height: calc(100vh - $nav-height - $footer-height);
+$height-controlbar: 5rem;
+$height-nav: 5rem;
+$height-footer: 5rem;
+$height-main-content--home: calc(100vh - $height-nav - $height-controlbar - $height-footer);
+$height-main-content--page: calc(100vh - $height-nav - $height-footer);
 
 // typography
 $font-primary: 'Oswald', 'open-sans';

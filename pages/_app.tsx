@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 
 // components
 import Grid from '@/layout/grid/grid.component';
-import Nav from '@/components/nav/nav.component';
+import Nav from '@/layout/nav/nav.component';
 import Toolbar from '@/components/toolbar/toolbar.component';
 
 // context

@@ -1,8 +1,16 @@
-.u-remove-link-styles {
+.util-remove-link-styles {
   &,
   &:link,
   &:visited {
     text-decoration: none;
     color: currentColor;
   } 
+}
+
+.util-remove-button-styles {
+  border: none;
+  background: none;
+  font-size: inherit;
+  font-family: inherit;
+  text-transform: inherit;
 }

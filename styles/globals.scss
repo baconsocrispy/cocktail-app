@@ -12,6 +12,8 @@
 @import '@/components/ingredients/ingredients.styles';
 @import '@/components/filterbar/filterbar.styles';
 @import '@/components/filter-options/filter-options.styles';
+
+// form components
 @import '@/components/formbar/formbar.styles';
 @import '@/components/form-categories/form-categories.styles';
 @import '@/components/form-ingredients/form-ingredients.styles';
@@ -19,9 +21,15 @@
 @import '@/components/form-options/form-options.styles';
 @import '@/components/form-select/form-select.styles';
 @import '@/components/form-tools/form-tools.styles';
+
 @import '@/components/ingredients/ingredients.styles';
 @import '@/components/logo/logo.styles';
-@import '@/components/nav/nav.styles';
+
+// navigation components
+@import '@/components/hamburger/hamburger.styles';
+@import '@/components/nav-link/nav-link.styles';
+@import '@/components/nav-links/nav-links.styles';
+
 @import '@/components/option/option.styles';
 @import '@/components/recipes/recipes.styles';
 @import '@/components/search/search.styles';
@@ -32,3 +40,4 @@
 
 // layout
 @import '@/layout/grid/grid.styles';
+@import '@/layout/nav/nav.styles';

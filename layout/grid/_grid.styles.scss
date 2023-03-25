@@ -4,16 +4,16 @@
 
   &__home {
     grid-template-rows: 
-      $nav-height 
-      $filter-bar-height 
-      $main-content-home-height 
-      $footer-height;
+      $height-nav 
+      $height-controlbar
+      $height-main-content--home
+      $height-footer;
   }
 
   &__page {
     grid-template-rows: 
-      $nav-height 
-      $main-content-page-height 
-      $footer-height;
+      $height-nav 
+      $height-main-content--page
+      $height-footer;
   }
 }
