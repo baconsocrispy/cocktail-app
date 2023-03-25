@@ -12,8 +12,8 @@ const ResetButton = () => {
   const handleResetClick = () => resetFilterOptions();
 
   return (
-    <div className="filterbar__option--reset">
-      <button className="reset" onClick={ handleResetClick }>
+    <div className="reset">
+      <button className="reset__button" onClick={ handleResetClick }>
         Reset
       </button>
     </div>

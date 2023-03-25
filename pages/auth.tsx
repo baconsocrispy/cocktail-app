@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // components
-import FilterBar from "@/components/filterbar/filterbar.component";
+import ControlBar from "@/layout/controlbar/controlbar.component";
 
 // data
 import AuthForm, { FORM_TYPES } from "@/components/auth-form/auth-form.component";
@@ -19,7 +19,7 @@ const Auth = () => {
 
   return (
     <>
-      <FilterBar />
+      <ControlBar>Control Bar</ControlBar>
       <div>
         <AuthForm formType={ activeForm } />
         <button onClick={ changeForm }>

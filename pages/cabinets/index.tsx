@@ -1,4 +1,4 @@
-// external imports
+// library imports
 import { useContext } from 'react';
 import Link from 'next/link';
 
@@ -6,7 +6,9 @@ import Link from 'next/link';
 import { UserContext } from '@/contexts/user.context';
 
 // components
-import FilterBar from '@/components/filterbar/filterbar.component';
+import ControlBar from '@/layout/controlbar/controlbar.component';
+
+// api
 import { deleteCabinet } from '../api/cocktail-api';
 
 const CabinetsPage = () => {
@@ -23,7 +25,7 @@ const CabinetsPage = () => {
 
   return (
     <>
-      <FilterBar />
+      <ControlBar>Control Bar</ControlBar>
       <div>
         <h1>Cabinets</h1>
         { user && 

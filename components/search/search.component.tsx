@@ -21,18 +21,23 @@ const Search = () => {
 
   return (
     <form 
-      className="filterbar__option--search"
+      className="search"
       onSubmit={ handleSubmit }
     >
       <label htmlFor="search">Keyword</label>
       <input 
-        className='filterbar__search' 
+        className='search__input' 
         type='search' 
         name='search'
         onChange={ handleChange }
         value={ keyword }
       />
-      <button type='submit'>Search</button>
+      <button 
+        type='submit' 
+        className="search__button util-remove-button-styles"
+      >
+        Search
+      </button>
     </form>
   )
 }
