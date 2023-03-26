@@ -23,7 +23,10 @@ const ControlOptions: FC<ControlOptionsProps> = ({
   ] = useState<number | null>(null);
 
   // handlers
-  const handleCloseSidebar = () => setSidebarOpen(false);
+  const handleCloseSidebar = () => {
+    setSidebarOpen(false);
+    // setSidebarContent(null);
+  }
   
   const handleOptionClick = (index: number) => {  
     setSidebarContent(index)

@@ -18,7 +18,7 @@ const SortBy: FC<SortByProps> = ({ open }) => {
   
   return (
     <div 
-      className={ open ? "sort-by sort-by--open" : "sort-by" }
+      className={ open ? "sort-by" : "sort-by--closed" }
     >
       <Select 
         header={ 'Choose one sort option'} 

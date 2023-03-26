@@ -1,10 +1,11 @@
 .ingredients {
-  display: none;
+  position: fixed;
+  display: grid;
   grid-template-rows: max-content repeat(4, 1fr);
   padding: 2rem;
   height: 100%;
 
-  &--open {
-    display: grid;
+  &--closed {
+    display: none;
   }
 }

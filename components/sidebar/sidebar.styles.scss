@@ -1,24 +1,28 @@
 .sidebar {
-  display: none;
-  position: absolute;
+  display: block;
+  position: fixed;
   width: 100vw;
   top: calc($height-nav + $height-controlbar);
   bottom: $height-footer;
+  
+  transform: translateX(0%);
+  transition: transform .5s ease-in-out;
 
-  background-color: bisque;
+  color: $color-black;
+  background-color: $color-white;
 
   &__content {
-    position: relative;
+    position: fixed;
     height: 100%;
   }
 
-  &__open {
-    display: block;
+  &--closed {
+    transform: translateX(-100%);
   }
 
   &__close-button {
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     top: 1rem;
     right: 1rem;
     background-color: transparent;

@@ -10,13 +10,13 @@ type SidebarProps = {
 
 const Sidebar: FC<SidebarProps> = ({ open, onClick, children }) => {
   return (
-    <div className={ open ? 'sidebar sidebar__open' : 'sidebar' }>
-        <button 
-          className="sidebar__close-button" 
-          onMouseDown={ onClick }
-        >
-          Close X
-        </button>
+    <div className={ open ? 'sidebar' : 'sidebar sidebar--closed' }>
+      <button 
+        className="sidebar__close-button"
+        onMouseDown={ onClick }
+      >
+        Close X
+      </button>
       <div className="sidebar__content">
         { children }
       </div>

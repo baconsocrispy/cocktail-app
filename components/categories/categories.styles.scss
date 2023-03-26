@@ -1,9 +1,8 @@
 .categories {
-  display: none;
   padding: 2rem;
+  height: 100%;
   
-
-  &--open {
-    display: block;
+  &--closed {
+    display: none;
   }
 }

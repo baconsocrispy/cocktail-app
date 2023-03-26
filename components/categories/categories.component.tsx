@@ -18,7 +18,7 @@ const Categories: FC<CategoriesProps> = ({ open }) => {
 
   return (
     <div 
-      className={ open ? "categories categories--open" : "categories" }
+      className={ open ? "categories" : "categories--closed" }
     >
       <Select 
         header={ 'Select one or more categories'} 

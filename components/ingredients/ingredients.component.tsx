@@ -1,16 +1,19 @@
-// external imports
-import { FC, useContext, useState, useEffect } from "react"
+// library imports
+import { FC, useContext, useState, useEffect } from "react";
 
 // components
 import Select from "../select/select.component";
 
 // context
-import { Ingredient, IngredientsContext } from "@/contexts/ingredients.context";
-import { UserContext } from "@/contexts/user.context";
-import { fetchCabinetIngredients, updateCurrentCabinet } from "@/pages/api/cocktail-api";
 import { FilteringContext } from "@/contexts/filtering.context";
+import { IngredientsContext } from "@/contexts/ingredients.context";
+import { UserContext } from "@/contexts/user.context";
+
+// api
+import { updateCurrentCabinet } from "@/pages/api/cocktail-api";
 
 // types
+import { Ingredient } from "@/contexts/ingredients.context";
 type IngredientsProps = {
   open: boolean;
 }
@@ -19,7 +22,7 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
   // state
   const { user, jwt, userIngredients, getUser } = useContext(UserContext);
   const { ingredients, ingredientTypes } = useContext(IngredientsContext);
-  const { resetFilterOptions } = useContext(FilteringContext)
+  const { resetFilterOptions } = useContext(FilteringContext);
   const [ cabinetIngredients, setCabinetIngredients ] = useState<Ingredient[]>(ingredients);
 
   // set initial ingredients && rerender when current_cabinet_id changes
@@ -43,7 +46,7 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
   }
 
   return (
-    <div className={ open ? 'ingredients ingredients--open' : 'ingredients'}>
+    <div className={ open ? 'ingredients' : 'ingredients--closed'}>
       <ul>
         <li onClick={ handleResetIngredients }>All Ingredients</li>
         
