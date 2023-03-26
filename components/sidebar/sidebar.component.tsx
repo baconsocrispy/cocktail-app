@@ -1,5 +1,5 @@
 // external imports
-import { FC, MouseEventHandler, ReactNode } from "react"
+import { FC, MouseEventHandler, ReactNode, useEffect } from "react"
 
 // types
 type SidebarProps = {
@@ -9,13 +9,18 @@ type SidebarProps = {
 }
 
 const Sidebar: FC<SidebarProps> = ({ open, onClick, children }) => {
+  // prevent page scrolling while sidebar is open
+  useEffect(() => {
+    open && (document.body.style.overflow = 'hidden');
+  }, [ open ])
+
   return (
     <div className={ open ? 'sidebar' : 'sidebar sidebar--closed' }>
       <button 
         className="sidebar__close-button"
         onMouseDown={ onClick }
       >
-        Close X
+        X
       </button>
       <div className="sidebar__content">
         { children }

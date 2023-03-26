@@ -1,4 +1,4 @@
-// external imports
+// library imports
 import { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -7,9 +7,23 @@ import { FormProvider } from '@/contexts/form.context';
 import { Cabinet, UserContext } from '@/contexts/user.context';
 
 // components
+import ControlBar from '@/layout/controlbar/controlbar.component';
+import ControlOptions from '@/components/control-options/control-options.component';
 import CabinetForm from '@/components/cabinet-form/cabinet-form.component';
-import FormBar from '@/components/formbar/formbar.component';
+import FormCategories from '@/components/form-categories/form-categories.component';
+import FormIngredients from '@/components/form-ingredients/form-ingredients.component';
+import FormTools from '@/components/form-tools/form-tools.component';
+
+// api
 import { fetchCabinet } from '@/pages/api/cocktail-api';
+
+// data
+const controlOptions = [ 'Ingredients', 'Categories', 'Tools' ];
+const sidebarComponents = [
+  <FormIngredients key='ingredients' open={ false} />,
+  <FormCategories key='categories' open={ false } />,
+  <FormTools key='tools' open={ false } /> 
+]
 
 const EditCabinetPage = () => {
   // state
@@ -30,7 +44,12 @@ const EditCabinetPage = () => {
 
   return (    
     <FormProvider>
-      <FormBar />
+      <ControlBar>
+        <ControlOptions 
+          options={ controlOptions} 
+          sidebarComponents={ sidebarComponents } 
+        />
+      </ControlBar>
       { (user &&  cabinet) && <CabinetForm userId={ user.id } cabinet={ cabinet } /> }
     </FormProvider>
   )

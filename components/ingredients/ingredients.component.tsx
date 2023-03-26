@@ -1,5 +1,5 @@
 // library imports
-import { FC, useContext, useState, useEffect } from "react";
+import { FC, useContext, useState, useEffect, MouseEvent } from "react";
 
 // components
 import Select from "../select/select.component";
@@ -14,6 +14,7 @@ import { updateCurrentCabinet } from "@/pages/api/cocktail-api";
 
 // types
 import { Ingredient } from "@/contexts/ingredients.context";
+import Dropdown from "../dropdown/dropdown.component";
 type IngredientsProps = {
   open: boolean;
 }
@@ -33,32 +34,25 @@ const Ingredients: FC<IngredientsProps> = ({ open }) => {
   }, [ user, userIngredients, ingredients ])
 
   // handlers
-  const handleResetIngredients = async () => {
-    jwt && await updateCurrentCabinet(null, jwt)
-    setCabinetIngredients(ingredients); 
-    resetFilterOptions();
-  }
-
-  const handleUpdateCabinet = (cabinetId: number) => {
-    jwt && updateCurrentCabinet(cabinetId, jwt);
-    getUser();
-    resetFilterOptions();
+  const updateIngredients = async (cabinetId: number | null) => {
+    if (jwt) {
+      cabinetId ? 
+        await updateCurrentCabinet(cabinetId, jwt) :
+        await updateCurrentCabinet(null, jwt)
+      getUser();
+      resetFilterOptions();
+    }
   }
 
   return (
     <div className={ open ? 'ingredients' : 'ingredients--closed'}>
-      <ul>
-        <li onClick={ handleResetIngredients }>All Ingredients</li>
-        
-        { user?.cabinets.map((cabinet) => (
-          <li 
-            key={ cabinet.id }
-            onClick={ () => handleUpdateCabinet(cabinet.id) }
-          >
-            { cabinet.name }
-          </li>
-        ))}
-      </ul>
+      <Dropdown
+        defaultItemName="All Ingredients"
+        header='Cabinet' 
+        objects={ user?.cabinets }
+        selectedObjectId={ user?.current_cabinet_id } 
+        onClick={ (cabinetId: number | null) => updateIngredients(cabinetId) }
+      />
 
       { ingredientTypes.map((type) => (
         <Select 
