@@ -1,11 +1,18 @@
 .search {
-  grid-column: span 5;
-  
+  grid-column: 1 / 6;
+  padding: .5rem;
+
   &__input {
-    width: 80%;
+    width: 85%;
+    border: none;
+    border-radius: 2px 0px 0px 2px;
+    height: 2rem;
   }
 
   &__button {
-
+    font-size: 1.2rem;
+    padding: 0 .5rem;
+    border-radius: 0px 2px 2px 0px;
+    background-color: $color-white;
   }
 }

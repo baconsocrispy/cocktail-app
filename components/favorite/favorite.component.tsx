@@ -7,7 +7,6 @@ import { UserContext } from "@/contexts/user.context";
 // api
 import { favoriteRecipe } from "@/pages/api/cocktail-api";
 
-
 // types
 type FavoriteProps = {
   recipeId: number;

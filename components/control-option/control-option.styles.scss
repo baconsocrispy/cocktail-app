@@ -1,0 +1,9 @@
+.control-option {
+  display: block;
+  flex: 1;
+  text-align: center;
+  
+  &__button {
+    height: 100%;
+  }
+}

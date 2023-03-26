@@ -24,19 +24,20 @@ const Search = () => {
       className="search"
       onSubmit={ handleSubmit }
     >
-      <label htmlFor="search">Keyword</label>
       <input 
+        aria-label="search"
         className='search__input' 
         type='search' 
         name='search'
         onChange={ handleChange }
+        placeholder='Keyword Search'
         value={ keyword }
       />
       <button 
         type='submit' 
-        className="search__button util-remove-button-styles"
+        className="search__button util-default-button"
       >
-        Search
+        &#128269;
       </button>
     </form>
   )

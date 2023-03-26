@@ -5,5 +5,6 @@
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(6, 1fr);
   
-  background-color: purple;
+  color: $color-white;
+  background-color: $color-black;
 }

@@ -24,7 +24,7 @@ const NavAuth: FC<NavAuthProps> = ({ onClick }) => {
 
   return (
     <div className='nav-auth'>
-      <button onClick={ handleClick } className='util-remove-button-styles'>
+      <button onClick={ handleClick } className='util-default-button'>
         { user ? 'Sign Out' : 'Sign In' }
       </button>
     </div>

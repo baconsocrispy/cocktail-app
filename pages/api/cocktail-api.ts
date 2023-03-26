@@ -164,8 +164,6 @@ const configureURLSearchParams = (
 ) => {
   const params = new URLSearchParams();
 
-  console.log(filterOptions)
-
   if (filterOptions.ingredientIds.length > 0) {
     filterOptions.ingredientIds.forEach((id) => {
       params.append('ingredientIds[]', id.toString())

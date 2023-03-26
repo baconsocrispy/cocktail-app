@@ -7,9 +7,11 @@
   } 
 }
 
-.util-remove-button-styles {
+.util-default-button {
+  cursor: pointer;
   border: none;
   background: none;
+  color: currentColor;
   font-size: inherit;
   font-family: inherit;
   text-transform: inherit;

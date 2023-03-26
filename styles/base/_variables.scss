@@ -1,9 +1,15 @@
 // grid
-$height-controlbar: 5rem;
+$height-controlbar: 6rem;
 $height-nav: 5rem;
 $height-footer: 5rem;
 $height-main-content--home: calc(100vh - $height-nav - $height-controlbar - $height-footer);
 $height-main-content--page: calc(100vh - $height-nav - $height-footer);
 
 // typography
+$font-size-default: 1.6rem;
 $font-primary: 'Oswald', 'open-sans';
+$font-secondary: 'Roboto', 'open-sans';
+
+// colors
+$color-black: black;
+$color-white: white;
