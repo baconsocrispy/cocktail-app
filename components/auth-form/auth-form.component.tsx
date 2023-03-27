@@ -48,40 +48,68 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
   }
 
   return (
-    <div>
-      <form id='user' onSubmit={ formType === FORM_TYPES.signUp ? 
-        handleSubmit(onSignUp) : 
-        handleSubmit(onSignIn)
+    <div className="auth-form">
+      <form 
+        id='user'
+        className="auth-form__form" 
+        onSubmit={ formType === FORM_TYPES.signUp ? 
+          handleSubmit(onSignUp) : 
+          handleSubmit(onSignIn)
       }>
-        
-        <label htmlFor="email">Email</label>
-        <input 
-          type="email"
-          { ...register('user.email', { required: 'Email is required' })}
-          autoComplete="email"
-        />
-
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          { ...register('user.password', { required: 'Password is required' })}
-          autoComplete="current-password"
-        />
+        {/* <div className="auth-form__element"> */}
+          <label 
+            htmlFor="email"
+            className="auth-form__label"
+          >
+            Email
+          </label>
+          <input 
+            type="email"
+            className="auth-form__input"
+            { ...register('user.email', { required: 'Email is required' })}
+            autoComplete="email"
+          />
+        {/* </div> */}
+   
+        {/* <div className="auth-form__element"> */}
+          <label 
+            htmlFor="password"
+            className="auth-form__label"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            className="auth-form__input"
+            { ...register('user.password', { required: 'Password is required' })}
+            autoComplete="current-password"
+          />
+        {/* </div> */}
 
         { formType === FORM_TYPES.signUp && 
+          // <div className="auth-form__element">
           <>
-            <label htmlFor="password_confirmation">Confirm Password</label>
+            <label 
+              htmlFor="password_confirmation"
+              className="auth-form__label"
+            >
+              Confirm Password
+            </label>
             <input
               type="password"
+              className="auth-form__input"
               { ...register('user.password_confirmation', 
                 { required: 'Password confirmation required' })
               }
               autoComplete="new-password"
             />
           </>
+          // </div>
         }
 
-        <button>Submit</button>
+        <button className="auth-form__button util-default-button">
+          Submit
+        </button>
       </form>
     </div>
   )

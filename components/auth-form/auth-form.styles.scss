@@ -1,0 +1,32 @@
+.auth-form {
+  padding: 1rem;
+  font-family: $font-primary;
+  font-size: $font-size-small;
+
+  &__form {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  &__label {
+    align-self: center;
+  }
+
+  &__input {
+    width: 100%;
+  }
+
+  &__button {
+    grid-column: 2 / 3;
+    margin-left: auto;
+    border: 1px solid $color-black;
+    padding: .5rem;
+
+    &:hover {
+      background-color: $color-black;
+      color: $color-white;
+    }
+  }
+}

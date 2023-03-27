@@ -18,6 +18,7 @@ import '@/styles/globals.scss'
 // fonts
 import { Oswald } from 'next/font/google';
 import Head from 'next/head';
+import { FilteringProvider } from '@/contexts/filtering.context';
 
 const oswald = Oswald({ subsets: [ 'latin' ] })
 
@@ -30,7 +31,9 @@ export const App = ({ Component, pageProps }: AppProps) => {
           <IngredientsProvider>
             <CategoriesProvider>
               <ToolsProvider>
-                <Component { ...pageProps } />
+                <FilteringProvider>
+                  <Component { ...pageProps } />
+                </FilteringProvider>
               </ToolsProvider>
             </CategoriesProvider>
           </IngredientsProvider>

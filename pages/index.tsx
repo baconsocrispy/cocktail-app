@@ -37,7 +37,6 @@ export const Home = ({ data }: HomeProps) => {
   return (
     <>
       <RecipesProvider recipes={ recipes } recipeCount={ recipeCount }>
-        <FilteringProvider>
           <SortByProvider>
             <ControlBar>
               <ControlOptions 
@@ -49,7 +48,6 @@ export const Home = ({ data }: HomeProps) => {
             </ControlBar>
           </SortByProvider>
           <Recipes />
-        </FilteringProvider>
       </RecipesProvider>
     </>
   )

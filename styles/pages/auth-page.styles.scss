@@ -1,0 +1,26 @@
+.auth-page {
+
+  &__header {
+    padding: 1rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form-switch {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 1rem;
+  }
+
+  &__text {
+
+  }
+
+  &__button {
+    margin-left: 1rem;
+    text-decoration: underline;
+  }
+}

@@ -11,6 +11,9 @@
 @import '@/layout/grid/grid.styles';
 @import '@/layout/nav/nav.styles';
 
+// pages
+@import '@/styles/pages/auth-page.styles';
+
 // generic components
 @import '@/components/card/card.styles';
 @import '@/components/dropdown/dropdown.styles';
@@ -34,6 +37,7 @@
 @import '@/components/search/search.styles';
 
 // form components
+@import '@/components/auth-form/auth-form.styles';
 @import '@/components/cabinet-form/cabinet-form.styles';
 @import '@/components/form-categories/form-categories.styles';
 @import '@/components/form-ingredients/form-ingredients.styles';
