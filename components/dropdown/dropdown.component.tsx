@@ -20,38 +20,57 @@ const Dropdown: FC<DropdownProps> = ({
 }) => {
   // state
   const [ open, setOpen ] = useState(false);
-  const [ selectedItem, setSelectedItem ] = useState<number | null>(null);
+  const [ selectedItemId, setSelectedItemId ] = useState<number | null>(null);
+  const [ selectedItemName, setSelectedItemName ] = useState<string>(defaultItemName);
 
-  // preset selected object on load if selectedObjectId provided
+  // set selected object on load if selectedObjectId provided
   useEffect(() => {
     if (selectedObjectId) {
-      setSelectedItem(selectedObjectId)
+      setSelectedItemId(selectedObjectId)
+
+      objects && objects.map((object) => {
+        if (object.id === selectedObjectId) setSelectedItemName(object.name);
+      })
     }
   }, [])
 
   // handlers
-  const handleChangeObject = () => setOpen(true);
+  const handleChangeObject = () => setOpen(!open);
 
-  const handleClick = (objectId: number | null) => {
+  const handleClick = (
+    objectId: number | null, 
+    objectName: string
+  ) => {
     onClick(objectId);
-    setSelectedItem(objectId);
+    setSelectedItemId(objectId);
+    setSelectedItemName(objectName);
+    setOpen(false);
   }
 
   return (
     <div role="listbox" className="dropdown">
       <h4 className="dropdown__header">{ header }:</h4>
-      <div></div>
+
+      <div className="dropdown__selection">{ selectedItemName }</div>
+
+      <button 
+        className="dropdown__change-button util-default-button"
+        onClick={ handleChangeObject }
+      >
+        Change
+      </button>
+
       <ul
         role="list" 
-        className="dropdown__list"
+        className={open ? "dropdown__list" : "dropdown__list dropdown__list--closed" }
       >
         <li 
           role="option" 
-          aria-selected={ !selectedItem }
-          className={ !selectedItem ? 
+          aria-selected={ !selectedItemId }
+          className={ !selectedItemId ? 
             "dropdown__item dropdown__item--selected" : "dropdown__item"
           }
-          onClick={ () => handleClick(null) } 
+          onClick={ () => handleClick(null, defaultItemName) } 
         >
           { defaultItemName }
         </li>
@@ -60,23 +79,16 @@ const Dropdown: FC<DropdownProps> = ({
             <li 
               key={ object.id }
               role="option"
-              aria-selected={ selectedItem === object.id }
-              className={ selectedItem === object.id ? 
+              aria-selected={ selectedItemId === object.id }
+              className={ selectedItemId === object.id ? 
                 "dropdown__item dropdown__item--selected" : "dropdown__item"
               }
-              onClick={ () => handleClick(object.id) }
+              onClick={ () => handleClick(object.id, object.name) }
             >
               { object.name }
             </li>
         ))}
       </ul>
-
-      <button 
-        className="dropdown__change-button util-default-button"
-        onClick={ handleChangeObject }
-      >
-        Change
-      </button>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 .dropdown {
   display: flex;
+  position: relative;
   width: 100%;
   border-bottom: 1px solid black;
 
@@ -7,24 +8,40 @@
     font-family: $font-primary;
   }
 
-  &__list {
+  &__selection {
     display: flex;
     flex: 1;
     justify-content: center;
     align-items: center;
     padding: 0 .5rem;
     text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__list {
+    position: absolute;
+    top: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
     list-style: none;
 
-    
+    background-color: $color-white;
+    border: 1px solid $color-black;
+
+    &--closed {
+      display: none;
+    }
   }
 
   &__item {
+    display: block;
     text-transform: uppercase;
-    display: none;
 
     &--selected {
-      display: block;
+      background-color: rgba(0, 0, 0, .4);
     }
   }
 
