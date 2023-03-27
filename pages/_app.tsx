@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app'
 // components
 import Grid from '@/layout/grid/grid.component';
 import Nav from '@/layout/nav/nav.component';
-import Toolbar from '@/components/toolbar/toolbar.component';
+import Toolbar from '@/layout/footerbar/footerbar.component';
 
 // context
 import { UserProvider } from '@/contexts/user.context';

@@ -1,8 +1,7 @@
 .recipes {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 5rem;
-  padding: 5rem;
+  grid-gap: 2rem;
+  padding: 1rem;
   overflow: scroll;
-  background-color: pink;
 }
