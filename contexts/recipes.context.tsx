@@ -20,6 +20,7 @@ export type Recipe = {
   id: number;
   ingredients: Ingredient[];
   name: string;
+  slug: string;
   steps: Step[];
   tools: Tool[];
   users: User[];

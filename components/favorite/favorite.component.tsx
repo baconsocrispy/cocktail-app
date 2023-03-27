@@ -1,5 +1,8 @@
 // library imports
 import { useState, FC, useContext, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as closedHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as openHeart } from '@fortawesome/free-regular-svg-icons';
 
 // context
 import { UserContext } from "@/contexts/user.context";
@@ -33,9 +36,15 @@ const Favorite: FC<FavoriteProps> = ({ recipeId }) => {
   }
 
   return (
-    <div>
-      <button onClick={ handleFavorite }>
-        { favorited ? 'favorited' : 'unfavorited'}
+    <div className="favorite">
+      <button 
+        onClick={ handleFavorite } 
+        className='favorite__button util-default-button'
+      >
+        <FontAwesomeIcon 
+          icon={ favorited ? closedHeart : openHeart } 
+          className='favorite__icon'
+        />
       </button>
     </div>
   )

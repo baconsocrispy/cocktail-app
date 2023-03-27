@@ -3,9 +3,12 @@
   font-size: $font-size-small;
 
   &__button {
-    padding: .5rem;
-    border: 1px solid $color-white;
-
+    &,
+    &:active {
+      padding: .5rem;
+      border: 1px solid $color-white;
+    }
+   
     &:hover {
       background-color: $color-white;
       color: $color-black;

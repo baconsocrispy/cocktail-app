@@ -4,6 +4,7 @@
   width: 100vw;
   top: calc($height-nav + $height-controlbar);
   bottom: $height-footer;
+  z-index: 5;
 
   transform: translateX(0%);
   transition: transform .5s ease-in-out;

@@ -32,3 +32,10 @@ to digest them properly.
 
 `{"ingredientIds"=>["104", "42", "106", "105", "103", "45"], "categoryIds"=>["4", "3"], "sortOptionsId"=>"3"}`
 
+### Fonts
+
+@fortawesome/fontawesome-svg-core
+@fortawesome/react-fontawesome
+@fortawesome/free-solid-svg-icons
+@fortawesome/free-regular-svg-icons
+

@@ -12,12 +12,20 @@
 @import '@/layout/nav/nav.styles';
 
 // generic components
-@import '@/components/dropdown/dropdown.styles';
-
-// components
 @import '@/components/card/card.styles';
+@import '@/components/dropdown/dropdown.styles';
+@import '@/components/favorite/favorite.styles';
+@import '@/components/hamburger/hamburger.styles';
+@import '@/components/logo/logo.styles';
+@import '@/components/option/option.styles';
+@import '@/components/select/select.styles';
+@import '@/components/sidebar/sidebar.styles';
+
+// custom components
 @import '@/components/categories/categories.styles';
 @import '@/components/ingredients/ingredients.styles';
+@import '@/components/recipes/recipes.styles';
+@import '@/components/sort-by/sort-by.styles';
 
 // controlbar
 @import '@/components/control-option/control-option.styles';
@@ -33,19 +41,11 @@
 @import '@/components/form-select/form-select.styles';
 @import '@/components/form-tools/form-tools.styles';
 
-@import '@/components/ingredients/ingredients.styles';
-@import '@/components/logo/logo.styles';
-
 // navigation components
-@import '@/components/hamburger/hamburger.styles';
 @import '@/components/nav-link/nav-link.styles';
 @import '@/components/nav-links/nav-links.styles';
 
-@import '@/components/option/option.styles';
-@import '@/components/recipes/recipes.styles';
 
-@import '@/components/select/select.styles';
-@import '@/components/sidebar/sidebar.styles';
-@import '@/components/sort-by/sort-by.styles';
+
 
 

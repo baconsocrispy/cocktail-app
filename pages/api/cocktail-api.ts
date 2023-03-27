@@ -13,6 +13,10 @@ export type RecipesAPI = {
   recipeCount: number;
 }
 
+export type RecipeAPI = {
+  recipe: Recipe;
+}
+
 export type CategoriesAPI = {
   categories: Category[];
 }
@@ -35,6 +39,12 @@ export const fetchAllRecipes = async () => {
   const response = await fetch('http://localhost:3001/recipes');
   const recipes: RecipesAPI = await response.json();
   return recipes;
+}
+
+export const fetchRecipe = async (cabinetSlug: string) => {
+  const response = await fetch(`http://localhost:3001/recipes/${ cabinetSlug}`);
+  const recipe: RecipeAPI = await response.json();
+  return recipe;
 }
 
 export const filterRecipes = async (
