@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr;
 
-  &__home {
+  &__form {
     grid-template-rows: 
       $height-nav 
       $height-controlbar
@@ -10,7 +10,7 @@
       $height-footer;
   }
 
-  &__page {
+  &__default {
     grid-template-rows: 
       $height-nav 
       $height-main-content--page

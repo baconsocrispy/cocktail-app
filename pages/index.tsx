@@ -35,21 +35,19 @@ const sidebarComponents = [
 export const Home = ({ data }: HomeProps) => {
   const { recipes, recipeCount } = data || {};
   return (
-    <>
-      <RecipesProvider recipes={ recipes } recipeCount={ recipeCount }>
-          <SortByProvider>
-            <ControlBar>
-              <ControlOptions 
-                options={ controlOptions }
-                sidebarComponents={ sidebarComponents }
-              />
-              <Search />
-              <ResetButton />
-            </ControlBar>
-          </SortByProvider>
-          <Recipes />
-      </RecipesProvider>
-    </>
+    <RecipesProvider recipes={ recipes } recipeCount={ recipeCount }>
+        <SortByProvider>
+          <ControlBar>
+            <ControlOptions 
+              options={ controlOptions }
+              sidebarComponents={ sidebarComponents }
+            />
+            <Search />
+            <ResetButton />
+          </ControlBar>
+        </SortByProvider>
+        <Recipes />
+    </RecipesProvider>
   )
 }
 

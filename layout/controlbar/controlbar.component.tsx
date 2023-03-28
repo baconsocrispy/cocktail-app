@@ -8,9 +8,9 @@ type ControlBarProps = {
 
 const ControlBar: FC<ControlBarProps> = ({ children }) => {
   return (
-    <div className='controlbar'>
+    <section className='controlbar'>
       { children }
-    </div>
+    </section>
   )
 }
 

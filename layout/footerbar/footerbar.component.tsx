@@ -21,7 +21,7 @@ const Footerbar = () => {
   }
 
   return (
-    <div className="footerbar">
+    <footer className="footerbar">
       <ul className="footerbar__options">
         { options.map((option) => (
           <li key={ option } className="footerbar__option">
@@ -35,7 +35,7 @@ const Footerbar = () => {
           </li>
         )) }
       </ul>
-    </div>
+    </footer>
   )
 }
 

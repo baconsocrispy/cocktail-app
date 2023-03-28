@@ -21,9 +21,7 @@ const Auth = () => {
   }
 
   return (
-    <>
-      <ControlBar>Control Bar</ControlBar>
-
+    <div className="auth-page">
       <div className="auth-page__content">
 
         <h4 className="auth-page__header">
@@ -50,9 +48,8 @@ const Auth = () => {
               }
             </button>
         </div>
-         
       </div>
-    </>
+    </div>
   )
 }
 

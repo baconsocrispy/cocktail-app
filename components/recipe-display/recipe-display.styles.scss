@@ -1,0 +1,24 @@
+.recipe-display {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, max-content) repeat(4, 1fr);
+  gap: 1rem;
+
+  &__name {
+    text-transform: uppercase;
+    text-align: center;
+    font-family: $font-primary;
+  }
+
+  &__image-container {
+    position: relative;
+    width: 10rem;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+  }
+}

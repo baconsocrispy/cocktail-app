@@ -24,24 +24,20 @@ const CabinetsPage = () => {
   }
 
   return (
-    <>
-      <ControlBar>Control Bar</ControlBar>
-      <div>
-        <h1>Cabinets</h1>
-        { user && 
-          <ul>
-            { user.cabinets.map((cabinet) => (
-              <li key={ cabinet.id }>
-                <Link href={ `cabinets/${ cabinet.slug }`}>{ cabinet.name }</Link>
-                <button onClick={ () => handleDeleteCabinet(cabinet.slug) }>X</button>
-              </li>
-            ))}
-          </ul>
-        }
-        <Link href='/cabinets/new'>New Cabinet</Link>
-      </div>
-    </>
-   
+    <div className='cabinets-page'>
+      <h1>Cabinets</h1>
+      { user && 
+        <ul>
+          { user.cabinets.map((cabinet) => (
+            <li key={ cabinet.id }>
+              <Link href={ `cabinets/${ cabinet.slug }`}>{ cabinet.name }</Link>
+              <button onClick={ () => handleDeleteCabinet(cabinet.slug) }>X</button>
+            </li>
+          ))}
+        </ul>
+      }
+      <Link href='/cabinets/new'>New Cabinet</Link>
+    </div>
   )
 }
 
