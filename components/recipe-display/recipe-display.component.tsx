@@ -24,7 +24,28 @@ const RecipeDisplay: FC<RecipeDisplayProps> = ({ recipe }) => {
           className="recipe-display__image"
         />
       </div>
-      
+
+      <div className="recipe-display__elements">
+        <h3 className="recipe-display__sub-header">Ingredients</h3>
+        <ul className="recipe-display__list">
+          { recipe.ingredients.map((ingredient) => (
+            <li key={ ingredient.id } className="recipe-display__option">
+              { ingredient.name }
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="recipe-display__elements">
+        <h3 className="recipe-display__sub-header">Steps</h3>
+        <ul className="recipe-display__list">
+          { recipe.steps.map((step) => (
+            <li key={ step.id } className="recipe-display__option">
+              { step.name }
+            </li>
+          ))}
+        </ul>
+      </div>      
     </div>
   )
 }

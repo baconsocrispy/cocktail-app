@@ -30,13 +30,10 @@ const CabinetPage = () => {
   }, [ slug, jwt ])
 
   return (
-    <>
-      <ControlBar>Control Bar</ControlBar>
-      <div>
-        { cabinet && <h3>{ cabinet.name }</h3>}
-        <Link href={ `/cabinets/${ slug }/edit` }>Edit</Link>
-      </div>
-    </>
+    <div>
+      { cabinet && <h3>{ cabinet.name }</h3>}
+      <Link href={ `/cabinets/${ slug }/edit` }>Edit</Link>
+    </div>
   )
 }
 
