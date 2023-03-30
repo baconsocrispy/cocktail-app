@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 // components
-import ControlBar from "@/layout/controlbar/controlbar.component";
+import DetailsDisplay from "@/components/details-display/details-display.component";
 
 // api
 import { fetchCabinet } from "@/pages/api/cocktail-api";
@@ -30,10 +30,9 @@ const CabinetPage = () => {
   }, [ slug, jwt ])
 
   return (
-    <div>
-      { cabinet && <h3>{ cabinet.name }</h3>}
-      <Link href={ `/cabinets/${ slug }/edit` }>Edit</Link>
-    </div>
+    <main className="util-overflow-scroll">
+      { cabinet && <DetailsDisplay object={ cabinet } /> }
+    </main>
   )
 }
 

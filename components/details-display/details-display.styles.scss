@@ -1,13 +1,25 @@
-.recipe-display {
+.details-display {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, max-content) repeat(4, 1fr);
+  grid-template-rows: repeat(2, max-content) repeat(2, 1fr);
   gap: 1rem;
+
+  &__header {
+    position: relative;
+    text-align: center;
+  }
 
   &__name {
     text-transform: uppercase;
-    text-align: center;
     font-family: $font-primary;
+  }
+
+  &__edit-link {
+    position: absolute;
+    top: 0;
+    transform: translateX(8rem);
+    font-style: italic;
+    text-decoration: underline;
   }
 
   &__image-container {
@@ -22,7 +34,7 @@
     height: auto;
   }
 
-  &__elements {
+  &__details {
     padding: 0 1rem;
   }
 
@@ -31,10 +43,7 @@
   }
 
   &__list {
-
-  }
-
-  &__option {
-
+    height: 20rem;
+    overflow: scroll;
   }
 }

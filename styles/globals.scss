@@ -13,7 +13,6 @@
 
 // pages
 @import '@/styles/pages/auth-page.styles';
-@import '@/styles/pages/recipe-page.styles';
 
 // generic components
 @import '@/components/card/card.styles';
@@ -30,7 +29,7 @@
 // custom components
 @import '@/components/categories/categories.styles';
 @import '@/components/ingredients/ingredients.styles';
-@import '@/components/recipe-display/recipe-display.styles';
+@import '@/components/details-display/details-display.styles';
 @import '@/components/recipes/recipes.styles';
 @import '@/components/sort-by/sort-by.styles';
 

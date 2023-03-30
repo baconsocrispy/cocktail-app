@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 // components
-import ControlBar from "@/layout/controlbar/controlbar.component";
-import RecipeDisplay from "@/components/recipe-display/recipe-display.component";
+import DetailsDisplay from "@/components/details-display/details-display.component";
 
 // api
 import { fetchRecipe } from "@/pages/api/cocktail-api";
@@ -30,8 +29,8 @@ const RecipePage = () => {
   }, [ slug ])
 
   return (
-    <main className="recipe-page">
-      { recipe && <RecipeDisplay recipe={ recipe } /> }
+    <main className="util-overflow-scroll">
+      { recipe && <DetailsDisplay object={ recipe } /> }
     </main>
   )
 }

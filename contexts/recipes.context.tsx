@@ -16,6 +16,7 @@ type Step = {
 
 export type Recipe = {
   categories: Category[];
+  class: string;
   description?: string;
   id: number;
   ingredients: Ingredient[];

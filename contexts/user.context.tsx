@@ -14,6 +14,7 @@ import { getCurrentUser } from "@/pages/api/cocktail-api";
 import { Recipe } from "./recipes.context";
 
 export type Cabinet = {
+  class: string;
   id: number;
   name: string;
   private: boolean;
