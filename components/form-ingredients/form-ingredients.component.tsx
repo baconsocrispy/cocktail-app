@@ -18,7 +18,7 @@ const FormIngredients: FC<FormIngredientsProps> = ({ open }) => {
 
   return (
     <div className={ open ? 
-      'form-ingredients form-ingredients--open' : 'form-ingredients'
+      'form-ingredients' : 'form-ingredients--closed'
     }>
 
       { ingredientTypes.map((type) => (

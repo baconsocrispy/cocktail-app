@@ -18,7 +18,7 @@ const FormTools: FC<FormToolsProps> = ({ open }) => {
 
   return (
     <div 
-      className={ open ? "categories categories--open" : "categories" }
+      className={ open ? "categories" : "categories--closed" }
     >
       <FormSelect 
         header={ 'Select one or more tools'} 

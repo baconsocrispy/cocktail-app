@@ -1,4 +1,4 @@
-// external imports
+// library imports
 import { FC, useContext } from "react"
 
 // components

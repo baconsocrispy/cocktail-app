@@ -4,16 +4,18 @@ import { createContext, ReactNode, useState } from "react";
 
 // types
 import { Category } from "./categories.context";
-import { Tool } from "./tools.context";
 import { Ingredient } from "./ingredients.context";
+import { Portion } from "@/components/form-portion/form-portion.component";
+import { Tool } from "./tools.context";
 
 type FormOptions = {
   formCategories: Category[];
   formIngredients: Ingredient[];
+  formPortions: Portion[];
   formTools: Tool[];
 }
 
-type FormOption = Category | Ingredient | Tool;
+type FormOption = Category | Ingredient | Portion | Tool;
 
 type FormContextProps = {
   formOptions: FormOptions;
@@ -32,6 +34,7 @@ export const FormContext = createContext<FormContextProps>({
   formOptions: {
     formCategories: [],
     formIngredients: [],
+    formPortions: [],
     formTools: []
   },
   addFormOption: () => {},
@@ -46,6 +49,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
  const emptyForm: FormOptions = {
   formCategories: [],
   formIngredients: [],
+  formPortions: [],
   formTools: []
  }
 
@@ -53,17 +57,20 @@ export const FormProvider = ({ children }: FormProviderProps) => {
 
   // actions
   const addFormOption = (option: FormOption) => {
-    const updatedFormOptions = { ...formOptions }
+    const updatedFormOptions = { ...formOptions };
 
     switch (option.class.toLowerCase()) {
       case 'category':
-        updatedFormOptions.formCategories.push(option as Category)
+        updatedFormOptions.formCategories.push(option as Category);
         break;
       case 'ingredient':
-        updatedFormOptions.formIngredients.push(option as Ingredient)
+        updatedFormOptions.formIngredients.push(option as Ingredient);
+        break;
+      case 'portion':
+        updatedFormOptions.formPortions.push(option as Portion);
         break;
       case 'tool':
-        updatedFormOptions.formTools.push(option as Tool)
+        updatedFormOptions.formTools.push(option as Tool);
         break;
     }
     
@@ -71,25 +78,30 @@ export const FormProvider = ({ children }: FormProviderProps) => {
   }
 
   const removeFormOption = (option: FormOption) => {
-    const updatedFormOptions: FormOptions = { ...formOptions }
+    const updatedFormOptions: FormOptions = { ...formOptions };
 
     switch (option.class.toLowerCase()) {
       case 'category':
         const formCategories = updatedFormOptions.formCategories.filter(
           (category) => category.id !== option.id
-        )
+        );
         updatedFormOptions.formCategories = formCategories;
         break;
       case 'ingredient':
         const formIngredients = updatedFormOptions.formIngredients.filter(
           (ingredient) => ingredient.id !== option.id
-        )
+        );
         updatedFormOptions.formIngredients = formIngredients;
         break;
+      case 'portion':
+        const formPortions = updatedFormOptions.formPortions.filter(
+          ((portion) => portion.id !== option.id)
+        );
+        updatedFormOptions.formPortions = formPortions;
       case 'tool':
         const formTools = updatedFormOptions.formTools.filter(
           (tool) => tool.id !== option.id
-        )
+        );
         updatedFormOptions.formTools = formTools;
         break;
     }
@@ -105,6 +117,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
     return (
       formOptions.formCategories.length === 0 &&
       formOptions.formIngredients.length === 0 &&
+      formOptions.formPortions.length ===0 &&
       formOptions.formTools.length === 0
     )
   }

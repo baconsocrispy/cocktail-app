@@ -54,7 +54,7 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
   // load cabinet elements on Edit page
   useEffect(() => {
     if (cabinet && emptyFormOptions()) {
-      cabinet.ingredients.map((ingredient) => addFormOption(ingredient));
+      cabinet.portions.map((portion) => addFormOption(portion));
       cabinet.tools.map((tool) => addFormOption(tool));
       setNameField(cabinet.name)
     }
@@ -108,11 +108,18 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
       <div className="cabinet-form__ingredients">
         <h3 className="cabinet-form__sub-header">Ingredients</h3>
         <ul className="cabinet-form__list">
-          { formOptions.formIngredients.map((ingredient, index) => (
+          { formOptions.formPortions.map((portion) => (
+              <PortionForm 
+                key={ portion.id } 
+                object={ portion } 
+                register={ register } 
+                unregister={ unregister }
+              />))
+          }
+          { formOptions.formIngredients.map((ingredient) => (
             <PortionForm 
               key={ ingredient.id } 
-              index={ index } 
-              ingredient={ ingredient } 
+              object={ ingredient } 
               register={ register } 
               unregister={ unregister }
             />
