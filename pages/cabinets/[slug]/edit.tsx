@@ -50,7 +50,9 @@ const EditCabinetPage = () => {
           sidebarComponents={ sidebarComponents } 
         />
       </ControlBar>
-      { (user &&  cabinet) && <CabinetForm userId={ user.id } cabinet={ cabinet } /> }
+      <main className='util-overflow-scroll'>
+        { (user &&  cabinet) && <CabinetForm userId={ user.id } cabinet={ cabinet } /> }
+      </main>
     </FormProvider>
   )
 }

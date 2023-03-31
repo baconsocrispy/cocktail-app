@@ -12,12 +12,14 @@ import { Tool } from "./tools.context";
 import { UserFormData } from "@/components/auth-form/auth-form.component";
 import { getCurrentUser } from "@/pages/api/cocktail-api";
 import { Recipe } from "./recipes.context";
+import { Portion } from "@/components/form-portion/form-portion.component";
 
 export type Cabinet = {
   class: string;
   id: number;
   name: string;
   private: boolean;
+  portions: Portion[];
   ingredients: Ingredient[];
   slug: string;
   tools: Tool[];

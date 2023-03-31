@@ -6,7 +6,6 @@ import { createContext, ReactNode, useState } from "react";
 import { Category } from "./categories.context";
 import { Tool } from "./tools.context";
 import { Ingredient } from "./ingredients.context";
-import FormOptions from "@/components/form-options/form-options.component";
 
 type FormOptions = {
   formCategories: Category[];

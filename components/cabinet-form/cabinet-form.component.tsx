@@ -28,8 +28,7 @@ type CabinetFormProps = {
 
 const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
   // state
-  const [ loading, setLoading ] = useState(true);
-  const [ nameField, setNameField ] = useState('')
+  const [ nameField, setNameField ] = useState('');
 
   const { 
     formOptions, 
@@ -37,6 +36,7 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
     resetFormOptions,
     emptyFormOptions
   } = useContext(FormContext);
+
   const { jwt, getUser } = useContext(UserContext);
 
   // navigation
@@ -58,7 +58,7 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
       cabinet.tools.map((tool) => addFormOption(tool));
       setNameField(cabinet.name)
     }
-  }, [ ])
+  }, [])
 
   // handlers
   const handleFormSubmit: SubmitHandler<CabinetFormData> = async (formData: CabinetFormData) => {
@@ -77,14 +77,13 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
   };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const name = event.target?.value
-    setNameField(name)
+    const name = event.target?.value;
+    setNameField(name);
   }
 
   return (
     <form 
       id='cabinet'
-      onLoad={ () => setLoading(false)} 
       onSubmit={ handleSubmit(handleFormSubmit) } 
       className='cabinet-form'
     >
@@ -106,16 +105,19 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
         />
       </div>
 
-      <div>
-        { formOptions.formIngredients.map((ingredient, index) => (
-          <PortionForm 
-            key={ ingredient.id } 
-            index={ index } 
-            ingredient={ ingredient } 
-            register={ register } 
-            unregister={ unregister }
-          />
-        ))}
+      <div className="cabinet-form__ingredients">
+        <h3 className="cabinet-form__sub-header">Ingredients</h3>
+        <ul className="cabinet-form__list">
+          { formOptions.formIngredients.map((ingredient, index) => (
+            <PortionForm 
+              key={ ingredient.id } 
+              index={ index } 
+              ingredient={ ingredient } 
+              register={ register } 
+              unregister={ unregister }
+            />
+          ))}
+        </ul>
       </div>
 
       <input 
@@ -124,7 +126,9 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
         value={ userId }
       />
 
-      <button type='submit'>Submit</button>
+      <button type='submit'>
+        Submit
+      </button>
     </form>
   )
 }
