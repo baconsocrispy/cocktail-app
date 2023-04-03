@@ -7,11 +7,12 @@ import { FilteringContext } from "@/contexts/filtering.context";
 // types
 import { Category } from "@/contexts/categories.context";
 import { Ingredient } from "@/contexts/ingredients.context";
+import { Portion } from "../form-portion/form-portion.component";
 import { SortOption } from "@/contexts/sort-by.context";
 import { Tool } from "@/contexts/tools.context";
 
 type OptionProps = {
-  option: Category | Ingredient | SortOption | Tool;
+  option: Category | Ingredient | SortOption | Tool | Portion;
 }
 
 const Option: FC<OptionProps> = ({ option }) => {

@@ -4,6 +4,9 @@
   grid-template-rows: repeat(2, max-content) repeat(2, 1fr);
   gap: 1rem;
 
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+
   &__header {
     position: relative;
     text-align: center;
@@ -15,8 +18,6 @@
   }
 
   &__edit-link {
-    position: absolute;
-    top: 0;
     transform: translateX(8rem);
     font-style: italic;
     text-decoration: underline;

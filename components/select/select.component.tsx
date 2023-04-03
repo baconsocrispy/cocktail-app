@@ -1,5 +1,5 @@
-// external imports
-import { FC, useContext, useEffect } from "react"
+// library imports
+import { FC } from "react"
 
 // components
 import Option from "../option/option.component"
@@ -7,12 +7,13 @@ import Option from "../option/option.component"
 // types
 import { Category } from "@/contexts/categories.context"
 import { Ingredient } from "@/contexts/ingredients.context"
+import { Portion } from "../form-portion/form-portion.component"
 import { SortOption } from "@/contexts/sort-by.context"
 import { Tool } from "@/contexts/tools.context"
 
 type SelectProps = {
   header: string;
-  options: Category[] | Ingredient[] | SortOption[] | Tool[];
+  options: Category[] | Ingredient[] | SortOption[] | Tool[] | Portion[];
 }
 
 const Select: FC<SelectProps> = (

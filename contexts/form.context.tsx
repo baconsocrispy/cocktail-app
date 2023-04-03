@@ -50,13 +50,18 @@ export const FormProvider = ({ children }: FormProviderProps) => {
   formTools: []
  }
 
- // type guard
- const isPortion = (object: FormOption): object is Portion => {
-  return (
-    (object as Portion).amount !== undefined && 
-    (object as Portion).unit !== undefined
-  )
-};
+ // type guards
+  const isPortion = (object: FormOption): object is Portion => {
+    return (
+      (object as Portion).class === 'Portion'
+    )
+  };
+
+  const isIngredient = (object: FormOption): object is Ingredient => {
+    return (
+      (object as Ingredient).class === 'Ingredient'
+    )
+  };
 
  const [ formOptions, setFormOptions ] = useState<FormOptions>(emptyForm)
 
@@ -69,12 +74,13 @@ export const FormProvider = ({ children }: FormProviderProps) => {
         updatedFormOptions.formCategories.push(option as Category);
         break;
       case 'ingredient':
-        if (!isPortion(option)) {
+        if (isIngredient(option)) {
           const emptyPortion: Portion = { 
             amount: 0,
             class: 'Portion', 
             ingredient_id: option.id, 
-            name: option.name, 
+            name: option.name,
+            type: option.type, 
             unit: '' 
           };
           updatedFormOptions.formPortions.push(emptyPortion);

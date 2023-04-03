@@ -12,11 +12,12 @@ import { UseFormRegister, UseFormUnregister } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export type Portion = {
+  amount: number;
   class: string;
   id?: number;
   ingredient_id: number;
   name: string;
-  amount: number;
+  type: string;
   unit: string;
 }
 
