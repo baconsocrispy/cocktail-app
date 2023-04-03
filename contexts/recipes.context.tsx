@@ -4,6 +4,7 @@ import { ReactNode, createContext, useState } from 'react';
 //types
 import { Category } from './categories.context';
 import { Ingredient } from './ingredients.context';
+import { Portion } from '@/components/form-portion/form-portion.component';
 import { User } from './user.context';
 import { Tool } from './tools.context';
 
@@ -21,6 +22,7 @@ export type Recipe = {
   id: number;
   ingredients: Ingredient[];
   name: string;
+  portions: Portion[];
   slug: string;
   steps: Step[];
   tools: Tool[];

@@ -1,11 +1,7 @@
 // library imports
-import { FC, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
+import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-// context
-import { UserContext } from "@/contexts/user.context";
 
 // assets
 import cocktailImage from '../../public/cocktail.webp';
@@ -21,6 +17,7 @@ type DetailsDisplayProps = {
 }
 
 const DetailsDisplay: FC<DetailsDisplayProps> = ({ object }) => {
+  console.log(object)
   return (
     <div className="details-display">
 
@@ -46,9 +43,9 @@ const DetailsDisplay: FC<DetailsDisplayProps> = ({ object }) => {
       <div className="details-display__details">
         <h3 className="details-display__sub-header">Ingredients</h3>
         <ul className="details-display__list">
-          { object.ingredients.map((ingredient) => (
-            <li key={ ingredient.id } className="details-display__option">
-              { ingredient.name }
+          { object.portions.map((portion) => (
+            <li key={ portion.id } className="details-display__option">
+              { portion.name }
             </li>
           ))}
         </ul>

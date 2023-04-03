@@ -20,9 +20,9 @@ const FormOption: FC<FormOptionProps> = ({ option }) => {
     formOptions, 
     addFormOption, 
     removeFormOption, 
-  } = useContext(FormContext)
+  } = useContext(FormContext);
   
-  // initialize options as selected for form edit
+  // initialize options as selected for edit form
   useEffect(() => {
     switch (option.class.toLowerCase()) {
       case 'category':
@@ -35,8 +35,8 @@ const FormOption: FC<FormOptionProps> = ({ option }) => {
         }
         break;
       case 'ingredient':
-        if (formOptions.formIngredients.some(
-          (ingredient) => ingredient.id === option.id
+        if (formOptions.formPortions.some(
+          (portion) => portion.ingredient_id === option.id
         )) {
           setSelected(true);
         } else {

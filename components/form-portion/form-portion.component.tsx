@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export type Portion = {
   class: string;
-  id: number;
+  id?: number;
   ingredient_id: number;
   name: string;
   amount: number;
@@ -31,6 +31,7 @@ const PortionForm: FC<PortionFormProps> = ({
   register, 
   unregister 
 }) => {
+
   // type guard
   const isPortion = (object: Portion | Ingredient): object is Portion => {
     return (
@@ -38,6 +39,8 @@ const PortionForm: FC<PortionFormProps> = ({
       (object as Portion).unit !== undefined
     )
   };
+
+  const objectId = isPortion(object) ? object.ingredient_id : object.id
 
   // state
   const { removeFormOption } = useContext(FormContext);
@@ -54,11 +57,11 @@ const PortionForm: FC<PortionFormProps> = ({
   // the return function runs on unmount
   useEffect(() => {
     return () => {
-      unregister(`cabinet.portions_attributes.${ object.id }.amount`);
-      unregister(`cabinet.portions_attributes.${ object.id }.unit`);
-      unregister(`cabinet.portions_attributes.${ object.id }.ingredient_id`);
+      unregister(`cabinet.portions_attributes.${ objectId }.amount`);
+      unregister(`cabinet.portions_attributes.${ objectId }.unit`);
+      unregister(`cabinet.portions_attributes.${ objectId }.ingredient_id`);
     }
-  }, [ object, unregister ])
+  }, [ objectId, unregister ])
 
   // handlers
   const handleClick = () => {
@@ -77,7 +80,7 @@ const PortionForm: FC<PortionFormProps> = ({
 
   return (
     <li 
-      id={ 'portion-' + object.id }
+      id={ 'portion-' + objectId }
       className='portion'
     >
       <p className="portion__name">{ object.name }</p>
@@ -85,7 +88,7 @@ const PortionForm: FC<PortionFormProps> = ({
       <input 
         type="number"
         className="portion__input"
-        { ...register(`cabinet.portions_attributes.${ object.id }.amount` )}
+        { ...register(`cabinet.portions_attributes.${ objectId }.amount` )}
         value={ amount }
         onChange={ handleAmountChange }
       />
@@ -93,15 +96,15 @@ const PortionForm: FC<PortionFormProps> = ({
       <input 
         type="text"
         className="portion__input"
-        { ...register(`cabinet.portions_attributes.${ object.id }.unit` )}
+        { ...register(`cabinet.portions_attributes.${ objectId }.unit` )}
         value={ unit }
         onChange={ handleUnitChange }
       />
       
       <input 
         type='hidden'
-        { ...register(`cabinet.portions_attributes.${ object.id }.ingredient_id` )}
-        value={ isPortion(object) ? object.ingredient_id : object.id }
+        { ...register(`cabinet.portions_attributes.${ objectId }.ingredient_id` )}
+        value={ objectId }
       />
 
       <button 

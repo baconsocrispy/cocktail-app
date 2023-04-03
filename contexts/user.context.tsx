@@ -20,7 +20,6 @@ export type Cabinet = {
   name: string;
   private: boolean;
   portions: Portion[];
-  ingredients: Ingredient[];
   slug: string;
   tools: Tool[];
 }

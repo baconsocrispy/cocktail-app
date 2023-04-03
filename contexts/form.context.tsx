@@ -10,7 +10,6 @@ import { Tool } from "./tools.context";
 
 type FormOptions = {
   formCategories: Category[];
-  formIngredients: Ingredient[];
   formPortions: Portion[];
   formTools: Tool[];
 }
@@ -33,7 +32,6 @@ type FormProviderProps = {
 export const FormContext = createContext<FormContextProps>({
   formOptions: {
     formCategories: [],
-    formIngredients: [],
     formPortions: [],
     formTools: []
   },
@@ -48,10 +46,17 @@ export const FormProvider = ({ children }: FormProviderProps) => {
   // initial state
  const emptyForm: FormOptions = {
   formCategories: [],
-  formIngredients: [],
   formPortions: [],
   formTools: []
  }
+
+ // type guard
+ const isPortion = (object: FormOption): object is Portion => {
+  return (
+    (object as Portion).amount !== undefined && 
+    (object as Portion).unit !== undefined
+  )
+};
 
  const [ formOptions, setFormOptions ] = useState<FormOptions>(emptyForm)
 
@@ -64,7 +69,16 @@ export const FormProvider = ({ children }: FormProviderProps) => {
         updatedFormOptions.formCategories.push(option as Category);
         break;
       case 'ingredient':
-        updatedFormOptions.formIngredients.push(option as Ingredient);
+        if (!isPortion(option)) {
+          const emptyPortion: Portion = { 
+            amount: 0,
+            class: 'Portion', 
+            ingredient_id: option.id, 
+            name: option.name, 
+            unit: '' 
+          };
+          updatedFormOptions.formPortions.push(emptyPortion);
+        }
         break;
       case 'portion':
         updatedFormOptions.formPortions.push(option as Portion);
@@ -72,8 +86,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
       case 'tool':
         updatedFormOptions.formTools.push(option as Tool);
         break;
-    }
-    
+    } 
     setFormOptions(updatedFormOptions);
   }
 
@@ -88,16 +101,18 @@ export const FormProvider = ({ children }: FormProviderProps) => {
         updatedFormOptions.formCategories = formCategories;
         break;
       case 'ingredient':
-        const formIngredients = updatedFormOptions.formIngredients.filter(
-          (ingredient) => ingredient.id !== option.id
+        const portions = updatedFormOptions.formPortions.filter(
+          ((portion) => portion.ingredient_id !== option.id)
         );
-        updatedFormOptions.formIngredients = formIngredients;
+        updatedFormOptions.formPortions = portions;
         break;
       case 'portion':
-        const formPortions = updatedFormOptions.formPortions.filter(
-          ((portion) => portion.id !== option.id)
-        );
-        updatedFormOptions.formPortions = formPortions;
+        if (isPortion(option)) {
+          const formPortions = updatedFormOptions.formPortions.filter(
+            ((portion) => portion.ingredient_id !== option.ingredient_id)
+          );
+          updatedFormOptions.formPortions = formPortions;
+        }
       case 'tool':
         const formTools = updatedFormOptions.formTools.filter(
           (tool) => tool.id !== option.id
@@ -116,7 +131,6 @@ export const FormProvider = ({ children }: FormProviderProps) => {
   const emptyFormOptions = () => {
     return (
       formOptions.formCategories.length === 0 &&
-      formOptions.formIngredients.length === 0 &&
       formOptions.formPortions.length ===0 &&
       formOptions.formTools.length === 0
     )

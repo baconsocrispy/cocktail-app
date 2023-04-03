@@ -28,7 +28,7 @@ type CabinetFormProps = {
 
 const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
   // state
-  const [ nameField, setNameField ] = useState('');
+  const [ nameField, setNameField ] = useState('Untitled Cabinet');
 
   const { 
     formOptions, 
@@ -56,7 +56,7 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
     if (cabinet && emptyFormOptions()) {
       cabinet.portions.map((portion) => addFormOption(portion));
       cabinet.tools.map((tool) => addFormOption(tool));
-      setNameField(cabinet.name)
+      setNameField(cabinet.name);
     }
   }, [])
 
@@ -88,22 +88,29 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
       className='cabinet-form'
     >
       <div className="cabinet-form__form-element">
-        <label htmlFor="name">Cabinet Name</label>
+        <label 
+          htmlFor="name"
+          className="cabinet-form__label"
+        >
+          Name
+        </label>
+
         <input 
           type="text"
+          className="cabinet-form__input"
           { ...register('cabinet.name', { required: 'Cabinet name is required' })}
           onChange={ handleNameChange }
           value={ nameField }
         />
       </div>
 
-      <div className="cabinet-form__form-element">
+      {/* <div className="cabinet-form__form-element">
         <label htmlFor="private">Public?</label>
         <input 
           type="checkbox"
           { ...register('cabinet.private', { required: false })}
         />
-      </div>
+      </div> */}
 
       <div className="cabinet-form__ingredients">
         <h3 className="cabinet-form__sub-header">Ingredients</h3>
@@ -116,14 +123,6 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
                 unregister={ unregister }
               />))
           }
-          { formOptions.formIngredients.map((ingredient) => (
-            <PortionForm 
-              key={ ingredient.id } 
-              object={ ingredient } 
-              register={ register } 
-              unregister={ unregister }
-            />
-          ))}
         </ul>
       </div>
 
@@ -133,7 +132,10 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
         value={ userId }
       />
 
-      <button type='submit'>
+      <button 
+        type='submit'
+        className="util-default-button cabinet-form__button"
+      >
         Submit
       </button>
     </form>
