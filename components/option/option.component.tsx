@@ -40,6 +40,11 @@ const Option: FC<OptionProps> = ({ option }) => {
       case 'sortoption':
         if (selected && filterOptions.sortOption !== option.name.toString()) {
           setSelected(false)
+        } else if (
+          option.name === 'All Recipes' && 
+          filterOptions.sortOption === 'All Recipes'
+        ) {
+          setSelected(true)
         }
         break;
     }

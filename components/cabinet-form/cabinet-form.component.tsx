@@ -62,6 +62,7 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
 
   // handlers
   const handleFormSubmit: SubmitHandler<CabinetFormData> = async (formData: CabinetFormData) => {
+    console.log('Test')
     if (jwt) {
       const response = cabinet ? 
       await updateCabinet(cabinet.slug, formData, jwt) :
@@ -122,6 +123,23 @@ const CabinetForm: FC<CabinetFormProps> = ({ userId, cabinet }) => {
                 register={ register } 
                 unregister={ unregister }
               />))
+          }
+        </ul>
+      </div>
+
+      <div className="cabinet-form__ingredients">
+        <h3 className="cabinet-form__sub-header">Tools</h3>
+        <ul className="cabinet-form__list">
+          { formOptions.formTools.map((tool) => (
+              <li key={ tool.id }>
+                 <input 
+                  type='checkbox'
+                  { ...register(`cabinet.tool_ids.${ tool.id }`, { required: 'Cabinet name is required' })}
+                  value={ tool.id }
+                />
+                <label htmlFor={`tool_ids.${ tool.id }`}>{ tool.name }</label>
+              </li>
+            ))
           }
         </ul>
       </div>

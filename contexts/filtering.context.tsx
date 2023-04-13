@@ -18,7 +18,7 @@ export type FilterOptions = {
   ingredientIds: number[];
   categoryIds: number[];
   userIngredientIds?: number[];
-  sortOption: string | null;
+  sortOption: string;
   keyword: string;
 }
 
@@ -49,7 +49,7 @@ export const FilteringContext = createContext<FilteringContextProps>({
     ingredientIds: [],
     categoryIds: [],
     userIngredientIds: [],
-    sortOption: null,
+    sortOption: 'All Recipes',
     keyword: ''
   },
   page: 1,
@@ -66,7 +66,7 @@ export const FilteringProvider = ({ children }: FilteringProviderProps) => {
   const emptyFilterOptions: FilterOptions = {
     ingredientIds: [],
     categoryIds: [],
-    sortOption: null,
+    sortOption: 'All Recipes',
     keyword: ''
   }
 
