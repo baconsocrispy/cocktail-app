@@ -12,7 +12,7 @@ type FormOptions = {
   formCategories: Category[];
   formPortions: Portion[];
   formTools: Tool[];
-}
+};
 
 type FormOption = Category | Ingredient | Portion | Tool;
 
@@ -22,11 +22,11 @@ type FormContextProps = {
   removeFormOption: Function;
   resetFormOptions: Function;
   emptyFormOptions: Function;
-}
+};
 
 type FormProviderProps = {
   children: ReactNode;
-}
+};
 
 // context
 export const FormContext = createContext<FormContextProps>({
@@ -39,7 +39,7 @@ export const FormContext = createContext<FormContextProps>({
   removeFormOption: () => {},
   resetFormOptions: () => {},
   emptyFormOptions: () => {}
-})
+});
 
 // provider
 export const FormProvider = ({ children }: FormProviderProps) => {
@@ -48,7 +48,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
   formCategories: [],
   formPortions: [],
   formTools: []
- }
+ };
 
  // type guards
   const isPortion = (object: FormOption): object is Portion => {
@@ -94,7 +94,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
         break;
     } 
     setFormOptions(updatedFormOptions);
-  }
+  };
 
   const removeFormOption = (option: FormOption) => {
     const updatedFormOptions: FormOptions = { ...formOptions };
@@ -128,11 +128,11 @@ export const FormProvider = ({ children }: FormProviderProps) => {
     }
     
     setFormOptions(updatedFormOptions);
-  }
+  };
 
   const resetFormOptions = () => {
     setFormOptions(emptyForm);
-  }
+  };
 
   const emptyFormOptions = () => {
     return (
@@ -140,7 +140,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
       formOptions.formPortions.length ===0 &&
       formOptions.formTools.length === 0
     )
-  }
+  };
 
   // export data
   const value = { 
@@ -149,11 +149,11 @@ export const FormProvider = ({ children }: FormProviderProps) => {
     removeFormOption,
     resetFormOptions,
     emptyFormOptions
-  }
+  };
 
   return (
     <FormContext.Provider value={ value }>
       { children }
     </FormContext.Provider>
-  )
-}
+  );
+};

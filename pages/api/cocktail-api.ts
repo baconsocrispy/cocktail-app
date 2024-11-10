@@ -141,14 +141,14 @@ export const getCurrentUser = async (jwt: string) => {
     'GET', 'http://localhost:3001/current_user', jwt
   )
   return user
-}
+};
 
 export const favoriteRecipe = async (recipeId: number, jwt: string) => {
   const response = await backendJWTRequest(
     'POST', `http://localhost:3001/favorite/${ recipeId }`, jwt
   )
   return response
-}
+};
 
 // helpers
 const backendJWTRequest = async (
